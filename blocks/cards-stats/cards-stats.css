@@ -25,6 +25,39 @@
   margin: 16px;
 }
 
+.cards-stats .cards-stats-card-body p {
+  margin: 0;
+}
+
+.cards-stats .cards-stats-card-body strong {
+  display: block;
+}
+
+/* Stat number — 1st strong */
+.cards-stats .cards-stats-card-body strong:first-of-type {
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--text-color);
+  padding-bottom: 16px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #dadada;
+}
+
+/* Title — 2nd strong */
+.cards-stats .cards-stats-card-body strong:nth-of-type(2) {
+  font-size: var(--body-font-size-xs);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text-color);
+  margin-bottom: 8px;
+}
+
+.cards-stats .cards-stats-card-body a {
+  display: inline-block;
+  margin-top: 8px;
+}
+
 .cards-stats .cards-stats-card-image {
   display: none;
 }
