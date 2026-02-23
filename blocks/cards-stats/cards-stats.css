@@ -1,9 +1,11 @@
+/* cards-stats — mobile-first */
+
 .cards-stats > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  grid-template-columns: 1fr;
   gap: 24px;
 }
 
@@ -17,11 +19,30 @@
 }
 
 .cards-stats .cards-stats-card-image {
-  line-height: 0;
+  display: none;
 }
 
 .cards-stats > ul > li img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+/* 426px — 2 columns */
+@media (width >= 426px) {
+  .cards-stats > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* >1024px — show images */
+@media (width > 1024px) {
+  .cards-stats .cards-stats-card-image {
+    display: block;
+    line-height: 0;
+  }
+
+  .cards-stats > ul {
+    grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  }
 }
