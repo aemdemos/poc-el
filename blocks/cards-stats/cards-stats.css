@@ -41,7 +41,7 @@
   letter-spacing: -1.28px;
   color: var(--text-color);
   padding-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   border-bottom: 1px solid #dadada;
 }
 
@@ -51,7 +51,7 @@
   font-weight: 700;
   line-height: 1.4;
   color: var(--text-color);
-  margin-bottom: 8px;
+  margin-bottom: 0;
 }
 
 .cards-stats .cards-stats-card-body a {
