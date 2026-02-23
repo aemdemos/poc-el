@@ -34,12 +34,14 @@
 
 /* Stat number — 1st strong */
 .cards-stats .cards-stats-card-body strong:first-of-type {
-  font-size: 48px;
-  font-weight: 300;
-  line-height: 1.2;
+  font-size: var(--heading-font-size-xxxl);
+  font-weight: 400;
+  line-height: 400%;
+  font-family: Gotham, sans-serif;
+  letter-spacing: -1.28px;
   color: var(--text-color);
-  padding-bottom: 16px;
-  margin-bottom: 12px;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
   border-bottom: 1px solid #dadada;
 }
 
