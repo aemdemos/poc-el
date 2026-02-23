@@ -1,3 +1,10 @@
+.cards-support {
+  font-size: var(--body-font-size-s);
+  line-height: 150%;
+  font-family: "Open Sans", sans-serif;
+  color: #414448;
+}
+
 .cards-support > ul {
   list-style: none;
   margin: 0;

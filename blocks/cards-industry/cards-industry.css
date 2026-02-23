@@ -1,3 +1,10 @@
+.cards-industry {
+  font-size: var(--body-font-size-s);
+  line-height: 150%;
+  font-family: "Open Sans", sans-serif;
+  color: #414448;
+}
+
 .cards-industry > ul {
   list-style: none;
   margin: 0;
