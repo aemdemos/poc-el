@@ -1,5 +1,9 @@
 /* hero-enterprise — mobile-first, stacked layout at all sizes */
 
+main > .section.hero-enterprise-container {
+  margin-top: 4px;
+}
+
 .hero-enterprise-container .hero-enterprise-wrapper {
   max-width: unset;
   padding: 0;

@@ -39,7 +39,7 @@ main > .section.accordion-news-container {
 }
 
 .accordion-news details[open] summary {
-  background-color: #00535e;
+  background-color: rgb(4 57 61);
   color: #fff;
 }
 
@@ -48,7 +48,7 @@ main > .section.accordion-news-container {
 }
 
 .accordion-news details[open] summary:hover {
-  background-color: #00535e;
+  background-color: rgb(4 57 61);
 }
 
 /* Globe icon */
@@ -64,6 +64,10 @@ main > .section.accordion-news-container {
   mask-image: url("globe-icon.svg");
   mask-size: contain;
   mask-repeat: no-repeat;
+}
+
+.accordion-news details[open] summary::before {
+  background-color: #fff;
 }
 
 /* Chevron arrow */
