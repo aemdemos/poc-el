@@ -1,0 +1,119 @@
+/* accordion-news — news release banner */
+
+.accordion-news details {
+  border: 2px solid #00827f;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.accordion-news details + details {
+  margin-top: 16px;
+}
+
+.accordion-news details summary {
+  position: relative;
+  padding: 12px 50px 12px 48px;
+  cursor: pointer;
+  list-style: none;
+  background-color: var(--background-color);
+  font-family: Gotham, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #00535e;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background-color 0.2s;
+}
+
+.accordion-news details[open] summary {
+  background-color: #00535e;
+  color: #fff;
+}
+
+.accordion-news details summary:hover {
+  background-color: #f0f8f8;
+}
+
+.accordion-news details[open] summary:hover {
+  background-color: #00535e;
+}
+
+/* Globe icon */
+.accordion-news details summary::before {
+  content: "\1F310";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.25rem;
+}
+
+/* Chevron arrow */
+.accordion-news details summary::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%) rotate(135deg);
+  width: 8px;
+  height: 8px;
+  border: 2px solid;
+  border-width: 2px 2px 0 0;
+  transition: transform 0.2s;
+}
+
+.accordion-news details[open] summary::after {
+  transform: translateY(-50%) rotate(-45deg);
+  border-color: #fff;
+}
+
+.accordion-news details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Body */
+.accordion-news details .accordion-news-item-body {
+  padding: 16px 16px 20px;
+  border-top: 2px dashed #00827f;
+}
+
+.accordion-news details:not([open]) .accordion-news-item-body {
+  display: none;
+}
+
+.accordion-news details .accordion-news-item-body p {
+  margin: 0 0 4px;
+  font-family: "Open Sans", sans-serif;
+  color: #414448;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Headline */
+.accordion-news details .accordion-news-item-body p:nth-child(2) {
+  font-family: Gotham, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-color);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+/* Read More link */
+.accordion-news details .accordion-news-item-body a {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #00535e;
+  text-decoration: none;
+}
+
+.accordion-news details .accordion-news-item-body a::after {
+  content: " \2192";
+  color: #ff7a59;
+}
+
+.accordion-news details .accordion-news-item-body a:hover {
+  text-decoration: underline;
+}
