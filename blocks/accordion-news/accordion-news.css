@@ -9,7 +9,7 @@ main > .section.accordion-news-container {
 }
 
 .accordion-news details {
-  border: 2px solid #00827f;
+  border: 2px solid #d0d4d9;
   border-radius: 4px;
   overflow: hidden;
 }
@@ -31,6 +31,11 @@ main > .section.accordion-news-container {
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: background-color 0.2s;
+}
+
+.accordion-news details summary p {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .accordion-news details[open] summary {
