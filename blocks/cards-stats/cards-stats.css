@@ -22,8 +22,6 @@
 
 .cards-stats .cards-stats-card-body {
   margin: 0;
-  font-family: Gotham-book, Arial, Helvetica, sans-serif;
-  line-height: 24px;
 }
 
 .cards-stats .cards-stats-card-body p {
@@ -32,6 +30,8 @@
 
 .cards-stats .cards-stats-card-body strong {
   display: block;
+  font-family: Gotham-book, Arial, Helvetica, sans-serif;
+  line-height: 24px;
 }
 
 /* Stat number — 1st strong */
