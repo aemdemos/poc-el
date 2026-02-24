@@ -70,9 +70,10 @@
 .cards-stats .cards-stats-card-body a {
   display: inline-block;
   margin-top: 8px;
-  color: #414448;
+  font-size: 16px;
+  color: #111213;
+  font-weight: 500;
   text-decoration: none;
-  font-weight: 400;
 }
 
 .cards-stats .cards-stats-card-body a::after {
