@@ -1,5 +1,10 @@
 /* accordion-news — news release banner */
 
+.accordion-news-container {
+  margin-bottom: 0;
+  padding: 0;
+}
+
 .accordion-news details {
   border: 2px solid #00827f;
   border-radius: 4px;
