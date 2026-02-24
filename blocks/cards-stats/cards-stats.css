@@ -55,9 +55,10 @@
 
 /* Title — 2nd strong */
 .cards-stats .cards-stats-card-body strong:nth-of-type(2) {
-  font-size: var(--body-font-size-xs);
+  font-size: 1.25rem;
   font-weight: 700;
-  line-height: 1.4;
+  font-family: Gotham, sans-serif;
+  line-height: 150%;
   color: var(--text-color);
   margin-bottom: 0;
 }
