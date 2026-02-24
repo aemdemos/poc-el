@@ -11,8 +11,7 @@ header nav {
   box-sizing: border-box;
   display: grid;
   grid-template:
-    'hamburger brand tools' var(--nav-height)
-    'sections sections sections' 1fr / auto 1fr auto;
+    'hamburger brand search' var(--nav-height) / auto 1fr auto;
   align-items: center;
   gap: 0 24px;
   margin: auto;
@@ -25,9 +24,9 @@ header nav {
 
 header nav[aria-expanded='true'] {
   grid-template:
-    'hamburger brand' var(--nav-height)
-    'sections sections' 1fr
-    'tools tools' var(--nav-height) / auto 1fr;
+    'hamburger brand search' var(--nav-height)
+    'sections sections sections' 1fr
+    'tools tools tools' var(--nav-height) / auto 1fr auto;
   overflow-y: auto;
   min-height: 100dvh;
 }
@@ -44,6 +43,11 @@ header nav[aria-expanded='true'] {
   header nav[aria-expanded='true'] {
     min-height: 0;
     overflow: visible;
+  }
+
+  header nav .nav-tools {
+    display: block;
+    visibility: visible;
   }
 }
 
@@ -286,6 +290,13 @@ header nav .nav-sections ul > li > ul > li {
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
+  display: none;
+  visibility: hidden;
+}
+
+header nav[aria-expanded='true'] .nav-tools {
+  display: block;
+  visibility: visible;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -316,6 +327,62 @@ header nav .nav-tools .button {
   padding: 0.5em;
   background: none;
   line-height: 0;
+}
+
+/* search icon (mobile only) */
+header nav .nav-search {
+  grid-area: search;
+  display: flex;
+  align-items: center;
+}
+
+header nav .nav-search button {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  color: #0f3133;
+  cursor: pointer;
+  line-height: 0;
+}
+
+header nav .nav-search-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+
+header nav .nav-search-icon::before {
+  content: '';
+  display: block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentcolor;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+header nav .nav-search-icon::after {
+  content: '';
+  display: block;
+  width: 7px;
+  height: 2px;
+  background: currentcolor;
+  border-radius: 1px;
+  position: absolute;
+  bottom: 2px;
+  right: 0;
+  transform: rotate(45deg);
+}
+
+@media (width >= 900px) {
+  header nav .nav-search {
+    display: none;
+    visibility: hidden;
+  }
 }
 
 /* breadcrumbs */
