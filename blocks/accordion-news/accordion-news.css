@@ -9,7 +9,7 @@ main > .section.accordion-news-container {
 }
 
 .accordion-news details {
-  border: 2px solid #d0d4d9;
+  border: 2px solid #007981;
   border-radius: 4px;
   overflow: hidden;
 }
@@ -44,7 +44,7 @@ main > .section.accordion-news-container {
 }
 
 .accordion-news details summary:hover {
-  background-color: #f0f8f8;
+  background-color: #fff;
 }
 
 .accordion-news details[open] summary:hover {
@@ -60,7 +60,7 @@ main > .section.accordion-news-container {
   transform: translateY(-50%);
   width: 24px;
   height: 24px;
-  background-color: currentcolor;
+  background-color: rgb(4 57 61);
   mask-image: url("globe-icon.svg");
   mask-size: contain;
   mask-repeat: no-repeat;
