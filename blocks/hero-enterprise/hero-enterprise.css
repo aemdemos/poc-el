@@ -34,17 +34,19 @@
 .hero-enterprise h4,
 .hero-enterprise h5,
 .hero-enterprise h6 {
-  color: var(--text-color);
+  color: #0f3133;
   margin: 0 0 8px;
   font-size: 32px;
-  line-height: 1.1;
-  font-weight: 900;
+  line-height: 1.01;
+  font-weight: 700;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
 }
 
 .hero-enterprise p {
-  color: var(--text-color);
-  margin: 0;
+  color: #414448;
+  margin: 8px 0 0;
   font-size: 16px;
+  font-family: "Open Sans", sans-serif;
   line-height: 1.5;
 }
 
@@ -92,7 +94,7 @@
   }
 
   .hero-enterprise p {
-    font-size: 20px;
+    font-size: 18px;
     max-width: 600px;
   }
 }
@@ -106,6 +108,6 @@
   }
 
   .hero-enterprise h1 {
-    font-size: 56px;
+    font-size: 72px;
   }
 }
