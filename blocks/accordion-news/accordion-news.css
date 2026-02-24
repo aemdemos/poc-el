@@ -20,14 +20,14 @@ main > .section.accordion-news-container {
 
 .accordion-news details summary {
   position: relative;
-  padding: 12px 50px 12px 48px;
+  padding: 8px 50px 8px 48px;
   cursor: pointer;
   list-style: none;
   background-color: var(--background-color);
   font-family: Gotham, sans-serif;
-  font-size: 1rem;
+  font-size: 20px;
   font-weight: 700;
-  color: #00535e;
+  color: #007981;
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: background-color 0.2s;
@@ -90,7 +90,7 @@ main > .section.accordion-news-container {
 }
 
 .accordion-news details .accordion-news-item-body p {
-  margin: 0 0 4px;
+  margin: 0;
   font-family: "Open Sans", sans-serif;
   color: #414448;
   font-size: 14px;
@@ -104,7 +104,6 @@ main > .section.accordion-news-container {
   font-weight: 700;
   color: var(--text-color);
   line-height: 1.4;
-  margin-bottom: 8px;
 }
 
 /* Read More link */
