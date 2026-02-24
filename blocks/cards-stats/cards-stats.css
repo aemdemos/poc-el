@@ -29,6 +29,9 @@
 
 .cards-stats .cards-stats-card-body {
   margin: 0;
+  font-family: Open Sans, sans-serif;
+  color: #414448;
+  letter-spacing: 0.5px;
 }
 
 .cards-stats .cards-stats-card-body p {
