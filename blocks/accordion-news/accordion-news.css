@@ -1,6 +1,6 @@
 /* accordion-news — news release banner */
 
-.accordion-news-container {
+main > .section.accordion-news-container {
   margin: 0;
 }
 
