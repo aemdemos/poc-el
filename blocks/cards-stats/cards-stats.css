@@ -3,7 +3,7 @@
 .cards-stats {
   font-size: var(--body-font-size-s);
   line-height: 150%;
-  font-family: "Open Sans", sans-serif;
+  font-family: Gotham-book, Arial, Helvetica, sans-serif;
   color: #414448;
 }
 
