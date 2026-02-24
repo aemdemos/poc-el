@@ -24,12 +24,15 @@ main > .section.hero-enterprise-container {
 
 .hero-enterprise img {
   display: block;
-  width: 100%;
   height: auto;
+  margin: 0;
 }
 
 .hero-enterprise > div:not(:first-child) {
   padding: 16px;
+  border-radius: 40px 40px 0 0;
+  margin-top: -30px;
+  background-color: white;
 }
 
 .hero-enterprise h1,
@@ -40,7 +43,7 @@ main > .section.hero-enterprise-container {
 .hero-enterprise h6 {
   color: #0f3133;
   margin: 0 0 8px;
-  font-size: 32px;
+  font-size: var(--heading-font-size-xxxl);
   line-height: 1.01;
   font-weight: 700;
   font-family: Gotham, Arial, Helvetica, sans-serif;
