@@ -1,7 +1,10 @@
 /* accordion-news — news release banner */
 
 .accordion-news-container {
-  margin-bottom: 0;
+  margin: 0;
+}
+
+.accordion-news-container > .accordion-news-wrapper {
   padding: 0;
 }
 
