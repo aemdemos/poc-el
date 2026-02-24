@@ -70,6 +70,19 @@
 .cards-stats .cards-stats-card-body a {
   display: inline-block;
   margin-top: 8px;
+  color: #414448;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.cards-stats .cards-stats-card-body a::after {
+  content: " \2192";
+  color: #ff7a59;
+  font-weight: 400;
+}
+
+.cards-stats .cards-stats-card-body a:hover {
+  text-decoration: underline;
 }
 
 .cards-stats .cards-stats-card-image {
