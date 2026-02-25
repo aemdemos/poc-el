@@ -116,7 +116,7 @@ footer .footer .footer-social-mobile {
 
 /* Section 2: Link sections */
 footer .footer > div > div:nth-child(2) {
-  padding: 0 24px 32px;
+  padding: 0 24px 12px;
 }
 
 /* Quick links (Contact Us, Sign In, Billing, Support) */
@@ -208,6 +208,7 @@ footer .footer > div > div:nth-child(4) {
   padding: 24px;
   text-align: center;
   color: #fff;
+  background-color: #24767b;
 }
 
 footer .footer > div > div:nth-child(4) ul {
