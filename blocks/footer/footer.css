@@ -42,6 +42,7 @@ footer .footer > div > div:first-child > .default-content-wrapper > p img {
   width: 160px;
   height: auto;
   filter: brightness(0) invert(1);
+  margin-bottom: 40px;
 }
 
 /* Search box in footer */
