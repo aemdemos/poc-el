@@ -402,7 +402,7 @@ footer .footer .footer-country-list li a img {
 }
 
 /* Desktop layout */
-@media (width >= 900px) {
+@media (width >= 1200px) {
   footer .footer > div > div {
     padding: 40px 32px 24px;
   }
