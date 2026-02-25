@@ -232,6 +232,109 @@ footer .footer > div > div:nth-child(4) p {
   font-size: 16px;
 }
 
+/* Country selector */
+footer .footer .footer-country-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+footer .footer .footer-country-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid rgba(255 255 255 / 40%);
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: #fff;
+}
+
+footer .footer .footer-country-flag {
+  width: 28px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+footer .footer .footer-country-chevron {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #99f9ff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin-top: -4px;
+  transition: transform 0.2s;
+}
+
+footer .footer .footer-country-toggle[aria-expanded='true'] .footer-country-chevron {
+  transform: rotate(-135deg);
+  margin-top: 2px;
+}
+
+footer .footer .footer-country-popover {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 8px;
+  z-index: 10;
+  min-width: 280px;
+  box-shadow: 0 4px 16px rgba(0 0 0 / 20%);
+}
+
+footer .footer .footer-country-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #0f3133;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+}
+
+footer .footer .footer-country-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
+}
+
+footer .footer .footer-country-list li a:any-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0f3133;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 4px 0;
+}
+
+footer .footer .footer-country-list li a:hover {
+  text-decoration: underline;
+  color: #0f3133;
+}
+
+footer .footer .footer-country-list li a img {
+  width: 24px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
 /* Desktop layout */
 @media (width >= 900px) {
   footer .footer > div > div {

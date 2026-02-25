@@ -108,5 +108,84 @@ export default async function decorate(block) {
     }
   }
 
+  // Section 4: build country selector from flag image list
+  const section4 = footer.querySelector(':scope > div:nth-child(4) .default-content-wrapper');
+  if (section4) {
+    const ul = section4.querySelector('ul');
+    if (ul) {
+      // Separate flag items from legal links within the same UL
+      const flagItems = [];
+      const legalItems = [];
+      [...ul.querySelectorAll('li')].forEach((li) => {
+        const img = li.querySelector('a img');
+        if (img && img.src.includes('flag')) {
+          flagItems.push(li);
+        } else {
+          legalItems.push(li);
+        }
+      });
+
+      if (flagItems.length > 0) {
+        const countries = flagItems.map((li) => {
+          const a = li.querySelector('a');
+          const img = a?.querySelector('img');
+          return {
+            name: img?.alt || '',
+            flag: img?.src || '',
+            path: a?.getAttribute('href') || '#',
+          };
+        });
+
+        // Find current country (United States default)
+        const current = countries.find((c) => c.name === 'United States') || countries[0];
+
+        // Build dropdown widget
+        const dropdown = document.createElement('div');
+        dropdown.className = 'footer-country-selector';
+        dropdown.innerHTML = `
+          <button class="footer-country-toggle" aria-expanded="false" aria-label="Select country">
+            <img src="${current.flag}" alt="${current.name}" class="footer-country-flag">
+            <span class="footer-country-chevron"></span>
+          </button>
+          <div class="footer-country-popover" hidden>
+            <button class="footer-country-close" aria-label="Close">&times;</button>
+            <ul class="footer-country-list">
+              ${countries.map((c) => `
+                <li>
+                  <a href="${c.path}">
+                    <img src="${c.flag}" alt="${c.name}">
+                    <span>${c.name}</span>
+                  </a>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+
+        // Toggle popover
+        const toggle = dropdown.querySelector('.footer-country-toggle');
+        const popover = dropdown.querySelector('.footer-country-popover');
+        const closeBtn = dropdown.querySelector('.footer-country-close');
+
+        toggle.addEventListener('click', () => {
+          const open = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+          popover.hidden = open;
+        });
+
+        closeBtn.addEventListener('click', () => {
+          toggle.setAttribute('aria-expanded', 'false');
+          popover.hidden = true;
+        });
+
+        // Remove flag items from original list, keep legal links
+        flagItems.forEach((li) => li.remove());
+
+        // Insert dropdown before the legal links UL
+        ul.before(dropdown);
+      }
+    }
+  }
+
   block.append(footer);
 }
