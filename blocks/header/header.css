@@ -236,6 +236,8 @@ header nav .nav-brand img {
   header .nav-brand {
     grid-area: brand;
     text-align: left;
+    padding: 20px 0;
+    margin-left: 36%;
   }
 }
 
