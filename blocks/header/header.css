@@ -14,7 +14,7 @@ header nav {
     'hamburger brand search' auto / auto 1fr auto;
   align-items: center;
   gap: 0 24px;
-  margin: auto;
+  margin: 0;
   max-width: 1248px;
   min-height: var(--nav-height);
   padding: 20px;
