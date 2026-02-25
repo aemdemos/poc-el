@@ -458,6 +458,7 @@ header nav .nav-sections ul > li > ul > li > a {
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.3px;
+    padding: 5px 20px;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > a,
