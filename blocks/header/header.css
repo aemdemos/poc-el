@@ -72,6 +72,7 @@ header nav .nav-tools-bottom {
     visibility: visible;
     align-items: center;
     justify-content: flex-end;
+    min-width: 220px;
   }
 
   /* Hide non-signin items from nav-tools at desktop (shown in nav-tools-bottom) */
@@ -85,11 +86,11 @@ header nav .nav-tools-bottom {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    background-color: #0f3133;
-    color: #fff;
+    background-color: #f2f0f1;
+    color: #000;
     margin: 12px -32px 0;
-    padding: 12px 32px 12px 0;
-    border-top: none;
+    padding: 12px 32px;
+    border: none;
   }
 
   header nav .nav-tools-bottom ul {
@@ -104,13 +105,13 @@ header nav .nav-tools-bottom {
   header nav .nav-tools-bottom a {
     font-size: 13px;
     font-weight: 500;
-    color: #fff;
+    color: #000;
     text-decoration: none;
     white-space: nowrap;
   }
 
   header nav .nav-tools-bottom a:hover {
-    color: #ccc;
+    color: #00827f;
   }
 }
 
@@ -394,14 +395,21 @@ header nav .nav-sections ul > li > ul > li > a {
 @media (width >= 1200px) {
   header nav .nav-sections {
     grid-area: sections;
+    background-color: #f2f0f1;
+    border: none;
     display: block;
-    visibility: visible;
+    height: auto;
+    opacity: 1;
+    overflow: visible;
+    position: relative;
+    top: 0;
+    width: 100%;
+    color: #000;
+    z-index: 10;
     white-space: nowrap;
-    background-color: #0f3133;
-    color: #fff;
     margin: 12px -32px 0;
     padding: 12px 32px;
-    border-top: none;
+    visibility: visible;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
@@ -427,7 +435,7 @@ header nav .nav-sections ul > li > ul > li > a {
     transform: rotate(135deg);
     width: 6px;
     height: 6px;
-    border: 2px solid #fff;
+    border: 2px solid currentcolor;
     border-radius: 0 1px 0 0;
     border-width: 2px 2px 0 0;
   }
