@@ -2,7 +2,8 @@
 footer {
   background-color: #0f3133;
   color: #fff;
-  font-size: var(--body-font-size-xs);
+  font-size: 16px;
+  line-height: 1.4;
 }
 
 footer .footer > div > div {
@@ -24,7 +25,7 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* Section 1: Logo + social icons */
+/* Section 1: Logo + search (mobile) / Logo + social (desktop) */
 footer .footer > div > div:first-child {
   display: flex;
   flex-direction: column;
@@ -43,8 +44,30 @@ footer .footer > div > div:first-child img {
   filter: brightness(0) invert(1);
 }
 
-/* Social icons list */
-footer .footer > div > div:first-child ul {
+/* Search box in footer */
+footer .footer .footer-search {
+  display: block;
+}
+
+footer .footer .footer-search input {
+  width: 100%;
+  max-width: 320px;
+  padding: 0 35px 0 16px;
+  height: 44px;
+  border: 1px solid rgb(142 147 153);
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  font-size: 12px;
+}
+
+footer .footer .footer-search input::placeholder {
+  color: #333;
+}
+
+/* Social icons shared styles */
+footer .footer .footer-social-desktop,
+footer .footer .footer-social-mobile {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -52,7 +75,8 @@ footer .footer > div > div:first-child ul {
   gap: 16px;
 }
 
-footer .footer > div > div:first-child ul li a {
+footer .footer .footer-social-desktop li a,
+footer .footer .footer-social-mobile li a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -63,48 +87,100 @@ footer .footer > div > div:first-child ul li a {
   font-size: 0;
 }
 
-footer .footer > div > div:first-child ul li:nth-child(1) a::before {
+footer .footer .footer-social-desktop li:nth-child(1) a::before,
+footer .footer .footer-social-mobile li:nth-child(1) a::before {
   content: '𝕏';
   font-size: 14px;
   color: #fff;
 }
 
-footer .footer > div > div:first-child ul li:nth-child(2) a::before {
+footer .footer .footer-social-desktop li:nth-child(2) a::before,
+footer .footer .footer-social-mobile li:nth-child(2) a::before {
   content: 'in';
   font-size: 12px;
   font-weight: 700;
   color: #fff;
 }
 
-footer .footer > div > div:first-child ul li:nth-child(3) a::before {
+footer .footer .footer-social-desktop li:nth-child(3) a::before,
+footer .footer .footer-social-mobile li:nth-child(3) a::before {
   content: 'f';
   font-size: 14px;
   font-weight: 700;
   color: #fff;
 }
 
-footer .footer > div > div:first-child ul li:nth-child(4) a::before {
+footer .footer .footer-social-desktop li:nth-child(4) a::before,
+footer .footer .footer-social-mobile li:nth-child(4) a::before {
   content: '▶';
   font-size: 10px;
   color: #fff;
 }
 
-/* Section 2: Link columns */
+/* Mobile: hide desktop social, show mobile social */
+footer .footer .footer-social-desktop {
+  display: none;
+}
+
+footer .footer .footer-social-mobile {
+  display: flex;
+  padding: 16px 0;
+}
+
+/* Section 2: Link sections */
 footer .footer > div > div:nth-child(2) {
   padding: 32px 24px;
   border-bottom: 1px solid rgba(255 255 255 / 20%);
 }
 
-footer .footer > div > div:nth-child(2) .footer-col {
-  margin-bottom: 24px;
-}
-
-footer .footer > div > div:nth-child(2) .footer-col:last-child {
+/* Quick links (Contact Us, Sign In, Billing, Support) */
+footer .footer .footer-quick-links {
   margin-bottom: 0;
 }
 
-footer .footer > div > div:nth-child(2) .footer-col-heading {
-  font-size: var(--body-font-size-xs);
+footer .footer .footer-quick-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+footer .footer .footer-quick-links ul li {
+  padding: 4px 0;
+}
+
+footer .footer .footer-quick-links ul li a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Main links (About Us through Wholesale) */
+footer .footer .footer-main-links {
+  margin-bottom: 24px;
+}
+
+footer .footer .footer-main-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+footer .footer .footer-main-links ul li {
+  padding: 4px 0;
+}
+
+footer .footer .footer-main-links ul li a {
+  color: #fff;
+  font-size: 16px;
+}
+
+/* Col right: WHY LUMEN + RESOURCES */
+footer .footer .footer-col-right {
+  margin-bottom: 0;
+}
+
+footer .footer .footer-col-heading {
+  font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -113,23 +189,23 @@ footer .footer > div > div:nth-child(2) .footer-col-heading {
   color: #fff;
 }
 
-footer .footer > div > div:nth-child(2) .footer-col-heading:first-child {
+footer .footer .footer-col-heading:first-child {
   margin-top: 0;
 }
 
-footer .footer > div > div:nth-child(2) ul {
+footer .footer .footer-col-right ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-footer .footer > div > div:nth-child(2) ul li {
+footer .footer .footer-col-right ul li {
   padding: 4px 0;
 }
 
-footer .footer > div > div:nth-child(2) ul li a {
-  color: rgba(255 255 255 / 80%);
-  font-size: var(--body-font-size-xs);
+footer .footer .footer-col-right ul li a {
+  color: #fff;
+  font-size: 16px;
 }
 
 /* Section 3: Disclaimer */
@@ -137,14 +213,15 @@ footer .footer > div > div:nth-child(3) {
   padding: 24px;
   text-align: center;
   border-bottom: 1px solid rgba(255 255 255 / 20%);
-  color: rgba(255 255 255 / 80%);
+  color: #fff;
+  font-size: 16px;
 }
 
 /* Section 4: Legal links + copyright */
 footer .footer > div > div:nth-child(4) {
   padding: 24px;
   text-align: center;
-  color: rgba(255 255 255 / 60%);
+  color: #fff;
 }
 
 footer .footer > div > div:nth-child(4) ul {
@@ -158,34 +235,58 @@ footer .footer > div > div:nth-child(4) ul {
 }
 
 footer .footer > div > div:nth-child(4) ul li a {
-  color: rgba(255 255 255 / 80%);
-  font-size: var(--body-font-size-xs);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 footer .footer > div > div:nth-child(4) p {
-  color: rgba(255 255 255 / 60%);
-  font-size: var(--body-font-size-xs);
+  color: #fff;
+  font-size: 16px;
 }
 
-/* Desktop: multi-column layout for link sections */
+/* Desktop layout */
 @media (width >= 900px) {
   footer .footer > div > div {
     padding: 40px 32px 24px;
   }
 
+  /* Section 1: Logo left + social icons right, hide search */
   footer .footer > div > div:first-child {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
 
+  footer .footer .footer-search {
+    display: none;
+  }
+
+  footer .footer .footer-social-desktop {
+    display: flex;
+  }
+
+  footer .footer .footer-social-mobile {
+    display: none;
+  }
+
+  /* Section 2: 2-column grid */
   footer .footer > div > div:nth-child(2) .default-content-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 32px;
   }
 
-  footer .footer > div > div:nth-child(2) .footer-col {
+  /* Left column: quick-links + main-links stacked */
+  footer .footer .footer-quick-links,
+  footer .footer .footer-main-links {
+    grid-column: 1;
     margin-bottom: 0;
+  }
+
+  /* Right column: WHY LUMEN + RESOURCES */
+  footer .footer .footer-col-right {
+    grid-column: 2;
+    grid-row: 1 / 3;
   }
 }

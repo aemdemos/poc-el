@@ -24,25 +24,56 @@ export default async function decorate(block) {
     a.classList.remove('button', 'primary');
   });
 
-  // split the link section UL into 2 columns:
-  // col 1 = general links, col 2 = WHY LUMEN + RESOURCES stacked
+  // Section 1: extract social icons, add search box
+  const section1 = footer.querySelector(':scope > div:first-child .default-content-wrapper');
+  if (section1) {
+    const socialUl = section1.querySelector('ul');
+
+    // add search box after logo
+    const searchBox = document.createElement('div');
+    searchBox.className = 'footer-search';
+    searchBox.innerHTML = '<input type="text" placeholder="Search" aria-label="Search">';
+    if (socialUl) {
+      section1.insertBefore(searchBox, socialUl);
+    } else {
+      section1.append(searchBox);
+    }
+
+    // clone social icons for mobile (placed inside link section)
+    if (socialUl) {
+      socialUl.className = 'footer-social-desktop';
+      const socialClone = socialUl.cloneNode(true);
+      socialClone.className = 'footer-social-mobile';
+      // store clone to insert into link section later
+      footer._socialClone = socialClone;
+    }
+  }
+
+  // Section 2: split links into quick-links, social, main-links, WHY LUMEN, RESOURCES
   const linkSection = footer.querySelector(':scope > div:nth-child(2) .default-content-wrapper');
   if (linkSection) {
     const ul = linkSection.querySelector('ul');
     if (ul) {
-      const col1 = document.createElement('div');
-      col1.className = 'footer-col';
-      const col1Ul = document.createElement('ul');
-      col1.append(col1Ul);
+      const quickLinks = document.createElement('div');
+      quickLinks.className = 'footer-quick-links';
+      const quickUl = document.createElement('ul');
+      quickLinks.append(quickUl);
+
+      const mainLinks = document.createElement('div');
+      mainLinks.className = 'footer-main-links';
+      const mainUl = document.createElement('ul');
+      mainLinks.append(mainUl);
 
       const col2 = document.createElement('div');
-      col2.className = 'footer-col';
+      col2.className = 'footer-col-right';
       let currentUl = null;
+      let quickCount = 0;
+      const quickLinkNames = ['contact us', 'sign in', 'billing', 'support'];
 
       [...ul.children].forEach((li) => {
         const strong = li.querySelector('strong');
         if (strong && !li.querySelector('a')) {
-          // heading for a sub-section in col 2
+          // heading for WHY LUMEN / RESOURCES in col 2
           const heading = document.createElement('p');
           heading.className = 'footer-col-heading';
           heading.textContent = strong.textContent;
@@ -52,12 +83,27 @@ export default async function decorate(block) {
         } else if (currentUl) {
           currentUl.append(li);
         } else {
-          col1Ul.append(li);
+          // split first 4 links into quick-links
+          const linkText = li.textContent.trim().toLowerCase();
+          if (quickCount < 4 && quickLinkNames.includes(linkText)) {
+            quickUl.append(li);
+            quickCount += 1;
+          } else {
+            mainUl.append(li);
+          }
         }
       });
 
       linkSection.innerHTML = '';
-      linkSection.append(col1);
+      linkSection.append(quickLinks);
+
+      // insert mobile social icons clone after quick links
+      if (footer._socialClone) {
+        linkSection.append(footer._socialClone);
+        delete footer._socialClone;
+      }
+
+      linkSection.append(mainLinks);
       linkSection.append(col2);
     }
   }
