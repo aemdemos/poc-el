@@ -254,4 +254,16 @@ export default async function decorate(block) {
   if (getMetadata('breadcrumbs').toLowerCase() === 'true') {
     navWrapper.append(await buildBreadcrumbs());
   }
+
+  // hide header on scroll-down, show on scroll-up
+  let lastScrollY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY > lastScrollY && currentScrollY > 80) {
+      navWrapper.classList.add('nav-hidden');
+    } else {
+      navWrapper.classList.remove('nav-hidden');
+    }
+    lastScrollY = currentScrollY;
+  });
 }
