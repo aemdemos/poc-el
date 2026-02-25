@@ -222,19 +222,21 @@ header nav[aria-expanded='true'] .nav-tools ul > li a {
   color: currentcolor;
 }
 
-
+/* stylelint-disable-next-line no-descending-specificity */
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
   font-size: 14px;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 header nav .nav-sections ul > li {
   font-weight: 500;
   border-bottom: 1px solid #e0e0e0;
 }
 
 /* Collapse sub-menus on mobile */
+/* stylelint-disable-next-line no-descending-specificity */
 header nav .nav-sections ul > li > ul {
   display: none;
   margin-top: 0;
@@ -244,6 +246,7 @@ header nav .nav-sections ul > li[aria-expanded='true'] > ul {
   display: block;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 header nav .nav-sections ul > li > ul > li {
   font-weight: 400;
   border-bottom: none;
@@ -287,6 +290,7 @@ header nav .nav-sections .nav-drop[aria-expanded='true']::after {
 }
 
 /* Sub-menu items padding on mobile */
+/* stylelint-disable-next-line no-descending-specificity */
 header nav .nav-sections ul > li > ul > li > a {
   display: block;
   padding: 8px 0 8px 16px;
@@ -391,15 +395,11 @@ header nav .nav-sections ul > li > ul > li > a {
 }
 
 /* tools */
+/* stylelint-disable-next-line no-descending-specificity */
 header nav .nav-tools {
   grid-area: tools;
   display: none;
   visibility: hidden;
-}
-
-header nav[aria-expanded='true'] .nav-tools {
-  display: block;
-  visibility: visible;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -412,6 +412,7 @@ header nav .nav-tools ul {
   align-items: center;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 header nav .nav-tools a:any-link {
   font-size: 13px;
   font-weight: 500;
@@ -420,6 +421,7 @@ header nav .nav-tools a:any-link {
   white-space: nowrap;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 header nav .nav-tools a:hover {
   color: #00827f;
 }
@@ -439,14 +441,19 @@ header nav .nav-search {
   align-items: center;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 header nav .nav-search button {
   margin: 0;
   border: 0;
+  border-radius: 0;
   padding: 0;
   background-color: transparent;
   color: #0f3133;
   cursor: pointer;
   line-height: 0;
+  overflow: initial;
+  text-overflow: initial;
+  white-space: initial;
 }
 
 header nav .nav-search-icon {
