@@ -1,9 +1,9 @@
 ![Lumen logo](./images/lumen-logo.svg)
 
-- [X](https://www.twitter.com/lumentechco)
-- [LinkedIn](https://www.linkedin.com/company/lumentechnologies)
-- [Facebook](https://www.facebook.com/lumentechnologies)
-- [YouTube](https://www.youtube.com/lumentechnologies)
+- [![X](./images/social-icon-x.png)](https://www.twitter.com/lumentechco)
+- [![LinkedIn](./images/social-icon-linkedin.png)](https://www.linkedin.com/company/lumentechnologies)
+- [![Facebook](./images/social-icon-facebook.png)](https://www.facebook.com/lumentechnologies)
+- [![YouTube](./images/social-icon-youtube.png)](https://www.youtube.com/lumentechnologies)
 
 ---
 
@@ -44,6 +44,13 @@
 Not all products and services are available in all regions and countries; please [contact a representative near you for details.](https://www.lumen.com/en-us/contact-us.html)
 
 ---
+
+- [![Australia](./images/flag-australia.png)](/en-au/)
+- [![Hong Kong](./images/flag-hong-kong.png)](/en-hk/)
+- [![India](./images/flag-india.png)](/en-in/)
+- [![Japan](./images/flag-japan.png)](/ja-jp/)
+- [![Singapore](./images/flag-singapore.png)](/en-sg/)
+- [![United States](./images/flag-united-states.png)](/en-us/)
 
 - [About Us](https://www.lumen.com/en-us/about.html)
 - [Accessibility](https://www.lumen.com/en-us/about/accessibility.html)
