@@ -116,8 +116,7 @@ footer .footer .footer-social-mobile {
 
 /* Section 2: Link sections */
 footer .footer > div > div:nth-child(2) {
-  padding: 32px 24px;
-  border-bottom: 1px solid rgba(255 255 255 / 20%);
+  padding: 0 24px 32px;
 }
 
 /* Quick links (Contact Us, Sign In, Billing, Support) */
@@ -173,7 +172,7 @@ footer .footer .footer-col-heading {
   letter-spacing: 0.05em;
   margin-bottom: 8px;
   margin-top: 24px;
-  color: #fff;
+  color: #99f9ff;
 }
 
 footer .footer .footer-col-heading:first-child {
