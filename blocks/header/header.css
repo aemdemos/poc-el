@@ -5,6 +5,11 @@ header .nav-wrapper {
   z-index: 2;
   position: fixed;
   border-bottom: 1px solid #e0e0e0;
+  transition: transform 0.3s ease;
+}
+
+header .nav-wrapper.nav-hidden {
+  transform: translateY(-100%);
 }
 
 header nav {
