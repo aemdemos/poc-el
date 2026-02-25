@@ -15,7 +15,7 @@ header nav {
   align-items: center;
   gap: 0 24px;
   margin: 0;
-  max-width: 1248px;
+  max-width: none;
   min-height: var(--nav-height);
   padding: 20px;
   font-family: Gotham, Arial, Helvetica, sans-serif;
@@ -37,7 +37,7 @@ header nav[aria-expanded='true'] {
     display: flex;
     justify-content: space-between;
     gap: 0 32px;
-    max-width: 1264px;
+    max-width: none;
     padding: 0 32px;
   }
 
