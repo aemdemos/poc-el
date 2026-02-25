@@ -47,6 +47,9 @@ footer .footer > div > div:first-child > .default-content-wrapper > p img {
 /* Search box in footer */
 footer .footer .footer-search {
   display: block;
+  border: 1px solid #fff;
+  padding: 12px 16px;
+  max-width: 270px;
 }
 
 footer .footer .footer-search input {
