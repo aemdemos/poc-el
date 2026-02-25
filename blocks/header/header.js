@@ -30,7 +30,7 @@ function closeOnFocusLost(e) {
     if (navSectionExpanded && isDesktop.matches) {
       // eslint-disable-next-line no-use-before-define
       toggleAllNavSections(navSections, false);
-    } else if (!isDesktop.matches) {
+    } else if (!isDesktop.matches && e.relatedTarget) {
       // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections, false);
     }
@@ -74,7 +74,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
+  toggleAllNavSections(navSections, 'false');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
@@ -203,11 +203,11 @@ export default async function decorate(block) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
       navSection.addEventListener('click', () => {
+        const expanded = navSection.getAttribute('aria-expanded') === 'true';
         if (isDesktop.matches) {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
           toggleAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
+        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       });
     });
     navSections.querySelectorAll('.button-container').forEach((buttonContainer) => {
@@ -219,10 +219,16 @@ export default async function decorate(block) {
   const navTools = nav.querySelector('.nav-tools');
   if (navTools) {
     const search = navTools.querySelector('a[href*="search"]');
-    if (search && search.textContent === '') {
-      search.setAttribute('aria-label', 'Search');
-    }
+    if (search) search.closest('li')?.remove();
+    const signIn = navTools.querySelector('a[href*="login"]');
+    if (signIn) signIn.closest('li')?.classList.add('nav-tools-signin');
   }
+
+  // search icon
+  const searchIcon = document.createElement('div');
+  searchIcon.className = 'nav-search';
+  searchIcon.innerHTML = '<a href="/en-us/search.html" aria-label="Search"></a>';
+  nav.append(searchIcon);
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
