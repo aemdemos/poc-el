@@ -47,19 +47,20 @@ header nav .nav-tools-bottom {
     display: grid;
     grid-template:
       'brand search tools' auto
-      'sections sections tools-bottom' auto / auto 1fr auto;
+      'sections sections sections' auto / auto 1fr auto;
     align-items: center;
     gap: 0;
     max-width: none;
     padding: 12px 32px 0;
     min-height: auto;
     border-bottom: none;
+    position: relative;
   }
 
   header nav[aria-expanded='true'] {
     grid-template:
       'brand search tools' auto
-      'sections sections tools-bottom' auto / auto 1fr auto;
+      'sections sections sections' auto / auto 1fr auto;
     min-height: 0;
     overflow: visible;
   }
@@ -72,7 +73,6 @@ header nav .nav-tools-bottom {
     visibility: visible;
     align-items: center;
     justify-content: flex-end;
-    min-width: 220px;
   }
 
   /* Hide non-signin items from nav-tools at desktop (shown in nav-tools-bottom) */
@@ -80,17 +80,14 @@ header nav .nav-tools-bottom {
     display: none;
   }
 
-  /* Row 2 right side: Support, Contact Us */
+  /* Row 2: tools-bottom positioned absolutely on same line as sections */
   header nav .nav-tools-bottom {
-    grid-area: tools-bottom;
+    grid-area: sections;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    background-color: #f2f0f1;
-    color: #000;
-    margin: 12px -32px 0;
-    padding: 12px 32px;
-    border: none;
+    justify-self: end;
+    padding-right: 32px;
+    z-index: 11;
   }
 
   header nav .nav-tools-bottom ul {
