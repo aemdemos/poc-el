@@ -138,6 +138,7 @@ footer .footer .footer-quick-links ul li a {
   color: #fff;
   font-size: 16px;
   font-weight: 500;
+  text-decoration-line: underline;
 }
 
 /* Main links (About Us through Wholesale) */
@@ -158,6 +159,7 @@ footer .footer .footer-main-links ul li {
 footer .footer .footer-main-links ul li a {
   color: #fff;
   font-size: 16px;
+  text-decoration-line: underline;
 }
 
 /* Col right: WHY LUMEN + RESOURCES */
@@ -192,6 +194,7 @@ footer .footer .footer-col-right ul li {
 footer .footer .footer-col-right ul li a {
   color: #fff;
   font-size: 16px;
+  text-decoration-line: underline;
 }
 
 /* Section 3: Disclaimer */
