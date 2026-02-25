@@ -109,7 +109,12 @@ footer .footer > div > div:nth-child(2) .footer-col-heading {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 8px;
+  margin-top: 24px;
   color: #fff;
+}
+
+footer .footer > div > div:nth-child(2) .footer-col-heading:first-child {
+  margin-top: 0;
 }
 
 footer .footer > div > div:nth-child(2) ul {
@@ -176,7 +181,7 @@ footer .footer > div > div:nth-child(4) p {
 
   footer .footer > div > div:nth-child(2) .default-content-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 32px;
   }
 

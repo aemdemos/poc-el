@@ -24,39 +24,41 @@ export default async function decorate(block) {
     a.classList.remove('button', 'primary');
   });
 
-  // split the link section UL into 3 columns based on <strong> headers
+  // split the link section UL into 2 columns:
+  // col 1 = general links, col 2 = WHY LUMEN + RESOURCES stacked
   const linkSection = footer.querySelector(':scope > div:nth-child(2) .default-content-wrapper');
   if (linkSection) {
     const ul = linkSection.querySelector('ul');
     if (ul) {
-      const columns = [];
-      let currentCol = document.createElement('div');
-      currentCol.className = 'footer-col';
-      const currentUl = document.createElement('ul');
-      currentCol.append(currentUl);
-      columns.push(currentCol);
+      const col1 = document.createElement('div');
+      col1.className = 'footer-col';
+      const col1Ul = document.createElement('ul');
+      col1.append(col1Ul);
+
+      const col2 = document.createElement('div');
+      col2.className = 'footer-col';
+      let currentUl = null;
 
       [...ul.children].forEach((li) => {
         const strong = li.querySelector('strong');
         if (strong && !li.querySelector('a')) {
-          // start a new column
-          currentCol = document.createElement('div');
-          currentCol.className = 'footer-col';
+          // heading for a sub-section in col 2
           const heading = document.createElement('p');
           heading.className = 'footer-col-heading';
           heading.textContent = strong.textContent;
-          currentCol.append(heading);
-          const newUl = document.createElement('ul');
-          currentCol.append(newUl);
-          columns.push(currentCol);
+          col2.append(heading);
+          currentUl = document.createElement('ul');
+          col2.append(currentUl);
+        } else if (currentUl) {
+          currentUl.append(li);
         } else {
-          const lastCol = columns[columns.length - 1];
-          lastCol.querySelector('ul').append(li);
+          col1Ul.append(li);
         }
       });
 
       linkSection.innerHTML = '';
-      columns.forEach((col) => linkSection.append(col));
+      linkSection.append(col1);
+      linkSection.append(col2);
     }
   }
 
