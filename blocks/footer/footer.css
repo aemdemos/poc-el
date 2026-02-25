@@ -340,6 +340,17 @@ footer .footer .footer-country-list li a img {
 
 /* Tablet layout: 2-column links */
 @media (width >= 650px) {
+  footer .footer > div > div {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 54px;
+  }
+
+  footer .footer .footer-social-desktop,
+  footer .footer .footer-social-mobile {
+    margin-left: 54px;
+  }
+
   footer .footer > div > div:first-child {
     border-bottom: none;
   }
