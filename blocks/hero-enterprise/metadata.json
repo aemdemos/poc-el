@@ -1,0 +1,39 @@
+{
+  "variantName": "hero-enterprise",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-02-23T12:56:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.lumen.com/en-us/home.html",
+    "originPage": "Enterprise homepage",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "enterprise-hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "heading + description + background-image",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "enterprise homepage heroes",
+      "corporate landing pages",
+      "product showcase pages with dark backgrounds"
+    ],
+    "notSuitableFor": [
+      "blog post pages",
+      "lightweight text-only heroes",
+      "pages with light backgrounds"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/en-us/home"],
+    "reuseCount": 1,
+    "lastUsed": "2026-02-23T12:56:00.000Z"
+  }
+}

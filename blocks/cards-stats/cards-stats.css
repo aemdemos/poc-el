@@ -1,0 +1,116 @@
+/* cards-stats — mobile-first */
+
+.cards-stats-container > div > p {
+  font-family: Gotham-book, Arial, Helvetica, sans-serif;
+  line-height: 24px;
+  letter-spacing: 0.6px;
+  color: #333;
+}
+
+.cards-stats {
+  font-size: var(--body-font-size-s);
+  line-height: 150%;
+  font-family: Gotham-book, Arial, Helvetica, sans-serif;
+  color: #414448;
+}
+
+.cards-stats > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.cards-stats > ul > li {
+  background-color: var(--background-color);
+}
+
+.cards-stats .cards-stats-card-body {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  color: #414448;
+  letter-spacing: 0.5px;
+}
+
+.cards-stats .cards-stats-card-body p {
+  margin: 0;
+}
+
+.cards-stats .cards-stats-card-body strong {
+  display: block;
+  font-family: Gotham-book, Arial, Helvetica, sans-serif;
+  line-height: 24px;
+}
+
+/* Stat number — 1st strong */
+.cards-stats .cards-stats-card-body strong:first-of-type {
+  font-size: var(--heading-font-size-xxxl);
+  font-weight: 400;
+  line-height: 110%;
+  font-family: var(--body-font-family);
+  letter-spacing: -1.28px;
+  color: var(--text-color);
+  padding-bottom: 1.5rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid #8e9399;
+}
+
+/* Title — 2nd strong */
+.cards-stats .cards-stats-card-body strong:nth-of-type(2) {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: Gotham, sans-serif;
+  line-height: 150%;
+  color: var(--text-color);
+  margin-bottom: 0;
+}
+
+.cards-stats .cards-stats-card-body a {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 16px;
+  color: #111213;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.cards-stats .cards-stats-card-body a::after {
+  content: " \2192";
+  color: #ff7a59;
+  font-weight: 400;
+}
+
+.cards-stats .cards-stats-card-body a:hover {
+  text-decoration: underline;
+}
+
+.cards-stats .cards-stats-card-image {
+  display: none;
+}
+
+.cards-stats > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* 426px — 2 columns */
+@media (width >= 426px) {
+  .cards-stats > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* >1024px — show images */
+@media (width > 1024px) {
+  .cards-stats .cards-stats-card-image {
+    display: block;
+    line-height: 0;
+  }
+
+  .cards-stats > ul {
+    grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  }
+}
