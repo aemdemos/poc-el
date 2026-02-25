@@ -38,7 +38,7 @@ footer .footer > div > div:first-child picture {
   display: block;
 }
 
-footer .footer > div > div:first-child img {
+footer .footer > div > div:first-child > .default-content-wrapper > p img {
   width: 160px;
   height: auto;
   filter: brightness(0) invert(1);
@@ -51,18 +51,21 @@ footer .footer .footer-search {
 
 footer .footer .footer-search input {
   width: 100%;
-  max-width: 320px;
-  padding: 0 35px 0 16px;
-  height: 44px;
-  border: 1px solid rgb(142 147 153);
-  border-radius: 4px;
-  background: #fff;
-  color: #333;
-  font-size: 12px;
+  max-width: 260px;
+  padding: 0;
+  height: 25px;
+  border: none;
+  background: rgba(0, 0, 0, 0);
+  box-shadow: none;
+  color: #fff;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
 }
 
 footer .footer .footer-search input::placeholder {
-  color: #333;
+  color: #fff;
 }
 
 /* Social icons shared styles */
@@ -82,39 +85,19 @@ footer .footer .footer-social-mobile li a {
   justify-content: center;
   width: 32px;
   height: 32px;
-  border-radius: 50%;
-  border: 1px solid rgba(255 255 255 / 40%);
   font-size: 0;
 }
 
-footer .footer .footer-social-desktop li:nth-child(1) a::before,
-footer .footer .footer-social-mobile li:nth-child(1) a::before {
-  content: '𝕏';
-  font-size: 14px;
-  color: #fff;
+footer .footer .footer-social-desktop li a picture,
+footer .footer .footer-social-mobile li a picture {
+  display: flex;
 }
 
-footer .footer .footer-social-desktop li:nth-child(2) a::before,
-footer .footer .footer-social-mobile li:nth-child(2) a::before {
-  content: 'in';
-  font-size: 12px;
-  font-weight: 700;
-  color: #fff;
-}
-
-footer .footer .footer-social-desktop li:nth-child(3) a::before,
-footer .footer .footer-social-mobile li:nth-child(3) a::before {
-  content: 'f';
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-}
-
-footer .footer .footer-social-desktop li:nth-child(4) a::before,
-footer .footer .footer-social-mobile li:nth-child(4) a::before {
-  content: '▶';
-  font-size: 10px;
-  color: #fff;
+footer .footer .footer-social-desktop li a img,
+footer .footer .footer-social-mobile li a img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 /* Mobile: hide desktop social, show mobile social */
@@ -252,7 +235,8 @@ footer .footer > div > div:nth-child(4) p {
   }
 
   /* Section 1: Logo left + social icons right, hide search */
-  footer .footer > div > div:first-child {
+  footer .footer > div > div:first-child .default-content-wrapper {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
