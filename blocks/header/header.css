@@ -444,6 +444,7 @@ header nav .nav-search {
   grid-area: search;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
