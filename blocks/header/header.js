@@ -222,6 +222,16 @@ export default async function decorate(block) {
     if (search) search.closest('li')?.remove();
     const signIn = navTools.querySelector('a[href*="login"]');
     if (signIn) signIn.closest('li')?.classList.add('nav-tools-signin');
+
+    // Clone non-signin tools (Support, Contact Us) for desktop row 2
+    const navToolsBottom = document.createElement('div');
+    navToolsBottom.className = 'nav-tools-bottom';
+    const bottomUl = document.createElement('ul');
+    navTools.querySelectorAll('ul > li:not(.nav-tools-signin)').forEach((li) => {
+      bottomUl.append(li.cloneNode(true));
+    });
+    navToolsBottom.append(bottomUl);
+    nav.append(navToolsBottom);
   }
 
   // hamburger for mobile
