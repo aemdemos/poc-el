@@ -39,7 +39,7 @@ footer .footer > div > div:first-child picture {
 }
 
 footer .footer > div > div:first-child > .default-content-wrapper > p img {
-  width: 160px;
+  width: 65%;
   height: auto;
   filter: brightness(0) invert(1);
   margin-bottom: 40px;
