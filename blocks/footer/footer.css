@@ -340,6 +340,29 @@ footer .footer .footer-country-list li a img {
 
 /* Tablet layout: 2-column links */
 @media (width >= 650px) {
+  footer .footer > div > div:first-child {
+    border-bottom: none;
+  }
+
+  footer .footer > div > div:first-child .default-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+
+  footer .footer > div > div:first-child > .default-content-wrapper > p img {
+    width: 40%;
+  }
+
+  footer .footer .footer-search {
+    display: block;
+  }
+
+  footer .footer > div > div:nth-child(2) {
+    padding: 0 0 12px;
+  }
+
   footer .footer > div > div:nth-child(2) .default-content-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -350,6 +373,7 @@ footer .footer .footer-country-list li a img {
   footer .footer .footer-main-links {
     grid-column: 1;
     margin-bottom: 0;
+    margin-left: 54px;
   }
 
   footer .footer .footer-col-right {
