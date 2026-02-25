@@ -11,7 +11,7 @@ header nav {
   box-sizing: border-box;
   display: grid;
   grid-template:
-    'hamburger brand search' auto / auto 1fr auto;
+    'hamburger brand search' auto / auto auto;
   align-items: center;
   gap: 0 24px;
   margin: 0;
