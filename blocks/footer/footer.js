@@ -113,12 +113,13 @@ export default async function decorate(block) {
   if (section4) {
     const ul = section4.querySelector('ul');
     if (ul) {
-      // Separate flag items from legal links within the same UL
+      // Separate flag items (links with images) from legal links (text-only links)
       const flagItems = [];
       const legalItems = [];
       [...ul.querySelectorAll('li')].forEach((li) => {
-        const img = li.querySelector('a img');
-        if (img && img.src.includes('flag')) {
+        const a = li.querySelector('a');
+        const img = a?.querySelector('img');
+        if (a && img) {
           flagItems.push(li);
         } else {
           legalItems.push(li);
