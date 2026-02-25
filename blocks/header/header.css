@@ -1,31 +1,32 @@
 /* header and nav layout */
 header .nav-wrapper {
-  background-color: var(--background-color);
+  background-color: #fff;
   width: 100%;
   z-index: 2;
   position: fixed;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 header nav {
   box-sizing: border-box;
   display: grid;
   grid-template:
-    'hamburger brand search' var(--nav-height)
-    'sections sections sections' 1fr / auto 1fr auto;
+    'hamburger brand search' var(--nav-height) / auto 1fr auto;
   align-items: center;
   gap: 0 24px;
   margin: auto;
   max-width: 1248px;
-  height: 80px;
-  padding: 0 16px;
-  font-family: var(--body-font-family);
+  height: var(--nav-height);
+  padding: 0 24px;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
+  color: #0f3133;
 }
 
 header nav[aria-expanded='true'] {
   grid-template:
     'hamburger brand search' var(--nav-height)
-    'nav-tools nav-tools nav-tools' auto
-    'sections sections sections' 1fr / auto 1fr auto;
+    'sections sections sections' 1fr
+    'tools tools tools' var(--nav-height) / auto 1fr auto;
   overflow-y: auto;
   min-height: 100dvh;
   height: auto;
@@ -44,6 +45,11 @@ header nav[aria-expanded='true'] {
     min-height: 0;
     overflow: visible;
   }
+
+  header nav .nav-tools {
+    display: block;
+    visibility: visible;
+  }
 }
 
 header nav p {
@@ -53,6 +59,11 @@ header nav p {
 
 header nav a:any-link {
   color: currentcolor;
+  text-decoration: none;
+}
+
+header nav a:hover {
+  color: #00827f;
 }
 
 /* hamburger */
@@ -69,8 +80,8 @@ header nav .nav-hamburger button {
   border: 0;
   border-radius: 0;
   padding: 0;
-  background-color: var(--background-color);
-  color: inherit;
+  background-color: transparent;
+  color: #0f3133;
   overflow: initial;
   text-overflow: initial;
   white-space: initial;
@@ -149,7 +160,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 /* brand */
 header .nav-brand {
   grid-area: brand;
-  flex-basis: 128px;
+  flex-basis: 160px;
   font-size: var(--heading-font-size-s);
   font-weight: 700;
   line-height: 1;
@@ -157,12 +168,15 @@ header .nav-brand {
 }
 
 header nav .nav-brand img {
-  width: 128px;
+  width: 160px;
   height: auto;
 }
 
-header nav .nav-brand a {
-  text-decoration: none;
+@media (width >= 900px) {
+  header .nav-brand {
+    flex-basis: 160px;
+    text-align: left;
+  }
 }
 
 /* sections */
@@ -212,8 +226,7 @@ header nav[aria-expanded='true'] .nav-tools ul > li a {
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
-  font-size: var(--body-font-size-s);
-  margin: 0;
+  font-size: 14px;
 }
 
 header nav .nav-sections ul > li {
@@ -331,6 +344,9 @@ header nav .nav-sections ul > li > ul > li > a {
   header nav .nav-sections .default-content-wrapper > ul > li {
     flex: 0 1 auto;
     position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > a,
@@ -347,12 +363,14 @@ header nav .nav-sections ul > li > ul > li > a {
     display: block;
     position: absolute;
     left: -24px;
-    width: 200px;
+    width: 240px;
     top: 150%;
     padding: 16px;
-    background-color: var(--light-color);
+    background-color: #fff;
     white-space: initial;
     z-index: 1;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+    border-radius: 4px;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
@@ -364,7 +382,7 @@ header nav .nav-sections ul > li > ul > li > a {
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--light-color);
+    border-bottom: 8px solid #fff;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
@@ -379,10 +397,31 @@ header nav .nav-tools {
   visibility: hidden;
 }
 
+header nav[aria-expanded='true'] .nav-tools {
+  display: block;
+  visibility: visible;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
 header nav .nav-tools ul {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
   margin: 0;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+header nav .nav-tools a:any-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: #0f3133;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+header nav .nav-tools a:hover {
+  color: #00827f;
 }
 
 header nav .nav-tools .button {
@@ -393,27 +432,59 @@ header nav .nav-tools .button {
   line-height: 0;
 }
 
-/* search icon — always visible in header row */
+/* search icon (mobile only) */
 header nav .nav-search {
   grid-area: search;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
 }
 
-header nav .nav-search a {
+header nav .nav-search button {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  color: #0f3133;
+  cursor: pointer;
+  line-height: 0;
+}
+
+header nav .nav-search-icon {
   display: block;
   width: 20px;
   height: 20px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f3133' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
+  position: relative;
+}
+
+header nav .nav-search-icon::before {
+  content: '';
+  display: block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentcolor;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+header nav .nav-search-icon::after {
+  content: '';
+  display: block;
+  width: 7px;
+  height: 2px;
+  background: currentcolor;
+  border-radius: 1px;
+  position: absolute;
+  bottom: 2px;
+  right: 0;
+  transform: rotate(45deg);
 }
 
 @media (width >= 900px) {
-  header nav .nav-tools {
-    display: block;
-    visibility: visible;
+  header nav .nav-search {
+    display: none;
+    visibility: hidden;
   }
 }
 

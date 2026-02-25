@@ -1,0 +1,124 @@
+/* tabs-numbered — Lumen numbered tabs */
+
+.tabs-numbered-container .tabs-numbered-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.tabs-numbered .tabs-numbered-list {
+  display: flex;
+  align-items: baseline;
+  gap: 40px;
+  max-width: 100%;
+  overflow-x: auto;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tabs-numbered .tabs-numbered-list button {
+  flex: 0 0 max-content;
+  margin: 0;
+  border: none;
+  border-bottom: 4px solid transparent;
+  border-radius: 0;
+  padding: 8px 0;
+  background-color: transparent;
+  color: #0f3133;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: unset;
+  text-align: initial;
+  text-overflow: unset;
+  overflow: unset;
+  white-space: unset;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.tabs-numbered .tabs-numbered-list button p {
+  margin: 0;
+}
+
+.tabs-numbered .tabs-numbered-list button[aria-selected='true'] {
+  border-bottom: 4px solid #fa6e5c;
+  font-size: 40px;
+  cursor: initial;
+}
+
+/* Image container — above tab nav */
+.tabs-numbered .tabs-numbered-images {
+  margin-bottom: 24px;
+}
+
+.tabs-numbered .tabs-numbered-image {
+  display: block;
+}
+
+.tabs-numbered .tabs-numbered-image[aria-hidden='true'] {
+  display: none;
+}
+
+.tabs-numbered .tabs-numbered-image picture {
+  display: block;
+}
+
+.tabs-numbered .tabs-numbered-image img {
+  display: block;
+  width: 100%;
+  max-width: 740px;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* Panels — below tab nav */
+.tabs-numbered .tabs-numbered-panel {
+  margin-top: 0;
+  padding: 32px 0 0;
+  border: none;
+  overflow: auto;
+}
+
+.tabs-numbered .tabs-numbered-panel[aria-hidden='true'] {
+  display: none;
+}
+
+.tabs-numbered .tabs-numbered-panel h2 {
+  font-family: Gotham, Arial, Helvetica, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #0f3133;
+  margin: 24px 0 16px;
+  line-height: 1.1;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.tabs-numbered .tabs-numbered-panel p {
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  color: #414448;
+  line-height: 1.5;
+  margin: 0 0 24px;
+}
+
+.tabs-numbered .tabs-numbered-panel .button-container {
+  margin: 0;
+}
+
+.tabs-numbered .tabs-numbered-panel a {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 32px;
+  border-radius: 16px;
+  background-color: #ff7a59;
+  color: #fff;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.tabs-numbered .tabs-numbered-panel a:hover {
+  background-color: #e5593e;
+}

@@ -1,0 +1,39 @@
+{
+  "variantName": "cards-industry",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-02-23T12:56:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.lumen.com/en-us/home.html",
+    "originPage": "Enterprise homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "industry-cards",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + title + description + CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "industry vertical showcases",
+      "sector-specific content cards",
+      "use case highlights with images"
+    ],
+    "notSuitableFor": [
+      "icon-only feature cards",
+      "stat/metric tiles",
+      "dark background card grids"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/en-us/home"],
+    "reuseCount": 1,
+    "lastUsed": "2026-02-23T12:56:00.000Z"
+  }
+}

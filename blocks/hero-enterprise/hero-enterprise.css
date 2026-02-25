@@ -1,0 +1,120 @@
+/* hero-enterprise — mobile-first, stacked layout at all sizes */
+
+main > .section.hero-enterprise-container {
+  margin-top: 4px;
+}
+
+.hero-enterprise-container .hero-enterprise-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-enterprise {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-enterprise > div {
+  width: 100%;
+}
+
+.hero-enterprise picture {
+  display: block;
+}
+
+.hero-enterprise img {
+  display: block;
+  height: auto;
+  margin: 0;
+}
+
+.hero-enterprise > div:not(:first-child) {
+  padding: 16px;
+  border-radius: 40px 40px 0 0;
+  margin-top: -30px;
+  background-color: white;
+}
+
+.hero-enterprise h1,
+.hero-enterprise h2,
+.hero-enterprise h3,
+.hero-enterprise h4,
+.hero-enterprise h5,
+.hero-enterprise h6 {
+  color: #0f3133;
+  margin: 0 0 8px;
+  font-size: var(--heading-font-size-xxxl);
+  line-height: 1.01;
+  font-weight: 700;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
+}
+
+.hero-enterprise p {
+  color: #414448;
+  margin: 8px 0 0;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.5;
+}
+
+/* 426px — large mobile */
+@media (width >= 426px) {
+  .hero-enterprise > div:not(:first-child) {
+    padding: 16px 24px;
+  }
+
+  .hero-enterprise h1 {
+    font-size: 36px;
+  }
+}
+
+/* 768px — tablet */
+@media (width >= 768px) {
+  .hero-enterprise > div:not(:first-child) {
+    padding: 16px 32px;
+  }
+
+  .hero-enterprise h1 {
+    font-size: 40px;
+    max-width: 550px;
+  }
+
+  .hero-enterprise p {
+    font-size: 18px;
+    max-width: 550px;
+  }
+}
+
+/* 1024px — desktop */
+@media (width >= 1024px) {
+  .hero-enterprise {
+    padding: 0 40px;
+  }
+
+  .hero-enterprise > div:not(:first-child) {
+    padding: 16px 0;
+  }
+
+  .hero-enterprise h1 {
+    font-size: 52px;
+    max-width: 600px;
+  }
+
+  .hero-enterprise p {
+    font-size: 18px;
+    max-width: 600px;
+  }
+}
+
+/* 1200px — wide desktop */
+@media (width >= 1200px) {
+  .hero-enterprise > div:not(:first-child) {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-enterprise h1 {
+    font-size: 72px;
+  }
+}

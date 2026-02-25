@@ -1,0 +1,4 @@
+/* metadata block is removed from DOM after processing */
+.metadata {
+  display: none;
+}

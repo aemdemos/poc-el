@@ -1,0 +1,39 @@
+{
+  "variantName": "columns-industry",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-02-23T12:56:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.lumen.com/en-us/home.html",
+    "originPage": "Enterprise homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "industry-showcase",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image-column + text-column(eyebrow + title + description + CTA)",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "industry case study showcases",
+      "side-by-side image and text layouts",
+      "customer story highlights"
+    ],
+    "notSuitableFor": [
+      "multi-column grids",
+      "comparison tables",
+      "icon-based feature lists"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/en-us/home"],
+    "reuseCount": 1,
+    "lastUsed": "2026-02-23T12:56:00.000Z"
+  }
+}

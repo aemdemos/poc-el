@@ -1,0 +1,39 @@
+{
+  "variantName": "carousel-logos",
+  "baseBlock": "carousel",
+  "version": "1.0.0",
+  "created": "2026-02-23T12:56:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.lumen.com/en-us/home.html",
+    "originPage": "Enterprise homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "accent",
+    "density": "compact",
+    "purpose": "logo-carousel",
+    "imagePattern": "icon"
+  },
+  "contentPattern": {
+    "structure": "logo-images-only",
+    "buttonCount": 0,
+    "imageCount": 19
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "partner/client logo showcases",
+      "brand logo carousels",
+      "trust badges and certifications"
+    ],
+    "notSuitableFor": [
+      "content carousels with text",
+      "hero image sliders",
+      "testimonial rotators"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/en-us/home"],
+    "reuseCount": 1,
+    "lastUsed": "2026-02-23T12:56:00.000Z"
+  }
+}

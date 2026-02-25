@@ -26,13 +26,14 @@
 
   /* body sizes */
   --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  --body-font-size-s: 18px;
+  --body-font-size-xs: 16px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
+  --heading-font-size-xxxl: 64px;
+  --heading-font-size-xxl: 48px;
+  --heading-font-size-xl: 40px;
+  --heading-font-size-l: 32px;
   --heading-font-size-m: 27px;
   --heading-font-size-s: 24px;
   --heading-font-size-xs: 22px;
@@ -79,7 +80,7 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   font-family: var(--body-font-family);
-  font-size: var(--body-font-size-m);
+  font-size: var(--body-font-size-xs);
   line-height: 1.6;
 }
 
@@ -122,11 +123,29 @@ h6 {
 }
 
 h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
+
+h2 {
+  font-size: var(--heading-font-size-l);
+  font-family: Gotham, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 125%;
+  letter-spacing: 0.3px;
+  margin-bottom: 3rem;
+}
+
 h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
+
+@media (width >= 768px) {
+  h2 { font-size: var(--heading-font-size-xl); }
+}
+
+@media (width >= 1200px) {
+  h2 { font-size: var(--heading-font-size-xxl); }
+}
 
 p,
 dl,

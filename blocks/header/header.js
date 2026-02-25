@@ -176,7 +176,7 @@ async function buildBreadcrumbs() {
 export default async function decorate(block) {
   // load nav as fragment
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/en-us/nav';
   const fragment = await loadFragment(navPath);
 
   // decorate nav DOM
@@ -238,6 +238,15 @@ export default async function decorate(block) {
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
+
+  // search icon for mobile
+  const searchIcon = document.createElement('div');
+  searchIcon.classList.add('nav-search');
+  searchIcon.innerHTML = `<button type="button" aria-label="Search">
+      <span class="nav-search-icon"></span>
+    </button>`;
+  nav.append(searchIcon);
+
   nav.setAttribute('aria-expanded', 'false');
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
