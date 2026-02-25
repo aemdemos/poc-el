@@ -224,12 +224,6 @@ export default async function decorate(block) {
     if (signIn) signIn.closest('li')?.classList.add('nav-tools-signin');
   }
 
-  // search icon
-  const searchIcon = document.createElement('div');
-  searchIcon.className = 'nav-search';
-  searchIcon.innerHTML = '<a href="/en-us/search.html" aria-label="Search"></a>';
-  nav.append(searchIcon);
-
   // hamburger for mobile
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
