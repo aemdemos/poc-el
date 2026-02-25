@@ -29,6 +29,7 @@ header nav[aria-expanded='true'] {
     'tools tools tools' var(--nav-height) / auto 1fr auto;
   overflow-y: auto;
   min-height: 100dvh;
+  height: auto;
 }
 
 @media (width >= 900px) {
@@ -106,36 +107,46 @@ header nav[aria-expanded='false'] .nav-hamburger-icon,
 header nav[aria-expanded='false'] .nav-hamburger-icon::before,
 header nav[aria-expanded='false'] .nav-hamburger-icon::after {
   height: 2px;
-  border-radius: 2px;
+  border-radius: 0;
   background: currentcolor;
 }
 
 header nav[aria-expanded='false'] .nav-hamburger-icon::before {
-  top: -6px;
+  top: -7px;
 }
 
 header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  top: 6px;
+  top: 7px;
+}
+
+header nav[aria-expanded='true'] .nav-hamburger button {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon {
-  height: 22px;
+  height: 16px;
+  width: 16px;
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon::before,
 header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: 3px;
-  left: 1px;
+  top: 2px;
+  left: 0;
   transform: rotate(45deg);
-  transform-origin: 2px 1px;
-  width: 24px;
-  height: 2px;
-  border-radius: 2px;
+  transform-origin: center;
+  width: 16px;
+  height: 1.5px;
+  border-radius: 0;
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: unset;
-  bottom: 3px;
+  top: 2px;
+  bottom: unset;
   transform: rotate(-45deg);
 }
 
@@ -182,6 +193,36 @@ header nav[aria-expanded='true'] .nav-sections {
   align-self: start;
 }
 
+header nav[aria-expanded='true'] .nav-tools {
+  grid-area: nav-tools;
+  display: block;
+  visibility: visible;
+}
+
+/* Mobile expanded: only show Sign In from tools */
+header nav[aria-expanded='true'] .nav-tools ul {
+  display: block;
+}
+
+header nav[aria-expanded='true'] .nav-tools ul > li {
+  display: none;
+}
+
+header nav[aria-expanded='true'] .nav-tools ul > li.nav-tools-signin {
+  display: block;
+}
+
+header nav[aria-expanded='true'] .nav-tools ul > li a {
+  display: block;
+  padding: 16px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: var(--body-font-size-s);
+  font-weight: 500;
+  text-decoration: none;
+  color: currentcolor;
+}
+
+
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
@@ -190,14 +231,67 @@ header nav .nav-sections ul {
 
 header nav .nav-sections ul > li {
   font-weight: 500;
+  border-bottom: 1px solid #e0e0e0;
 }
 
+/* Collapse sub-menus on mobile */
 header nav .nav-sections ul > li > ul {
+  display: none;
   margin-top: 0;
+}
+
+header nav .nav-sections ul > li[aria-expanded='true'] > ul {
+  display: block;
 }
 
 header nav .nav-sections ul > li > ul > li {
   font-weight: 400;
+  border-bottom: none;
+}
+
+/* Mobile nav item links and labels */
+/* stylelint-disable-next-line no-descending-specificity */
+header nav .nav-sections .default-content-wrapper > ul > li {
+  padding: 16px 0;
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li > a {
+  display: block;
+  text-decoration: none;
+}
+
+/* Chevron for dropdowns on mobile */
+header nav .nav-sections .nav-drop {
+  position: relative;
+  padding-right: 24px;
+  cursor: pointer;
+}
+
+header nav .nav-sections .nav-drop::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-70%) rotate(135deg);
+  width: 6px;
+  height: 6px;
+  border: 2px solid currentcolor;
+  border-radius: 0 1px 0 0;
+  border-width: 2px 2px 0 0;
+  transition: transform 0.2s;
+}
+
+header nav .nav-sections .nav-drop[aria-expanded='true']::after {
+  transform: translateY(-30%) rotate(315deg);
+}
+
+/* Sub-menu items padding on mobile */
+header nav .nav-sections ul > li > ul > li > a {
+  display: block;
+  padding: 8px 0 8px 16px;
+  text-decoration: none;
+  font-size: var(--body-font-size-xs);
 }
 
 @media (width >= 900px) {
@@ -209,6 +303,10 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav[aria-expanded='true'] .nav-sections {
     align-self: unset;
+  }
+
+  header nav .nav-sections ul > li {
+    border-bottom: none;
   }
 
   header nav .nav-sections .nav-drop {
@@ -249,6 +347,11 @@ header nav .nav-sections ul > li > ul > li {
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.3px;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > a,
+  header nav .nav-sections .default-content-wrapper > ul > li > .nav-drop {
+    padding: 0;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
