@@ -51,7 +51,7 @@ header nav .nav-tools-bottom {
     align-items: center;
     gap: 0;
     max-width: none;
-    padding: 12px 32px 0;
+    padding: 0;
     min-height: auto;
     border-bottom: none;
     position: relative;
@@ -406,8 +406,8 @@ header nav .nav-sections ul > li > ul > li > a {
     color: #000;
     z-index: 10;
     white-space: nowrap;
-    margin: 12px -32px 0;
-    padding: 12px 32px;
+    margin: 0;
+    padding: 0;
     visibility: visible;
   }
 
