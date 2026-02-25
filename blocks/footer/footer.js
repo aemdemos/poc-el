@@ -16,6 +16,8 @@ export default async function decorate(block) {
   const footer = document.createElement('div');
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
+  let socialMobileClone = null;
+
   // strip button classes from footer links
   footer.querySelectorAll('.button-container').forEach((bc) => {
     bc.classList.remove('button-container');
@@ -42,10 +44,8 @@ export default async function decorate(block) {
     // clone social icons for mobile (placed inside link section)
     if (socialUl) {
       socialUl.className = 'footer-social-desktop';
-      const socialClone = socialUl.cloneNode(true);
-      socialClone.className = 'footer-social-mobile';
-      // store clone to insert into link section later
-      footer._socialClone = socialClone;
+      socialMobileClone = socialUl.cloneNode(true);
+      socialMobileClone.className = 'footer-social-mobile';
     }
   }
 
@@ -98,9 +98,8 @@ export default async function decorate(block) {
       linkSection.append(quickLinks);
 
       // insert mobile social icons clone after quick links
-      if (footer._socialClone) {
-        linkSection.append(footer._socialClone);
-        delete footer._socialClone;
+      if (socialMobileClone) {
+        linkSection.append(socialMobileClone);
       }
 
       linkSection.append(mainLinks);
