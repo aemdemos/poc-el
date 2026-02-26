@@ -39,7 +39,7 @@
   --heading-font-size-xs: 22px;
 
   /* nav heights */
-  --nav-height: 64px;
+  --nav-height: 80px;
   --breadcrumbs-height: 34px;
   --header-height: var(--nav-height);
 }
@@ -103,6 +103,16 @@ footer .footer[data-block-status="loaded"] {
 }
 
 @media (width >= 900px) {
+  body[data-breadcrumbs] {
+    --header-height: calc(var(--nav-height) + var(--breadcrumbs-height));
+  }
+}
+
+@media (width >= 1200px) {
+  :root {
+    --nav-height: 120px;
+  }
+
   body[data-breadcrumbs] {
     --header-height: calc(var(--nav-height) + var(--breadcrumbs-height));
   }
