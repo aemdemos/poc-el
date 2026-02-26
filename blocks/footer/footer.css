@@ -512,6 +512,10 @@ footer .footer .footer-country-list li a img {
   }
 
   footer .footer > div > div:nth-child(4) p {
-    padding-bottom: 36px;
+    padding-bottom: 6px;
+    min-height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
