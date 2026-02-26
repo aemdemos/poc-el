@@ -545,9 +545,9 @@ header nav .nav-drop-icon {
     display: none !important;
   }
 
-  /* Let mega items be static so mega-menu positions relative to nav-sections */
+  /* Let mega items be relative so mega-menu positions relative to nav item */
   header nav .nav-sections .default-content-wrapper > ul > li.nav-mega {
-    position: static;
+    position: relative;
   }
 
   /* Hide ::after for mega items (position:static breaks it); inline icon used */
@@ -581,35 +581,38 @@ header nav .nav-drop-icon {
     display: flex;
     position: absolute;
     left: 0;
-    right: 0;
     top: 100%;
     background: #fff;
-    box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+    box-shadow: rgb(0 0 0 / 24%) 0 8px 8px 0;
+    border-radius: 0 0 4px 4px;
     z-index: 100;
-    padding: 32px 60px;
+    padding: 0;
     max-height: 80vh;
     overflow-y: auto;
   }
 
   /* Categories panel (left) */
   header nav .mega-menu-categories {
-    flex: 0 0 280px;
-    border-right: 1px solid #d9d9d9;
-    padding-right: 32px;
-    padding-top: 8px;
+    flex: 0 0 315px;
+    max-width: 315px;
+    box-sizing: border-box;
+    border-right: 1px solid #d0d4d9;
+    padding: 20px 0 20px 20px;
   }
 
   header nav .mega-menu-cat {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px;
+    padding: 10px 20px;
     cursor: pointer;
-    font-size: 18px;
-    font-weight: 700;
-    color: #0f3133;
-    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    border-radius: 4px;
     white-space: nowrap;
+    height: 44px;
+    box-sizing: border-box;
   }
 
   header nav .mega-menu-chevron {
@@ -637,9 +640,10 @@ header nav .nav-drop-icon {
 
   /* Content panel (right) */
   header nav .mega-menu-content {
-    flex: 1;
-    padding-left: 40px;
-    padding-top: 8px;
+    flex: 0 0 315px;
+    box-sizing: border-box;
+    margin: 20px 0;
+    padding-left: 20px;
     min-width: 0;
     white-space: normal;
   }
