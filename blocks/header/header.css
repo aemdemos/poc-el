@@ -86,7 +86,7 @@ header nav .nav-tools-bottom {
     display: flex;
     align-items: center;
     justify-self: end;
-    padding-right: 32px;
+    padding-right: 48px;
     z-index: 11;
   }
 
@@ -97,6 +97,15 @@ header nav .nav-tools-bottom {
     display: flex;
     gap: 24px;
     align-items: center;
+  }
+
+  /* Force Support before Contact Us (pipeline alphabetizes by href) */
+  header nav .nav-tools-bottom ul li:first-child {
+    order: 2;
+  }
+
+  header nav .nav-tools-bottom ul li:nth-child(2) {
+    order: 1;
   }
 
   header nav .nav-tools-bottom a {
