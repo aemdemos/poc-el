@@ -325,7 +325,9 @@ header nav[aria-expanded='true'] .nav-tools ul > li a {
     padding: 0;
     padding-right: 50px;
     border-bottom: none;
-    font-size: 13px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: Gotham, Arial, sans-serif;
   }
 }
 
@@ -421,7 +423,7 @@ header nav .nav-sections ul > li > ul > li > a {
     z-index: 10;
     white-space: nowrap;
     margin: 0;
-    padding: 14px 0;
+    padding: 7px 0;
     visibility: visible;
   }
 
@@ -443,7 +445,7 @@ header nav .nav-sections ul > li > ul > li > a {
     content: '';
     display: inline-block;
     position: absolute;
-    top: 2px;
+    top: 5px;
     right: 2px;
     transform: rotate(135deg);
     width: 6px;
