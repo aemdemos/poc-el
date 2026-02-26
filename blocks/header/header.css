@@ -65,6 +65,10 @@ header nav .nav-tools-bottom {
     overflow: visible;
   }
 
+  header nav p {
+    line-height: 3;
+  }
+
   /* Row 1 right side: show search + Sign In only */
   header nav .nav-tools,
   header nav[aria-expanded='true'] .nav-tools {
