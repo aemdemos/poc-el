@@ -319,6 +319,7 @@ header nav[aria-expanded='true'] .nav-tools ul > li a {
   /* stylelint-disable-next-line no-descending-specificity */
   header nav[aria-expanded='true'] .nav-tools ul > li a {
     padding: 0;
+    padding-right: 50px;
     border-bottom: none;
     font-size: 13px;
   }
@@ -614,6 +615,10 @@ header nav .nav-search-icon::after {
     display: flex;
     visibility: visible;
     justify-content: flex-end;
+  }
+
+  header nav .nav-search button {
+    padding-right: 20px;
   }
 }
 
