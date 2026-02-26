@@ -375,10 +375,15 @@ export default async function decorate(block) {
 
       navDrop.classList.add('nav-mega');
 
-      // Add inline chevron (position:static on .nav-mega breaks ::after)
+      // Add inline chevron inside the text element (position:static breaks ::after)
       const dropIcon = document.createElement('span');
       dropIcon.className = 'nav-drop-icon';
-      navDrop.insertBefore(dropIcon, navDrop.querySelector('ul'));
+      const textEl = navDrop.querySelector(':scope > p');
+      if (textEl) {
+        textEl.appendChild(dropIcon);
+      } else {
+        navDrop.insertBefore(dropIcon, navDrop.querySelector('ul'));
+      }
 
       // Group items into categories, using DOM items where available and
       // injecting fallback items for any the pipeline may have dropped
