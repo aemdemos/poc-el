@@ -446,6 +446,11 @@ footer .footer .footer-country-list li a img {
   }
 
   /* Section 2: 4-column grid */
+  footer .footer > div > div:nth-child(2) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
   footer .footer > div > div:nth-child(2) .default-content-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
