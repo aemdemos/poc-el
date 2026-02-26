@@ -407,6 +407,11 @@ header nav .nav-sections ul > li > ul > li > a {
   font-size: var(--body-font-size-xs);
 }
 
+/* Hide mega-menu panel on mobile (desktop-only feature) */
+header nav .mega-menu {
+  display: none;
+}
+
 @media (width >= 1200px) {
   header nav .nav-sections {
     grid-area: sections;
@@ -518,6 +523,105 @@ header nav .nav-sections ul > li > ul > li > a {
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding: 8px 0;
   }
+}
+
+/* Mega-menu: desktop two-panel layout */
+@media (width >= 1200px) {
+  /* Hide original nested list for mega items; mega-menu panel takes over */
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-mega > ul {
+    display: none !important;
+  }
+
+  /* Let mega items be static so mega-menu positions relative to nav-sections */
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-mega {
+    position: static;
+  }
+
+  /* Show mega-menu when expanded */
+  header nav .nav-mega[aria-expanded='true'] .mega-menu {
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: #fff;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+    border-radius: 0 0 4px 4px;
+    z-index: 100;
+    padding: 24px 60px;
+  }
+
+  /* Categories panel (left) */
+  header nav .mega-menu-categories {
+    flex: 0 0 220px;
+    border-right: 1px solid #e0e0e0;
+    padding-right: 24px;
+  }
+
+  header nav .mega-menu-cat {
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0f3133;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  header nav .mega-menu-cat:hover,
+  header nav .mega-menu-cat.active {
+    background-color: #f2f0f1;
+    color: #00827f;
+  }
+
+  /* Content panel (right) */
+  header nav .mega-menu-content {
+    flex: 1;
+    padding-left: 24px;
+  }
+
+  header nav .mega-menu-group {
+    display: none;
+  }
+
+  header nav .mega-menu-group.active {
+    display: block;
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  header nav .mega-menu-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  header nav .mega-menu-group li {
+    padding: 0;
+    border-bottom: none;
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  header nav .mega-menu-group a {
+    display: block;
+    padding: 8px 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #0f3133;
+    text-decoration: none;
+    white-space: normal;
+    text-align: left;
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  header nav .mega-menu-group a:hover {
+    color: #00827f;
+  }
+
 }
 
 /* tools */

@@ -214,6 +214,239 @@ export default async function decorate(block) {
       buttonContainer.classList.remove('button-container');
       buttonContainer.querySelector('.button').classList.remove('button');
     });
+
+    // Mega-menu: category groupings by URL pattern with fallback items
+    // Fallback items ensure all nav links render even if the pipeline drops some
+    const megaMenuConfig = {
+      Solutions: [
+        {
+          label: 'By Business Outcome',
+          match: (h) => h.includes('/solutions/use-case/') && !['artificial-intelligence', 'cloud-connectivity', 'network-on-demand'].some((s) => h.includes(s)),
+          expected: [
+            { text: 'Reliable & Secure Connectivity', href: '/en-us/solutions/use-case/reliable-secure-connectivity' },
+            { text: 'Secure Customer Experience & Connectivity', href: '/en-us/solutions/use-case/secure-reliable-connectivity-for-business-continuity' },
+            { text: 'Flexible Networking for Secure Access', href: '/en-us/solutions/use-case/flexible-networking-for-secure-access' },
+          ],
+        },
+        {
+          label: 'By Industry',
+          match: (h) => h.includes('/industries/'),
+          expected: [
+            { text: 'Energy', href: '/en-us/industries/energy-utilities' },
+            { text: 'Financial Services', href: '/en-us/industries/financial-services' },
+            { text: 'Gaming Network', href: '/en-us/industries/gaming-network' },
+            { text: 'Healthcare', href: '/en-us/industries/healthcare' },
+            { text: 'Manufacturing', href: '/en-us/industries/manufacturing' },
+            { text: 'Media & Entertainment', href: '/en-us/industries/media-entertainment' },
+            { text: 'Pharmaceuticals', href: '/en-us/industries/pharmaceuticals' },
+            { text: 'Retail', href: '/en-us/industries/retail' },
+            { text: 'Technology', href: '/en-us/industries/technology' },
+          ],
+        },
+        {
+          label: 'By Business Type',
+          match: (h) => h.includes('/solutions/business-size/') || h.includes('/public-sector'),
+          expected: [
+            { text: 'Enterprise Business', href: '/en-us/solutions/business-size/large-enterprise' },
+            { text: 'Midsize Business', href: '/en-us/solutions/business-size/midsize' },
+            { text: 'Public Sector', href: '/en-us/public-sector' },
+            { text: 'Wholesale', href: '/en-us/solutions/business-size/wholesale' },
+          ],
+        },
+        {
+          label: 'By Technical Use Case',
+          match: (h) => ['artificial-intelligence', 'cloud-connectivity', 'network-on-demand'].some((s) => h.includes(s)),
+          expected: [
+            { text: 'AI', href: '/en-us/solutions/use-case/artificial-intelligence' },
+            { text: 'Cloud Connectivity', href: '/en-us/solutions/use-case/cloud-connectivity' },
+            { text: 'Network-as-a-Service', href: '/en-us/solutions/use-case/network-on-demand' },
+          ],
+        },
+      ],
+      Services: [
+        {
+          label: 'Infrastructure',
+          match: (h) => ['wavelengths', 'colocation', 'dark-fiber', 'enterprise-broadband'].some((s) => h.includes(s)),
+          expected: [
+            { text: 'Wavelengths', href: '/en-us/services/wavelengths' },
+            { text: 'Colocation', href: '/en-us/services/colocation' },
+            { text: 'Dark Fiber', href: '/en-us/services/dark-fiber' },
+            { text: 'Enterprise Broadband', href: '/en-us/services/enterprise-broadband' },
+          ],
+        },
+        {
+          label: 'Connectivity',
+          match: (h) => ['ethernet', 'ip-vpn', 'multi-cloud-gateway', 'sd-wan'].some((s) => h.includes(s)),
+          expected: [
+            { text: 'Ethernet', href: '/en-us/services/ethernet' },
+            { text: 'IP VPN', href: '/en-us/services/ip-vpn' },
+            { text: 'Multi-Cloud Gateway', href: '/en-us/services/multi-cloud-gateway' },
+            { text: 'SD-WAN', href: '/en-us/services/sd-wan' },
+          ],
+        },
+        {
+          label: 'Security',
+          match: (h) => ['ddos', 'sase'].some((s) => h.includes(s)),
+          expected: [
+            { text: 'DDoS', href: '/en-us/services/ddos' },
+            { text: 'SASE', href: '/en-us/services/sase' },
+          ],
+        },
+        {
+          label: 'Communication',
+          match: (h) => ['cloud-voice', 'ucc', 'contact-center'].some((s) => h.includes(s)),
+          expected: [
+            { text: 'Cloud Voice', href: '/en-us/services/lumen-cloud-voice' },
+            { text: 'UC&C', href: '/en-us/services/ucc' },
+            { text: 'Contact Center', href: '/en-us/services/contact-center' },
+          ],
+        },
+      ],
+      Partners: [
+        {
+          label: 'Connected Ecosystem',
+          match: (h) => h.includes('/partner/'),
+          expected: [
+            { text: 'Strategic Technology Partners', href: '/en-us/partner/strategic-technology-partners' },
+            { text: 'Lumen Validated Designs', href: '/en-us/partner/validated-designs' },
+          ],
+        },
+        {
+          label: 'By Technology Partner',
+          match: (h) => h.includes('/alliances/'),
+          expected: [
+            { text: 'Amazon Web Services', href: '/en-us/alliances/aws' },
+            { text: 'Cisco', href: '/en-us/alliances/cisco' },
+            { text: 'Google Cloud', href: '/en-us/alliances/google-cloud' },
+            { text: 'Microsoft', href: '/en-us/alliances/microsoft' },
+          ],
+        },
+      ],
+      Resources: [
+        {
+          label: 'Why Lumen',
+          match: (h) => ['why-lumen', 'black-lotus', 'network-maps'].some((s) => h.includes(s)),
+          expected: [
+            { text: 'Why Lumen', href: '/en-us/why-lumen' },
+            { text: 'Black Lotus Labs', href: '/en-us/security/black-lotus-labs' },
+            { text: 'Network Maps', href: '/en-us/resources/network-maps' },
+          ],
+        },
+        {
+          label: 'About Us',
+          match: (h) => ['customer-success', '/about'].some((s) => h.includes(s)),
+          expected: [
+            { text: 'Customer Stories', href: '/en-us/resources/customer-success-stories' },
+            { text: 'About Us', href: '/en-us/about' },
+          ],
+        },
+        {
+          label: 'Newsroom',
+          match: (h) => ['blog.lumen', 'ir.lumen', 'developer.lumen'].some((s) => h.includes(s)),
+          expected: [
+            { text: 'Blog & News', href: 'https://blog.lumen.com' },
+            { text: 'News Releases', href: 'https://ir.lumen.com/news/default.aspx' },
+            { text: 'Developers', href: 'https://developer.lumen.com/devcenter/home' },
+          ],
+        },
+      ],
+    };
+
+    // Build mega-menu for nav-drops that have category config
+    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li.nav-drop').forEach((navDrop) => {
+      const label = getDirectTextContent(navDrop);
+      const config = megaMenuConfig[label];
+      if (!config) return;
+
+      const subUl = navDrop.querySelector(':scope > ul');
+      if (!subUl) return;
+
+      navDrop.classList.add('nav-mega');
+
+      // Group items into categories, using DOM items where available and
+      // injecting fallback items for any the pipeline may have dropped
+      const domItems = [...subUl.querySelectorAll(':scope > li')];
+      const groups = config.map((cat) => {
+        const matched = domItems.filter((li) => {
+          const a = li.querySelector('a');
+          return a && cat.match(a.getAttribute('href') || '');
+        });
+        // Build complete item list from expected, using DOM nodes when available
+        const completeItems = (cat.expected || []).map((exp) => {
+          const found = matched.find((li) => {
+            const a = li.querySelector('a');
+            return a && a.getAttribute('href') === exp.href;
+          });
+          if (found) return found.cloneNode(true);
+          // Create fallback li for items dropped by the pipeline
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = exp.href;
+          a.textContent = exp.text;
+          li.append(a);
+          return li;
+        });
+        return { label: cat.label, items: completeItems };
+      });
+
+      // Desktop: build two-panel mega-menu
+      const megaMenu = document.createElement('div');
+      megaMenu.className = 'mega-menu';
+
+      const catPanel = document.createElement('div');
+      catPanel.className = 'mega-menu-categories';
+
+      const contentPanel = document.createElement('div');
+      contentPanel.className = 'mega-menu-content';
+
+      groups.forEach((grp, i) => {
+        // Category label
+        const catEl = document.createElement('div');
+        catEl.className = `mega-menu-cat${i === 0 ? ' active' : ''}`;
+        catEl.textContent = grp.label;
+        catEl.dataset.index = i;
+        catPanel.append(catEl);
+
+        // Content group
+        const group = document.createElement('div');
+        group.className = `mega-menu-group${i === 0 ? ' active' : ''}`;
+        group.dataset.index = i;
+        const ul = document.createElement('ul');
+        grp.items.forEach((li) => ul.append(li));
+        group.append(ul);
+        contentPanel.append(group);
+      });
+
+      megaMenu.append(catPanel, contentPanel);
+      navDrop.append(megaMenu);
+
+      // Prevent clicks inside mega-menu from closing dropdown
+      megaMenu.addEventListener('click', (e) => e.stopPropagation());
+
+      // Category hover switching
+      catPanel.addEventListener('mouseover', (e) => {
+        const catEl = e.target.closest('.mega-menu-cat');
+        if (!catEl) return;
+        catPanel.querySelectorAll('.mega-menu-cat').forEach((c) => c.classList.remove('active'));
+        contentPanel.querySelectorAll('.mega-menu-group').forEach((g) => g.classList.remove('active'));
+        catEl.classList.add('active');
+        const g = contentPanel.querySelector(`.mega-menu-group[data-index="${catEl.dataset.index}"]`);
+        if (g) g.classList.add('active');
+      });
+
+      // Desktop: open mega-menu on hover
+      navDrop.addEventListener('mouseenter', () => {
+        if (isDesktop.matches) {
+          toggleAllNavSections(navSections);
+          navDrop.setAttribute('aria-expanded', 'true');
+        }
+      });
+      navDrop.addEventListener('mouseleave', () => {
+        if (isDesktop.matches) {
+          navDrop.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
   }
 
   const navTools = nav.querySelector('.nav-tools');
