@@ -500,4 +500,8 @@ footer .footer .footer-country-list li a img {
     grid-column: 2;
     grid-row: 2;
   }
+
+  footer .footer .footer-country-selector {
+    float: left;
+  }
 }
