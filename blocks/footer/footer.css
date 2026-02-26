@@ -504,4 +504,14 @@ footer .footer .footer-country-list li a img {
   footer .footer .footer-country-selector {
     float: left;
   }
+
+  footer .footer > div > div:nth-child(4) ul li a {
+    font-size: 16px;
+    font-family: roboto, roboto-fallback, sans-serif;
+    line-height: 22.4px;
+  }
+
+  footer .footer > div > div:nth-child(4) p {
+    padding-bottom: 36px;
+  }
 }
