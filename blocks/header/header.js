@@ -469,19 +469,13 @@ export default async function decorate(block) {
         const g = contentPanel.querySelector(`.mega-menu-group[data-index="${catEl.dataset.index}"]`);
         if (g) g.classList.add('active');
       });
+    });
 
-      // Desktop: open mega-menu on hover
-      navDrop.addEventListener('mouseenter', () => {
-        if (isDesktop.matches) {
-          toggleAllNavSections(navSections);
-          navDrop.setAttribute('aria-expanded', 'true');
-        }
-      });
-      navDrop.addEventListener('mouseleave', () => {
-        if (isDesktop.matches) {
-          navDrop.setAttribute('aria-expanded', 'false');
-        }
-      });
+    // Close mega-menus when clicking outside on desktop
+    document.addEventListener('click', (e) => {
+      if (isDesktop.matches && !e.target.closest('.nav-sections')) {
+        toggleAllNavSections(navSections);
+      }
     });
   }
 
