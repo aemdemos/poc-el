@@ -209,6 +209,18 @@ export default async function decorate(block) {
         }
         navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       });
+      // Desktop: open on hover
+      navSection.addEventListener('mouseenter', () => {
+        if (isDesktop.matches) {
+          toggleAllNavSections(navSections);
+          navSection.setAttribute('aria-expanded', 'true');
+        }
+      });
+      navSection.addEventListener('mouseleave', () => {
+        if (isDesktop.matches) {
+          navSection.setAttribute('aria-expanded', 'false');
+        }
+      });
     });
     navSections.querySelectorAll('.button-container').forEach((buttonContainer) => {
       buttonContainer.classList.remove('button-container');
@@ -362,6 +374,11 @@ export default async function decorate(block) {
       if (!subUl) return;
 
       navDrop.classList.add('nav-mega');
+
+      // Add inline chevron (position:static on .nav-mega breaks ::after)
+      const dropIcon = document.createElement('span');
+      dropIcon.className = 'nav-drop-icon';
+      navDrop.insertBefore(dropIcon, navDrop.querySelector('ul'));
 
       // Group items into categories, using DOM items where available and
       // injecting fallback items for any the pipeline may have dropped
