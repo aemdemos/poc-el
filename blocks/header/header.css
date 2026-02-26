@@ -492,6 +492,9 @@ header nav .nav-drop-icon {
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop:hover,
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop[aria-expanded='true'] {
     background-color: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    padding: 4px 19px;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > a,
