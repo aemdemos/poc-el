@@ -31,7 +31,7 @@ footer .footer > div > div:first-child {
   flex-direction: column;
   gap: 24px;
   padding-bottom: 24px;
-  border-bottom: 1px solid rgba(255 255 255 / 20%);
+  border-bottom: 1px solid rgb(255 255 255 / 20%);
 }
 
 footer .footer > div > div:first-child picture {
@@ -59,7 +59,7 @@ footer .footer .footer-search input {
   padding: 0;
   height: 25px;
   border: none;
-  background: rgba(0, 0, 0, 0);
+  background: rgb(0 0 0 / 0%);
   box-shadow: none;
   color: #fff;
   font-size: 18px;
@@ -97,7 +97,9 @@ footer .footer .footer-social-mobile li a picture {
   display: flex;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 footer .footer .footer-social-desktop li a img,
+/* stylelint-disable-next-line no-descending-specificity */
 footer .footer .footer-social-mobile li a img {
   width: 32px;
   height: 32px;
@@ -201,7 +203,7 @@ footer .footer .footer-col-right ul li a {
 footer .footer > div > div:nth-child(3) {
   padding: 24px;
   text-align: center;
-  border-bottom: 1px solid rgba(255 255 255 / 20%);
+  border-bottom: 1px solid rgb(255 255 255 / 20%);
   color: #fff;
   font-size: 16px;
 }
@@ -249,7 +251,7 @@ footer .footer .footer-country-toggle {
   align-items: center;
   gap: 8px;
   background: none;
-  border: 1px solid rgba(255 255 255 / 40%);
+  border: 1px solid rgb(255 255 255 / 40%);
   border-radius: 4px;
   padding: 6px 12px;
   cursor: pointer;
@@ -290,7 +292,7 @@ footer .footer .footer-country-popover {
   margin-bottom: 8px;
   z-index: 10;
   min-width: 280px;
-  box-shadow: 0 4px 16px rgba(0 0 0 / 20%);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 20%);
 }
 
 footer .footer .footer-country-close {
@@ -331,6 +333,7 @@ footer .footer .footer-country-list li a:hover {
   color: #0f3133;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 footer .footer .footer-country-list li a img {
   width: 24px;
   height: 16px;
@@ -344,15 +347,18 @@ footer .footer .footer-country-list li a img {
     padding-left: 0;
     padding-right: 0;
     margin-left: 54px;
+    margin-right: 54px;
   }
 
   footer .footer .footer-social-desktop,
   footer .footer .footer-social-mobile {
     margin-left: 0;
+    margin-top: -150px;
   }
 
   footer .footer > div > div:first-child {
     border-bottom: none;
+    padding-bottom: 50px;
   }
 
   footer .footer > div > div:first-child .default-content-wrapper {
