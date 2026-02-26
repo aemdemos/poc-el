@@ -489,6 +489,11 @@ header nav .nav-drop-icon {
     padding: 5px 20px;
   }
 
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop:hover,
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop[aria-expanded='true'] {
+    background-color: #fff;
+  }
+
   header nav .nav-sections .default-content-wrapper > ul > li > a,
   header nav .nav-sections .default-content-wrapper > ul > li > .nav-drop {
     padding: 0;
