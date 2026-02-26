@@ -449,7 +449,9 @@ header nav .nav-sections ul > li > ul > li > a {
     display: flex;
     gap: 24px;
     margin: 0;
+    margin-left: 60px;
     padding-right: 40px;
+    align-items: center;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
