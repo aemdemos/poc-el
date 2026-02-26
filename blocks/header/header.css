@@ -412,6 +412,11 @@ header nav .mega-menu {
   display: none;
 }
 
+/* Hide inline chevron on mobile (::after handles it) */
+header nav .nav-drop-icon {
+  display: none;
+}
+
 @media (width >= 1200px) {
   header nav .nav-sections {
     grid-area: sections;
@@ -535,6 +540,32 @@ header nav .mega-menu {
   /* Let mega items be static so mega-menu positions relative to nav-sections */
   header nav .nav-sections .default-content-wrapper > ul > li.nav-mega {
     position: static;
+  }
+
+  /* Hide ::after for mega items (position:static breaks it); inline icon used */
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-mega::after {
+    display: none;
+  }
+
+  /* Inline dropdown chevron for mega items */
+  header nav .nav-drop-icon {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border: 2px solid currentcolor;
+    border-radius: 0 1px 0 0;
+    border-width: 2px 2px 0 0;
+    transform: rotate(135deg);
+    margin-left: 6px;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+    transition: transform 0.2s;
+  }
+
+  header nav .nav-mega[aria-expanded='true'] .nav-drop-icon {
+    transform: rotate(315deg);
+    top: 1px;
   }
 
   /* Show mega-menu when expanded */
