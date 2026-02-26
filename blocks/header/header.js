@@ -223,9 +223,9 @@ export default async function decorate(block) {
           label: 'By Business Outcome',
           match: (h) => h.includes('/solutions/use-case/') && !['artificial-intelligence', 'cloud-connectivity', 'network-on-demand'].some((s) => h.includes(s)),
           expected: [
-            { text: 'Reliable & Secure Connectivity', href: '/en-us/solutions/use-case/reliable-secure-connectivity' },
-            { text: 'Secure Customer Experience & Connectivity', href: '/en-us/solutions/use-case/secure-reliable-connectivity-for-business-continuity' },
-            { text: 'Flexible Networking for Secure Access', href: '/en-us/solutions/use-case/flexible-networking-for-secure-access' },
+            { text: 'Reliable & Secure Connectivity', href: '/en-us/solutions/use-case/reliable-secure-connectivity', desc: 'DIA and SASE integrate to offer secure, consistent connectivity with proactive threat protection enabling seamless and scalable network modernization.' },
+            { text: 'Secure Customer Experience & Connectivity', href: '/en-us/solutions/use-case/secure-reliable-connectivity-for-business-continuity', desc: 'Provide secure, uninterrupted internet connectivity to all your locations and cloud resources with bundled DIA and DDoS Mitigation.' },
+            { text: 'Flexible Networking for Secure Access', href: '/en-us/solutions/use-case/flexible-networking-for-secure-access', desc: 'IP VPN and SASE provide secure, flexible connections between sites, data centers, private networks, cloud environments and over the internet.' },
           ],
         },
         {
@@ -247,19 +247,19 @@ export default async function decorate(block) {
           label: 'By Business Type',
           match: (h) => h.includes('/solutions/business-size/') || h.includes('/public-sector'),
           expected: [
-            { text: 'Enterprise Business', href: '/en-us/solutions/business-size/large-enterprise' },
-            { text: 'Midsize Business', href: '/en-us/solutions/business-size/midsize' },
-            { text: 'Public Sector', href: '/en-us/public-sector' },
-            { text: 'Wholesale', href: '/en-us/solutions/business-size/wholesale' },
+            { text: 'Enterprise Business', href: '/en-us/solutions/business-size/large-enterprise', desc: 'Explore next-gen connectivity and security solutions for your large, distributed enterprise.' },
+            { text: 'Midsize Business', href: '/en-us/solutions/business-size/midsize', desc: 'Discover how to achieve speed, scale and security for your midsize business with resources and product recommendations.' },
+            { text: 'Public Sector', href: '/en-us/public-sector', desc: 'Explore how to attain efficiency, security and connectivity solutions for your public sector organization utilizing helpful resources.' },
+            { text: 'Wholesale', href: '/en-us/solutions/business-size/wholesale', desc: 'Future-ready wholesale networking, security and voice solutions to meet your customers\u2019 digital business demands.' },
           ],
         },
         {
           label: 'By Technical Use Case',
           match: (h) => ['artificial-intelligence', 'cloud-connectivity', 'network-on-demand'].some((s) => h.includes(s)),
           expected: [
-            { text: 'AI', href: '/en-us/solutions/use-case/artificial-intelligence' },
-            { text: 'Cloud Connectivity', href: '/en-us/solutions/use-case/cloud-connectivity' },
-            { text: 'Network-as-a-Service', href: '/en-us/solutions/use-case/network-on-demand' },
+            { text: 'AI', href: '/en-us/solutions/use-case/artificial-intelligence', desc: 'Support large AI workloads by using programmable connectivity to control bandwidth, path and latency.' },
+            { text: 'Cloud Connectivity', href: '/en-us/solutions/use-case/cloud-connectivity', desc: 'Connect across high-bandwidth clouds or dynamic multiclouds with expansive network reach and simplified architecture designed to support AI workloads.' },
+            { text: 'Network-as-a-Service', href: '/en-us/solutions/use-case/network-on-demand', desc: 'Quickly deliver reliable, secure connectivity services that scale to your business and offer affordable pay-as-you-go pricing.' },
           ],
         },
       ],
@@ -268,37 +268,37 @@ export default async function decorate(block) {
           label: 'Infrastructure',
           match: (h) => ['wavelengths', 'colocation', 'dark-fiber', 'enterprise-broadband'].some((s) => h.includes(s)),
           expected: [
-            { text: 'Wavelengths', href: '/en-us/services/wavelengths' },
-            { text: 'Colocation', href: '/en-us/services/colocation' },
-            { text: 'Dark Fiber', href: '/en-us/services/dark-fiber' },
-            { text: 'Enterprise Broadband', href: '/en-us/services/enterprise-broadband' },
+            { text: 'Wavelengths', href: '/en-us/services/wavelengths', desc: 'High-capacity optical transport for reliable, scalable connectivity.' },
+            { text: 'Colocation', href: '/en-us/services/colocation', desc: 'Secure, reliable data center space with robust connectivity options.' },
+            { text: 'Dark Fiber', href: '/en-us/services/dark-fiber', desc: 'Dedicated fiber infrastructure for maximum control and scalability.' },
+            { text: 'Enterprise Broadband', href: '/en-us/services/enterprise-broadband', desc: 'High-speed, reliable internet access for distributed business locations.' },
           ],
         },
         {
           label: 'Connectivity',
           match: (h) => ['ethernet', 'ip-vpn', 'multi-cloud-gateway', 'sd-wan'].some((s) => h.includes(s)),
           expected: [
-            { text: 'Ethernet', href: '/en-us/services/ethernet' },
-            { text: 'IP VPN', href: '/en-us/services/ip-vpn' },
-            { text: 'Multi-Cloud Gateway', href: '/en-us/services/multi-cloud-gateway' },
-            { text: 'SD-WAN', href: '/en-us/services/sd-wan' },
+            { text: 'Ethernet', href: '/en-us/services/ethernet', desc: 'Scalable, high-performance Ethernet services for site-to-site connectivity.' },
+            { text: 'IP VPN', href: '/en-us/services/ip-vpn', desc: 'Secure, private network connectivity across your enterprise locations.' },
+            { text: 'Multi-Cloud Gateway', href: '/en-us/services/multi-cloud-gateway', desc: 'Seamless, secure connections to multiple cloud providers.' },
+            { text: 'SD-WAN', href: '/en-us/services/sd-wan', desc: 'Intelligent, software-defined WAN for optimized application performance.' },
           ],
         },
         {
           label: 'Security',
           match: (h) => ['ddos', 'sase'].some((s) => h.includes(s)),
           expected: [
-            { text: 'DDoS', href: '/en-us/services/ddos' },
-            { text: 'SASE', href: '/en-us/services/sase' },
+            { text: 'DDoS', href: '/en-us/services/ddos', desc: 'Proactive DDoS mitigation powered by Black Lotus Labs threat intelligence.' },
+            { text: 'SASE', href: '/en-us/services/sase', desc: 'Converged networking and security for secure access from anywhere.' },
           ],
         },
         {
           label: 'Communication',
           match: (h) => ['cloud-voice', 'ucc', 'contact-center'].some((s) => h.includes(s)),
           expected: [
-            { text: 'Cloud Voice', href: '/en-us/services/lumen-cloud-voice' },
-            { text: 'UC&C', href: '/en-us/services/ucc' },
-            { text: 'Contact Center', href: '/en-us/services/contact-center' },
+            { text: 'Cloud Voice', href: '/en-us/services/lumen-cloud-voice', desc: 'Cloud-based voice services for modern business communication.' },
+            { text: 'UC&C', href: '/en-us/services/ucc', desc: 'Unified communications and collaboration to connect distributed teams.' },
+            { text: 'Contact Center', href: '/en-us/services/contact-center', desc: 'Intelligent contact center solutions to enhance customer experience.' },
           ],
         },
       ],
@@ -307,18 +307,18 @@ export default async function decorate(block) {
           label: 'Connected Ecosystem',
           match: (h) => h.includes('/partner/'),
           expected: [
-            { text: 'Strategic Technology Partners', href: '/en-us/partner/strategic-technology-partners' },
-            { text: 'Lumen Validated Designs', href: '/en-us/partner/validated-designs' },
+            { text: 'Strategic Technology Partners', href: '/en-us/partner/strategic-technology-partners', desc: 'Explore our ecosystem of technology partners driving innovation.' },
+            { text: 'Lumen Validated Designs', href: '/en-us/partner/validated-designs', desc: 'Pre-tested, partner-integrated solutions for faster deployment.' },
           ],
         },
         {
           label: 'By Technology Partner',
           match: (h) => h.includes('/alliances/'),
           expected: [
-            { text: 'Amazon Web Services', href: '/en-us/alliances/aws' },
-            { text: 'Cisco', href: '/en-us/alliances/cisco' },
-            { text: 'Google Cloud', href: '/en-us/alliances/google-cloud' },
-            { text: 'Microsoft', href: '/en-us/alliances/microsoft' },
+            { text: 'Amazon Web Services', href: '/en-us/alliances/aws', desc: 'Direct, low-latency connectivity to AWS cloud services.' },
+            { text: 'Cisco', href: '/en-us/alliances/cisco', desc: 'Integrated networking solutions powered by Cisco technology.' },
+            { text: 'Google Cloud', href: '/en-us/alliances/google-cloud', desc: 'Optimized connectivity to Google Cloud Platform.' },
+            { text: 'Microsoft', href: '/en-us/alliances/microsoft', desc: 'Enterprise-grade connections to Microsoft Azure and 365.' },
           ],
         },
       ],
@@ -327,26 +327,26 @@ export default async function decorate(block) {
           label: 'Why Lumen',
           match: (h) => ['why-lumen', 'black-lotus', 'network-maps'].some((s) => h.includes(s)),
           expected: [
-            { text: 'Why Lumen', href: '/en-us/why-lumen' },
-            { text: 'Black Lotus Labs', href: '/en-us/security/black-lotus-labs' },
-            { text: 'Network Maps', href: '/en-us/resources/network-maps' },
+            { text: 'Why Lumen', href: '/en-us/why-lumen', desc: 'Discover what sets Lumen apart as the trusted network for AI.' },
+            { text: 'Black Lotus Labs', href: '/en-us/security/black-lotus-labs', desc: 'Threat intelligence research protecting businesses worldwide.' },
+            { text: 'Network Maps', href: '/en-us/resources/network-maps', desc: 'Explore our global fiber network and data center footprint.' },
           ],
         },
         {
           label: 'About Us',
           match: (h) => ['customer-success', '/about'].some((s) => h.includes(s)),
           expected: [
-            { text: 'Customer Stories', href: '/en-us/resources/customer-success-stories' },
-            { text: 'About Us', href: '/en-us/about' },
+            { text: 'Customer Stories', href: '/en-us/resources/customer-success-stories', desc: 'See how businesses achieve results with Lumen solutions.' },
+            { text: 'About Us', href: '/en-us/about', desc: 'Learn about Lumen\u2019s mission, leadership and global presence.' },
           ],
         },
         {
           label: 'Newsroom',
           match: (h) => ['blog.lumen', 'ir.lumen', 'developer.lumen'].some((s) => h.includes(s)),
           expected: [
-            { text: 'Blog & News', href: 'https://blog.lumen.com' },
-            { text: 'News Releases', href: 'https://ir.lumen.com/news/default.aspx' },
-            { text: 'Developers', href: 'https://developer.lumen.com/devcenter/home' },
+            { text: 'Blog & News', href: 'https://blog.lumen.com', desc: 'Latest insights and thought leadership from Lumen experts.' },
+            { text: 'News Releases', href: 'https://ir.lumen.com/news/default.aspx', desc: 'Official press releases and corporate announcements.' },
+            { text: 'Developers', href: 'https://developer.lumen.com/devcenter/home', desc: 'APIs, tools and resources for developers building on Lumen.' },
           ],
         },
       ],
@@ -399,21 +399,57 @@ export default async function decorate(block) {
       const contentPanel = document.createElement('div');
       contentPanel.className = 'mega-menu-content';
 
+      // Find the matching config to get descriptions
+      const catConfig = config;
+
       groups.forEach((grp, i) => {
-        // Category label
+        // Category label with chevron
         const catEl = document.createElement('div');
         catEl.className = `mega-menu-cat${i === 0 ? ' active' : ''}`;
-        catEl.textContent = grp.label;
+        const catText = document.createElement('span');
+        catText.textContent = grp.label;
+        const chevron = document.createElement('span');
+        chevron.className = 'mega-menu-chevron';
+        catEl.append(catText, chevron);
         catEl.dataset.index = i;
         catPanel.append(catEl);
 
-        // Content group
+        // Content group with category heading + items with descriptions
         const group = document.createElement('div');
         group.className = `mega-menu-group${i === 0 ? ' active' : ''}`;
         group.dataset.index = i;
-        const ul = document.createElement('ul');
-        grp.items.forEach((li) => ul.append(li));
-        group.append(ul);
+
+        // Category title heading with underline
+        const heading = document.createElement('div');
+        heading.className = 'mega-menu-heading';
+        heading.textContent = grp.label;
+        group.append(heading);
+
+        // Items with title + description
+        const itemsContainer = document.createElement('div');
+        itemsContainer.className = 'mega-menu-items';
+        const expectedItems = catConfig[i].expected || [];
+        grp.items.forEach((li, j) => {
+          const a = li.querySelector('a');
+          if (!a) return;
+          const itemEl = document.createElement('a');
+          itemEl.href = a.getAttribute('href') || a.href;
+          itemEl.className = 'mega-menu-item';
+          const title = document.createElement('span');
+          title.className = 'mega-menu-item-title';
+          title.textContent = a.textContent;
+          itemEl.append(title);
+          // Add description if available
+          const expItem = expectedItems[j];
+          if (expItem && expItem.desc) {
+            const desc = document.createElement('span');
+            desc.className = 'mega-menu-item-desc';
+            desc.textContent = expItem.desc;
+            itemEl.append(desc);
+          }
+          itemsContainer.append(itemEl);
+        });
+        group.append(itemsContainer);
         contentPanel.append(group);
       });
 
