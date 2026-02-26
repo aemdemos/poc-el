@@ -447,7 +447,7 @@ header nav .nav-sections ul > li > ul > li > a {
 
   header nav .nav-sections ul {
     display: flex;
-    gap: 40px;
+    gap: 20px;
     margin: 0;
     margin-left: 60px;
     padding-right: 40px;
