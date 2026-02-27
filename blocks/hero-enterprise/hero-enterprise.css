@@ -45,7 +45,7 @@ main > .section.hero-enterprise-container {
 .hero-enterprise > div:not(.hero-enterprise-img-desktop, .hero-enterprise-img-mobile, :first-child) {
   padding: 16px;
   border-radius: 40px 40px 0 0;
-  margin-top: -30px;
+  margin-top: -60px;
   background-color: white;
   position: relative;
   z-index: 1;
@@ -71,6 +71,7 @@ main > .section.hero-enterprise-container {
   font-size: 18px;
   font-family: "Open Sans", sans-serif;
   line-height: 27px;
+  padding-top: 20px;
 }
 
 /* 426px — large mobile */
