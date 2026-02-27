@@ -455,6 +455,13 @@ footer .footer .footer-country-list li a img {
   footer .footer .footer-social-mobile {
     margin-top: -30px;
   }
+
+  footer .footer > div > div:nth-child(3) {
+    padding: 45px 20px;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: Figtree, Gotham, Arial, Helvetica, sans-serif;
+  }
 }
 
 @media (width >= 1024px) {
