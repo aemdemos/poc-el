@@ -1,5 +1,15 @@
 export default function decorate(block) {
-  if (!block.querySelector(':scope > div:first-child picture')) {
+  const rows = [...block.querySelectorAll(':scope > div')];
+
+  // Check if first two rows both contain images (desktop + mobile)
+  const firstRowPic = rows[0]?.querySelector('picture');
+  const secondRowPic = rows[1]?.querySelector('picture');
+
+  if (firstRowPic && secondRowPic) {
+    // Mark first row as desktop image, second as mobile image
+    rows[0].classList.add('hero-enterprise-img-desktop');
+    rows[1].classList.add('hero-enterprise-img-mobile');
+  } else if (!firstRowPic) {
     block.classList.add('no-image');
   }
 
