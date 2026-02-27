@@ -416,6 +416,16 @@ footer .footer .footer-country-list li a img {
   }
 }
 
+@media (width >= 1024px) {
+  footer .footer > div > div:nth-child(4) ul {
+    font-family: Figtree, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.6px;
+  }
+}
+
 /* Desktop layout */
 @media (width >= 1200px) {
   footer .footer > div > div {
