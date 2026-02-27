@@ -14,25 +14,41 @@ main > .section.hero-enterprise-container {
   flex-direction: column;
 }
 
-.hero-enterprise > div {
-  width: 100%;
-}
-
 .hero-enterprise picture {
   display: block;
 }
 
 .hero-enterprise img {
   display: block;
+  width: 100%;
+  max-width: 100%;
   height: auto;
   margin: 0;
 }
 
-.hero-enterprise > div:not(:first-child) {
+/* Responsive image switching: mobile image shown by default, desktop hidden */
+.hero-enterprise .hero-enterprise-img-desktop,
+.hero-enterprise .hero-enterprise-img-mobile {
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-enterprise .hero-enterprise-img-desktop {
+  display: none;
+}
+
+.hero-enterprise .hero-enterprise-img-mobile {
+  display: block;
+}
+
+/* Content rows (everything after the image rows) */
+.hero-enterprise > div:not(.hero-enterprise-img-desktop, .hero-enterprise-img-mobile, :first-child) {
   padding: 16px;
   border-radius: 40px 40px 0 0;
-  margin-top: -30px;
+  margin-top: -60px;
   background-color: white;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-enterprise h1,
@@ -52,52 +68,87 @@ main > .section.hero-enterprise-container {
 .hero-enterprise p {
   color: #414448;
   margin: 8px 0 0;
-  font-size: 16px;
+  font-size: 18px;
   font-family: "Open Sans", sans-serif;
-  line-height: 1.5;
+  line-height: 27px;
+  padding-top: 20px;
 }
 
 /* 426px — large mobile */
 @media (width >= 426px) {
-  .hero-enterprise > div:not(:first-child) {
-    padding: 16px 24px;
+  .hero-enterprise > div:not(.hero-enterprise-img-desktop, .hero-enterprise-img-mobile, :first-child) {
+    padding: 24px 20px;
   }
 
   .hero-enterprise h1 {
-    font-size: 36px;
+    font-size: var(--heading-font-size-xxxl);
   }
 }
 
 /* 768px — tablet */
 @media (width >= 768px) {
-  .hero-enterprise > div:not(:first-child) {
-    padding: 16px 32px;
+  /* Break image out of section padding to fill viewport */
+  .hero-enterprise .hero-enterprise-img-mobile,
+  .hero-enterprise .hero-enterprise-img-desktop {
+    margin-left: -24px;
+    margin-right: -24px;
+    width: calc(100% + 48px);
+  }
+
+  .hero-enterprise > div:not(.hero-enterprise-img-desktop, .hero-enterprise-img-mobile, :first-child) {
+    padding: 24px 20px;
+    border-radius: 40px 40px 0 0;
+    margin-top: -100px;
+    width:98%;
   }
 
   .hero-enterprise h1 {
-    font-size: 40px;
-    max-width: 550px;
+    font-size: 72px;
   }
 
   .hero-enterprise p {
     font-size: 18px;
-    max-width: 550px;
   }
 }
 
-/* 1024px — desktop */
+/* 900px — section padding increases to 32px */
+@media (width >= 900px) {
+  .hero-enterprise .hero-enterprise-img-mobile,
+  .hero-enterprise .hero-enterprise-img-desktop {
+    margin-left: -32px;
+    margin-right: -32px;
+    width: calc(100% + 64px);
+  }
+}
+
+/* 1024px — desktop: switch to desktop image */
 @media (width >= 1024px) {
+  .hero-enterprise .hero-enterprise-img-desktop {
+    display: block;
+  }
+
+  .hero-enterprise .hero-enterprise-img-mobile {
+    display: none;
+  }
+
   .hero-enterprise {
     padding: 0 40px;
   }
 
-  .hero-enterprise > div:not(:first-child) {
-    padding: 16px 0;
+  .hero-enterprise > div:not(.hero-enterprise-img-desktop, .hero-enterprise-img-mobile, :first-child) {
+    padding: 40px;
+    place-self: end end;
+    position: relative;
+    border-radius: 60px 60px 0 0;
+    max-width: 785px;
+    display: flex;
   }
 
   .hero-enterprise h1 {
-    font-size: 52px;
-    max-width: 600px;
+    font-size: 90px;
+    letter-spacing: -1.8px;
+    line-height: 99px;
+    max-width: 670px;
   }
 
   .hero-enterprise p {
@@ -108,13 +159,21 @@ main > .section.hero-enterprise-container {
 
 /* 1200px — wide desktop */
 @media (width >= 1200px) {
-  .hero-enterprise > div:not(:first-child) {
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
+  .hero-enterprise > div:not(.hero-enterprise-img-desktop, .hero-enterprise-img-mobile, :first-child) {
+   bottom:40px;
   }
 
   .hero-enterprise h1 {
     font-size: 72px;
+  }
+}
+
+/* 1600px — max-width, center content */
+@media (width >= 1600px) {
+  main > .section.hero-enterprise-container > div,
+  .hero-enterprise-container .hero-enterprise-wrapper {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
