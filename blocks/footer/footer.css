@@ -441,6 +441,20 @@ footer .footer .footer-country-list li a img {
     letter-spacing: 0.6px;
     line-height: 24px;
   }
+
+  footer .footer .footer-main-links ul {
+    padding-top: 70px;
+  }
+
+  footer .footer > div > div:nth-child(2) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  footer .footer .footer-social-desktop,
+  footer .footer .footer-social-mobile {
+    margin-top: -30px;
+  }
 }
 
 @media (width >= 1024px) {
