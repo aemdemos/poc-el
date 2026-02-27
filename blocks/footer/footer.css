@@ -214,6 +214,7 @@ footer .footer > div > div:nth-child(4) {
   text-align: center;
   color: #fff;
   background-color: #24767b;
+  padding-bottom: 50px;
 }
 
 footer .footer > div > div:nth-child(4) ul {
@@ -223,20 +224,21 @@ footer .footer > div > div:nth-child(4) ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 4px 16px;
+  gap: 0 16px;
 }
 
 footer .footer > div > div:nth-child(4) ul li a {
   color: #fff;
   font-size: 13px;
   font-weight: 500;
-  font-family: Figtree, Arial, sans-serif;
+  font-family: Figtree, Gotham,Arial;
 }
 
 footer .footer > div > div:nth-child(4) p {
   color: #fff;
-  font-size: 16px;
-  font-family: Figtree, Arial, sans-serif;
+  font-size: 13px;
+  font-family: Figtree, Gotham,Arial;
+  line-height: normal;
 }
 
 /* Country selector */
@@ -246,6 +248,8 @@ footer .footer .footer-country-selector {
   align-items: center;
   margin-bottom: 16px;
   position: relative;
+  padding-top: 10px;
+  padding-bottom: 20px;
 }
 
 footer .footer .footer-country-toggle {
