@@ -20,11 +20,19 @@ main > .section.hero-enterprise-container {
 
 .hero-enterprise img {
   display: block;
+  width: 100%;
+  max-width: 100%;
   height: auto;
   margin: 0;
 }
 
 /* Responsive image switching: mobile image shown by default, desktop hidden */
+.hero-enterprise .hero-enterprise-img-desktop,
+.hero-enterprise .hero-enterprise-img-mobile {
+  width: 100%;
+  overflow: hidden;
+}
+
 .hero-enterprise .hero-enterprise-img-desktop {
   display: none;
 }
@@ -39,6 +47,8 @@ main > .section.hero-enterprise-container {
   border-radius: 40px 40px 0 0;
   margin-top: -30px;
   background-color: white;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-enterprise h1,
@@ -76,8 +86,18 @@ main > .section.hero-enterprise-container {
 
 /* 768px — tablet */
 @media (width >= 768px) {
+  /* Break image out of section padding to fill viewport */
+  .hero-enterprise .hero-enterprise-img-mobile,
+  .hero-enterprise .hero-enterprise-img-desktop {
+    margin-left: -24px;
+    margin-right: -24px;
+    width: calc(100% + 48px);
+  }
+
   .hero-enterprise > div:not(.hero-enterprise-img-desktop, .hero-enterprise-img-mobile, :first-child) {
     padding: 24px 20px;
+    border-radius: 40px 40px 0 0;
+    margin-top: -100px;
   }
 
   .hero-enterprise h1 {
@@ -86,6 +106,16 @@ main > .section.hero-enterprise-container {
 
   .hero-enterprise p {
     font-size: 18px;
+  }
+}
+
+/* 900px — section padding increases to 32px */
+@media (width >= 900px) {
+  .hero-enterprise .hero-enterprise-img-mobile,
+  .hero-enterprise .hero-enterprise-img-desktop {
+    margin-left: -32px;
+    margin-right: -32px;
+    width: calc(100% + 64px);
   }
 }
 
