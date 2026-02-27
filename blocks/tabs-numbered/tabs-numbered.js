@@ -47,24 +47,77 @@ function parseMigrationContent(contentDiv) {
   }
 }
 
-function switchTab(block, tablist, imageContainer, panelIndex) {
-  block.querySelectorAll('[role=tabpanel]').forEach((panel) => {
-    panel.setAttribute('aria-hidden', true);
+function updateActiveTab(tablist, imageContainer, panelIndex) {
+  tablist.querySelectorAll('button').forEach((btn, i) => {
+    btn.setAttribute('aria-selected', i === panelIndex);
   });
-  tablist.querySelectorAll('button').forEach((btn) => {
-    btn.setAttribute('aria-selected', false);
+  imageContainer.querySelectorAll('.tabs-numbered-image').forEach((img, i) => {
+    img.setAttribute('aria-hidden', i !== panelIndex);
   });
-  imageContainer.querySelectorAll('.tabs-numbered-image').forEach((img) => {
-    img.setAttribute('aria-hidden', true);
+}
+
+function scrollToPanel(track, panelIndex) {
+  const panels = track.querySelectorAll('[role=tabpanel]');
+  if (panels[panelIndex]) {
+    track.scrollTo({ left: panels[panelIndex].offsetLeft, behavior: 'smooth' });
+  }
+}
+
+function setupDrag(track) {
+  let isDown = false;
+  let startX = 0;
+  let scrollStart = 0;
+
+  track.addEventListener('mousedown', (e) => {
+    // ignore clicks on links/buttons
+    if (e.target.closest('a, button')) return;
+    isDown = true;
+    startX = e.pageX;
+    scrollStart = track.scrollLeft;
+    track.style.scrollSnapType = 'none';
+    track.style.cursor = 'grabbing';
+    e.preventDefault();
   });
 
-  const panels = block.querySelectorAll('[role=tabpanel]');
-  const buttons = tablist.querySelectorAll('button');
-  const images = imageContainer.querySelectorAll('.tabs-numbered-image');
+  track.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    const dx = e.pageX - startX;
+    track.scrollLeft = scrollStart - dx;
+  });
 
-  if (panels[panelIndex]) panels[panelIndex].setAttribute('aria-hidden', false);
-  if (buttons[panelIndex]) buttons[panelIndex].setAttribute('aria-selected', true);
-  if (images[panelIndex]) images[panelIndex].setAttribute('aria-hidden', false);
+  const endDrag = () => {
+    if (!isDown) return;
+    isDown = false;
+    track.style.scrollSnapType = '';
+    track.style.cursor = '';
+  };
+
+  track.addEventListener('mouseup', endDrag);
+  track.addEventListener('mouseleave', endDrag);
+}
+
+function setupScrollSync(track, tablist, imageContainer) {
+  let ticking = false;
+  track.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const panels = track.querySelectorAll('[role=tabpanel]');
+      const scrollCenter = track.scrollLeft + track.clientWidth / 2;
+      let closest = 0;
+      let minDist = Infinity;
+      panels.forEach((panel, i) => {
+        const center = panel.offsetLeft + panel.offsetWidth / 2;
+        const dist = Math.abs(center - scrollCenter);
+        if (dist < minDist) {
+          minDist = dist;
+          closest = i;
+        }
+      });
+      updateActiveTab(tablist, imageContainer, closest);
+      ticking = false;
+    });
+  });
 }
 
 export default async function decorate(block) {
@@ -75,6 +128,9 @@ export default async function decorate(block) {
   const imageContainer = document.createElement('div');
   imageContainer.className = 'tabs-numbered-images';
 
+  const track = document.createElement('div');
+  track.className = 'tabs-numbered-track';
+
   const tabs = [...block.children].map((child) => child.firstElementChild);
   tabs.forEach((tab, i) => {
     const id = toClassName(tab.textContent);
@@ -82,7 +138,6 @@ export default async function decorate(block) {
     const tabpanel = block.children[i];
     tabpanel.className = 'tabs-numbered-panel';
     tabpanel.id = `tabpanel-${id}`;
-    tabpanel.setAttribute('aria-hidden', !!i);
     tabpanel.setAttribute('aria-labelledby', `tab-${id}`);
     tabpanel.setAttribute('role', 'tabpanel');
 
@@ -98,7 +153,7 @@ export default async function decorate(block) {
     button.setAttribute('role', 'tab');
     button.setAttribute('type', 'button');
     button.addEventListener('click', () => {
-      switchTab(block, tablist, imageContainer, i);
+      scrollToPanel(track, i);
     });
     tablist.append(button);
     tab.remove();
@@ -121,7 +176,17 @@ export default async function decorate(block) {
     imageContainer.append(imageDiv);
   });
 
-  // Insert: image container first, then tablist
+  // Move panels into scrollable track
+  block.querySelectorAll('.tabs-numbered-panel').forEach((panel) => {
+    track.append(panel);
+  });
+
+  // Assemble: images → tablist → track
+  block.prepend(track);
   block.prepend(tablist);
   block.prepend(imageContainer);
+
+  // Wire up drag and scroll sync
+  setupDrag(track);
+  setupScrollSync(track, tablist, imageContainer);
 }
