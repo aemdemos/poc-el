@@ -422,6 +422,9 @@ footer .footer .footer-country-list li a img {
   footer .footer > div > div:nth-child(4) {
     margin-left: 0;
     margin-right: 0;
+    padding-top:40px;
+    padding-left:100px;
+    padding-right:100px;
   }
 
   footer .footer .footer-country-selector {
@@ -489,9 +492,23 @@ footer .footer .footer-country-list li a img {
     line-height: 1.4;
     letter-spacing: 0.6px;
     padding-top: 26px;
+    width:80%;
   }
 
   footer .footer > div > div:nth-child(4) ul li a {
+    font-size: 16px;
+  }
+
+  footer .footer > div > div:nth-child(4) {
+    padding-left: 8%;
+    padding-right: 12%;
+  }
+
+  footer .footer .footer-country-selector {
+    padding-right: 20px;
+  }
+
+  footer .footer > div > div:nth-child(4) p {
     font-size: 16px;
   }
 }
@@ -536,6 +553,8 @@ footer .footer .footer-country-list li a img {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 32px;
   }
+
+
 
   footer .footer .footer-quick-links {
     grid-column: 1;
