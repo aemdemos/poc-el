@@ -416,6 +416,10 @@ footer .footer .footer-country-list li a img {
     margin-left: 0;
     margin-right: 0;
   }
+
+  footer .footer .footer-country-selector {
+    float: left;
+  }
 }
 
 @media (width >= 768px) {
@@ -461,6 +465,13 @@ footer .footer .footer-country-list li a img {
     font-size: 18px;
     font-weight: 500;
     font-family: Figtree, Gotham, Arial, Helvetica, sans-serif;
+  }
+
+  footer .footer > div > div:nth-child(4) p {
+    font-size: 13px;
+    font-weight: 500;
+    font-family: Figtree, Arial, sans-serif;
+    letter-spacing: 0.6px;
   }
 }
 
@@ -561,10 +572,6 @@ footer .footer .footer-country-list li a img {
   footer .footer .footer-col-right > :nth-child(4) {
     grid-column: 2;
     grid-row: 2;
-  }
-
-  footer .footer .footer-country-selector {
-    float: left;
   }
 
   footer .footer > div > div:nth-child(4) ul li a {
