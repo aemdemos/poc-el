@@ -520,6 +520,14 @@ footer .footer .footer-country-list li a img {
     padding: 40px 32px 24px;
   }
 
+  footer .footer .footer-main-links ul {
+    padding-top:0;
+  }
+
+  footer .footer > div > div:first-child {
+    padding-top:70px;
+  }
+
   /* Section 1: Logo left + search right */
   footer .footer > div > div:first-child .default-content-wrapper {
     display: flex;
@@ -539,7 +547,10 @@ footer .footer .footer-country-list li a img {
   footer .footer .footer-social-mobile {
     display: flex;
     margin-top: 0;
-    padding: 16px 0 0;
+    padding: 80px 0 0;
+    grid-column: 1;
+    grid-row: 1;
+    margin-top:80px;
   }
 
   /* Section 2: 4-column grid */
