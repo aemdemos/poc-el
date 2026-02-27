@@ -13,35 +13,28 @@ export default function decorate(block) {
     block.classList.add('no-image');
   }
 
+  // Merge content rows (non-image rows) into a single div
+  const contentRows = rows.filter((r) => !r.classList.contains('hero-enterprise-img-desktop')
+    && !r.classList.contains('hero-enterprise-img-mobile')
+    && !r.querySelector('picture'));
+
+  if (contentRows.length > 1) {
+    const target = contentRows[0];
+    const inner = target.querySelector(':scope > div') || target;
+    for (let i = 1; i < contentRows.length; i += 1) {
+      while (contentRows[i].firstElementChild?.firstElementChild) {
+        inner.append(contentRows[i].firstElementChild.firstElementChild);
+      }
+      contentRows[i].remove();
+    }
+  }
+
   // Convert paragraphs with markdown heading syntax to actual headings
-  // Handles <br>-separated content: "# heading <br> subtitle" → <h1> + <p>
   block.querySelectorAll('p').forEach((p) => {
     const text = p.textContent.trim();
     const match = text.match(/^(#{1,6})\s+(.*)/);
-    if (!match) return;
-
-    const level = match[1].length;
-    const br = p.querySelector('br');
-
-    if (br) {
-      const parts = p.innerHTML.split(/<br\s*\/?>/i);
-      const headingText = parts[0].replace(/^#{1,6}\s+/, '').trim();
-      const paraText = parts.slice(1).join('').trim();
-
-      const heading = document.createElement(`h${level}`);
-      heading.textContent = headingText;
-
-      const frag = document.createDocumentFragment();
-      frag.appendChild(heading);
-
-      if (paraText) {
-        const para = document.createElement('p');
-        para.textContent = paraText;
-        frag.appendChild(para);
-      }
-
-      p.replaceWith(frag);
-    } else {
+    if (match) {
+      const level = match[1].length;
       const heading = document.createElement(`h${level}`);
       [, , heading.textContent] = match;
       p.replaceWith(heading);
