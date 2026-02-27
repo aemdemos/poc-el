@@ -141,6 +141,7 @@ footer .footer .footer-quick-links ul li a {
   font-size: 16px;
   font-weight: 500;
   text-decoration-line: underline;
+  font-family: Gotham, Arial, sans-serif;
 }
 
 /* Main links (About Us through Wholesale) */
@@ -162,6 +163,7 @@ footer .footer .footer-main-links ul li a {
   color: #fff;
   font-size: 16px;
   text-decoration-line: underline;
+  font-family: Gotham, Arial, Helvetica;
 }
 
 /* Col right: WHY LUMEN + RESOURCES */
@@ -190,13 +192,14 @@ footer .footer .footer-col-right ul {
 }
 
 footer .footer .footer-col-right ul li {
-  padding: 4px 0;
+  padding-bottom:12px;
 }
 
 footer .footer .footer-col-right ul li a {
   color: #fff;
   font-size: 16px;
   text-decoration-line: underline;
+  font-family: Gotham, Arial, Helvetica;
 }
 
 /* Section 3: Disclaimer */
