@@ -1,9 +1,10 @@
 /* tabs-numbered — Lumen numbered tabs */
 
 .tabs-numbered-container .tabs-numbered-wrapper {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 24px;
+  padding-right: 0;
 }
 
 .tabs-numbered .tabs-numbered-list {
@@ -12,7 +13,7 @@
   gap: 40px;
   max-width: 100%;
   overflow-x: auto;
-  border-bottom: 1px solid #e0e0e0;
+  margin: 12px 20px 24px;
 }
 
 .tabs-numbered .tabs-numbered-list button {
@@ -71,25 +72,38 @@
   border-radius: 16px;
 }
 
-/* Panels — below tab nav */
-.tabs-numbered .tabs-numbered-panel {
-  margin-top: 0;
-  padding: 32px 0 0;
-  border: none;
-  overflow: auto;
+/* Scrollable track — horizontal swipe container */
+.tabs-numbered .tabs-numbered-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  overflow: auto hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  cursor: grab;
 }
 
-.tabs-numbered .tabs-numbered-panel[aria-hidden='true'] {
+.tabs-numbered .tabs-numbered-track::-webkit-scrollbar {
   display: none;
 }
 
+/* Panels — inside the track */
+.tabs-numbered .tabs-numbered-panel {
+  margin-top: 0;
+  padding: 0;
+  border: none;
+  overflow: visible;
+  scroll-snap-align: start;
+}
+
 .tabs-numbered .tabs-numbered-panel h2 {
-  font-family: Gotham, Arial, Helvetica, sans-serif;
-  font-size: 40px;
+  font-family: Gotham, Arial, Helvetica;
+  font-size: 32px;
   font-weight: 700;
   color: #0f3133;
   margin: 24px 0 16px;
-  line-height: 1.1;
+  line-height: 125%;
+  padding-right: 20px;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -97,8 +111,9 @@
   font-family: "Open Sans", sans-serif;
   font-size: 18px;
   color: #414448;
-  line-height: 1.5;
-  margin: 0 0 24px;
+  line-height: 150%;
+  margin: 0 0 30px;
+  padding-right: 20px;
 }
 
 .tabs-numbered .tabs-numbered-panel .button-container {
@@ -111,7 +126,7 @@
   padding: 14px 32px;
   border-radius: 16px;
   background-color: #ff7a59;
-  color: #fff;
+  color: #111213;
   font-family: Gotham, Arial, Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -121,4 +136,94 @@
 
 .tabs-numbered .tabs-numbered-panel a:hover {
   background-color: #e5593e;
+}
+
+@media (width >= 768px) {
+  .tabs-numbered .tabs-numbered-panel h2 {
+    font-size: 40px;
+  }
+
+  .tabs-numbered .tabs-numbered-panel p {
+    padding-left: 92px;
+  }
+}
+
+/* 1024px — two-column layout: text left, image right */
+@media (width >= 1024px) {
+  .tabs-numbered {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 0 48px;
+    align-items: start;
+    padding: 64px 0 40px;
+  }
+
+  .tabs-numbered .tabs-numbered-list {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0 0 24px;
+  }
+
+  .tabs-numbered .tabs-numbered-track {
+    grid-column: 1;
+    grid-row: 2;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    display: grid;
+  }
+
+  .tabs-numbered .tabs-numbered-panel {
+    scroll-snap-align: start;
+  }
+
+  .tabs-numbered .tabs-numbered-images {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: start;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tabs-numbered .tabs-numbered-image picture {
+    display: block;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .tabs-numbered .tabs-numbered-image img {
+    max-width: 100%;
+    border-radius: 24px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .tabs-numbered .tabs-numbered-panel p {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .tabs-numbered .tabs-numbered-list button {
+    font-size: 36px;
+    color: #686c73;
+    font-family: Gotham, sans-serif
+  }
+
+  .tabs-numbered .tabs-numbered-list button[aria-selected='true']  {
+    font-size: 80px;
+    color: #111213;
+  }
+
+}
+
+@media (width >= 1200px) {
+  .tabs-numbered .tabs-numbered-list {
+    margin: 0 0 40px;
+  }
+
+  .tabs-numbered .tabs-numbered-panel p {
+    padding-left: 115px;
+    padding-top:20px;
+  }
 }
