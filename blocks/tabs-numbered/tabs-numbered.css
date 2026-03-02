@@ -1,7 +1,7 @@
 /* tabs-numbered — Lumen numbered tabs */
 
 .tabs-numbered-container .tabs-numbered-wrapper {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 24px;
   padding-right: 0;
@@ -193,7 +193,7 @@
   }
 
   .tabs-numbered .tabs-numbered-image img {
-    max-width: 85%;
+    max-width: 100%;
     border-radius: 24px;
     display: flex;
     justify-content: flex-end;
