@@ -338,6 +338,7 @@ main .section.orange {
   color: var(--background-color);
   margin: 0;
   padding: var(--section-spacing) 0;
+  background-color: background: linear-gradient(90deg, #f96498, #f96889 7%, #fa7266 25%, #fa7a4b 43%, #fb8038 61%, #fb832d 80%, #fb8429) 0 0 no-repeat;
 }
 
 main .section.orange h1,
