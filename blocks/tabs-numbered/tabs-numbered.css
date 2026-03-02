@@ -72,16 +72,28 @@
   border-radius: 16px;
 }
 
-/* Panels — below tab nav */
+/* Scrollable track — horizontal swipe container */
+.tabs-numbered .tabs-numbered-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  overflow: auto hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  cursor: grab;
+}
+
+.tabs-numbered .tabs-numbered-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Panels — inside the track */
 .tabs-numbered .tabs-numbered-panel {
   margin-top: 0;
   padding: 0;
   border: none;
-  overflow: auto;
-}
-
-.tabs-numbered .tabs-numbered-panel[aria-hidden='true'] {
-  display: none;
+  overflow: visible;
+  scroll-snap-align: start;
 }
 
 .tabs-numbered .tabs-numbered-panel h2 {
