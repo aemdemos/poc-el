@@ -1,0 +1,40 @@
+{
+  "variantName": "cards-stories",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-02-23T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.lumen.com/en-us/resources/customer-stories/accolade.html",
+    "originPage": "customer story page",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "related-stories",
+    "imagePattern": "icon",
+    "structure": "3 cards with logo + title + description + CTA each"
+  },
+  "contentPattern": {
+    "structure": "card grid: logo image + title + description + CTA link per card",
+    "buttonCount": 3,
+    "imageCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "related customer story cards",
+      "logo-based story cards with CTAs",
+      "case study recommendation sections"
+    ],
+    "notSuitableFor": [
+      "cards without images",
+      "cards with large hero images",
+      "product feature cards"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/en-us/resources/customer-stories/accolade"],
+    "reuseCount": 1,
+    "lastUsed": "2026-02-23T00:00:00.000Z"
+  }
+}

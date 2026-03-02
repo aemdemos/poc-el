@@ -1,0 +1,40 @@
+{
+  "variantName": "hero-customer-story",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-02-23T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.lumen.com/en-us/resources/customer-stories/accolade.html",
+    "originPage": "customer story page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "customer-story-hero",
+    "imagePattern": "large",
+    "structure": "heading + description + hero image"
+  },
+  "contentPattern": {
+    "structure": "h1 heading + description paragraph + background image",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "customer story pages",
+      "case study pages",
+      "success story landing pages"
+    ],
+    "notSuitableFor": [
+      "product pages with CTAs",
+      "homepage hero with multiple buttons",
+      "landing pages with form elements"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/en-us/resources/customer-stories/accolade"],
+    "reuseCount": 1,
+    "lastUsed": "2026-02-23T00:00:00.000Z"
+  }
+}

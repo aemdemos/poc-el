@@ -1,0 +1,47 @@
+.hero-customer-story-container .hero-customer-story-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-customer-story {
+  position: relative;
+  padding: 40px 24px;
+  min-height: 300px;
+}
+
+.hero-customer-story h1,
+.hero-customer-story h2,
+.hero-customer-story h3,
+.hero-customer-story h4,
+.hero-customer-story h5,
+.hero-customer-story h6,
+.hero-customer-story p {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--background-color);
+}
+
+.hero-customer-story.no-image * {
+  color: var(--text-color);
+}
+
+.hero-customer-story picture {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  object-fit: cover;
+  box-sizing: border-box;
+}
+
+.hero-customer-story img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+@media (width >= 900px) {
+  .hero-customer-story {
+    padding: 40px 32px;
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "variantName": "columns-quote",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-02-23T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.lumen.com/en-us/resources/customer-stories/accolade.html",
+    "originPage": "customer story page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "customer-quote",
+    "imagePattern": "large",
+    "structure": "logo + quote + attribution left, image right"
+  },
+  "contentPattern": {
+    "structure": "2-column: logo image + quote text + attribution | portrait image",
+    "buttonCount": 0,
+    "imageCount": 2
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "customer testimonial sections with logo",
+      "quote sections with side image",
+      "case study quote layouts"
+    ],
+    "notSuitableFor": [
+      "simple centered quotes without images",
+      "multi-quote layouts",
+      "quote carousels"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/en-us/resources/customer-stories/accolade"],
+    "reuseCount": 1,
+    "lastUsed": "2026-02-23T00:00:00.000Z"
+  }
+}
