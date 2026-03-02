@@ -1,36 +1,93 @@
 /* stylelint-disable max-line-length */
-@font-face {
-  font-family: roboto-condensed;
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('../fonts/roboto-condensed-bold.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 
+/* Gotham — Primary heading/display font */
 @font-face {
-  font-family: roboto;
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('../fonts/roboto-bold.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('../fonts/roboto-medium.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: roboto;
+  font-family: Gotham;
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('../fonts/roboto-regular.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url('https://lib.lumen.com/fonts/gotham/Gotham-Book_Web.woff2') format('woff2'),
+    url('https://lib.lumen.com/fonts/gotham/Gotham-Book_Web.woff') format('woff');
+}
+
+@font-face {
+  font-family: Gotham;
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://lib.lumen.com/fonts/gotham/Gotham-BookItalic_Web.woff2') format('woff2'),
+    url('https://lib.lumen.com/fonts/gotham/Gotham-BookItalic_Web.woff') format('woff');
+}
+
+@font-face {
+  font-family: Gotham;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('https://lib.lumen.com/fonts/gotham/Gotham-Medium_Web.woff2') format('woff2'),
+    url('https://lib.lumen.com/fonts/gotham/Gotham-Medium_Web.woff') format('woff');
+}
+
+@font-face {
+  font-family: Gotham;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://lib.lumen.com/fonts/gotham/Gotham-Bold_Web.woff2') format('woff2'),
+    url('https://lib.lumen.com/fonts/gotham/Gotham-Bold_Web.woff') format('woff');
+}
+
+@font-face {
+  font-family: Gotham;
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://lib.lumen.com/fonts/gotham/Gotham-BoldItalic_Web.woff2') format('woff2'),
+    url('https://lib.lumen.com/fonts/gotham/Gotham-BoldItalic_Web.woff') format('woff');
+}
+
+@font-face {
+  font-family: Gotham;
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('https://lib.lumen.com/fonts/gotham/Gotham-Black_Web.woff2') format('woff2'),
+    url('https://lib.lumen.com/fonts/gotham/Gotham-Black_Web.woff') format('woff');
+}
+
+/* Open Sans — Body/paragraph font
+ * Using Google Fonts CDN as the source site embeds these as data URIs.
+ * To self-host, download from https://fonts.google.com/specimen/Open+Sans
+ * and replace URLs with local paths (e.g., ../fonts/open-sans-regular.woff2).
+ */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2') format('woff2');
 }
