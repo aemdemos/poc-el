@@ -9,6 +9,7 @@
 .columns-challenges > div > div {
   border-left: 2px solid #fb8429;
   padding-left: 20px;
+  box-sizing: border-box;
 }
 
 .columns-challenges h2 {
@@ -26,7 +27,7 @@
 .columns-challenges p {
   font-size: 16px;
   line-height: 24px;
-  font-family: Gotham-book, Arial, Helvetica;
+  font-family: Gotham-book, Arial, Helvetica, sans-serif;
   font-style: normal;
   color: #333;
 }
@@ -43,19 +44,31 @@
   color: #333;
 }
 
-@media (width >= 900px) {
+/* Tablet: 2 columns, third wraps below */
+@media (width >= 700px) {
   .columns-challenges > div {
-    flex-direction: row;
-    gap: 40px;
+    flex-flow: row wrap;
+    gap: 32px 40px;
     align-items: flex-start;
   }
 
   .columns-challenges > div > div {
-    flex: 1 1 0;
+    flex: 0 0 calc(50% - 20px);
   }
 
   .columns-challenges h2 {
     font-size: 36px;
     line-height: 40px;
+  }
+}
+
+/* Desktop: all 3 columns in one row */
+@media (width >= 1024px) {
+  .columns-challenges > div {
+    flex-wrap: nowrap;
+  }
+
+  .columns-challenges > div > div {
+    flex: 1 1 0;
   }
 }
