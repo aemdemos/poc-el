@@ -57,6 +57,22 @@ main .section.columns-story-container a.button:focus {
   display: block;
 }
 
+@media (width > 425px) {
+  main .section.columns-story-container a:any-link {
+  width:auto;
+  }
+
+  main .section.columns-story-container h3 {
+    font-size: 38px;
+  }
+
+  main .section.columns-story-container p {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 400;
+  }
+}
+
 @media (width > 1024px) {
   main > .section.columns-story-container {
     padding-top: 60px;
