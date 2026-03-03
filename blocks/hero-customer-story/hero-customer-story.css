@@ -56,24 +56,29 @@
     padding: 20px 8.3334% 40px;
   }
 
-  /* Image row shows inline below text */
+  /* Image row: show only the logo (right side of hero image) */
   .hero-customer-story > div:first-child {
     order: 1;
     background: var(--background-color);
     display: flex;
     justify-content: center;
-    padding: 20px 8.3334% 40px;
+    padding: 40px 8.3334%;
   }
 
   .hero-customer-story picture {
     position: static;
-    max-width: 600px;
+    display: block;
+    width: 480px;
+    max-width: 100%;
+    height: 100px;
+    overflow: hidden;
   }
 
   .hero-customer-story img {
-    object-fit: contain;
+    object-fit: none;
+    object-position: right center;
     width: 100%;
-    height: auto;
+    height: 100%;
   }
 }
 
