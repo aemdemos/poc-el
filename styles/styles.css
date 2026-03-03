@@ -71,30 +71,15 @@
   src: local('Arial');
 }
 
-/* tablet breakpoint */
-@media (width >= 768px) {
-  :root {
-    --heading-font-size-xxl: 48px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 24px;
-    --heading-font-size-m: 20px;
-    --heading-font-size-s: 18px;
-    --heading-font-size-xs: 16px;
-  }
+main .section.orange h1 {
+  font-size: 24px;
 }
 
-/* desktop breakpoint */
-@media (width >= 1200px) {
-  :root {
-    --nav-height: 136px;
-    --heading-font-size-xxl: 60px;
-    --heading-font-size-xl: 48px;
-    --heading-font-size-l: 24px;
-    --heading-font-size-m: 20px;
-    --heading-font-size-s: 18px;
-    --heading-font-size-xs: 16px;
-  }
+main .section.orange p {
+  font-size: 20px;
+  font-weight: 700;
 }
+
 
 body {
   display: none;
@@ -126,11 +111,6 @@ footer .footer[data-block-status="loaded"] {
   visibility: visible;
 }
 
-@media (width >= 900px) {
-  body[data-breadcrumbs] {
-    --header-height: calc(var(--nav-height) + var(--breadcrumbs-height));
-  }
-}
 
 h1,
 h2,
@@ -294,18 +274,6 @@ main > .section:first-of-type {
   margin-top: 0;
 }
 
-@media (width >= 900px) {
-  main > .section > div {
-    padding: 0 32px;
-  }
-}
-
-@media (width >= 1200px) {
-  main > .section > div {
-    padding: 0 80px;
-  }
-}
-
 /* section metadata */
 main .section.light,
 main .section.highlight {
@@ -337,9 +305,8 @@ main .section.dark a:any-link {
 main .section.orange {
   color: var(--background-color);
   margin: 0;
-  padding: var(--section-spacing) 0;
   padding-top:0;
-  margin-top:-30px;
+  background: linear-gradient(90deg, #f96498, #f96889 7%, #fa7266 25%, #fa7a4b 43%, #fb8038 61%, #fb832d 80%, #fb8429) 0 0 no-repeat;
 }
 
 main .section.orange h1,
@@ -351,8 +318,85 @@ main .section.orange h6 {
   color: var(--background-color);
 }
 
+main .section.orange h1 {
+  font-size: 24px;
+}
+
+main .section.orange p {
+  font-size: 20px;
+  font-weight: 700;
+}
+
 /* focus styles */
 :focus-visible {
   outline: 2px solid var(--link-color);
   outline-offset: 2px;
 }
+
+/* tablet breakpoint */
+@media (width >= 768px) {
+  :root {
+    --heading-font-size-xxl: 48px;
+    --heading-font-size-xl: 36px;
+    --heading-font-size-l: 24px;
+    --heading-font-size-m: 20px;
+    --heading-font-size-s: 18px;
+    --heading-font-size-xs: 16px;
+  }
+
+  main .section.orange h1 {
+    font-size: 38px;
+  }
+  
+  main .section.orange p {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  
+}
+
+
+@media (width >= 900px) {
+  body[data-breadcrumbs] {
+    --header-height: calc(var(--nav-height) + var(--breadcrumbs-height));
+  }
+
+  main > .section > div {
+    padding: 0 32px;
+  }
+}
+
+
+@media (width >= 1200px) {
+  :root {
+    --nav-height: 136px;
+    --heading-font-size-xxl: 60px;
+    --heading-font-size-xl: 48px;
+    --heading-font-size-l: 24px;
+    --heading-font-size-m: 20px;
+    --heading-font-size-s: 18px;
+    --heading-font-size-xs: 16px;
+  }
+
+  main > .section > div {
+    padding: 0 80px;
+  }
+
+  main .section.orange {
+    background: none;
+  }
+
+  main .section.orange h1 {
+    font-size: 48px;
+  }
+  
+  main .section.orange p {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    word-break: break-word;
+  }
+  
+}
+
+

@@ -5,8 +5,9 @@
 
 .hero-customer-story {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  padding: 40px 8.3334%;
+  min-height: unset;
+  padding-top:20px;
 }
 
 .hero-customer-story h1,
@@ -40,11 +41,6 @@
   height: 100%;
 }
 
-@media (width >= 900px) {
-  .hero-customer-story {
-    padding: 40px 32px;
-  }
-}
 
 
 @media (width >= 1200px) {
