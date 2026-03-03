@@ -1,33 +1,49 @@
+/* Columns Challenges – 3-column layout: Challenges | Solutions | Results */
+
 .columns-challenges > div {
   display: flex;
   flex-direction: column;
-}
-
-.columns-challenges img {
-  width: 100%;
+  gap: 32px;
 }
 
 .columns-challenges > div > div {
-  order: 1;
+  border-left: 2px solid #fb8429;
+  padding-left: 20px;
 }
 
-.columns-challenges > div > .columns-challenges-img-col {
-  order: 0;
+.columns-challenges h2 {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 500;
+  color: #0f3133;
+  margin: 0 0 12px;
 }
 
-.columns-challenges > div > .columns-challenges-img-col img {
-  display: block;
+.columns-challenges ul {
+  padding: 0 0 0 20px;
+  margin: 0;
+}
+
+.columns-challenges li {
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 9px;
+  color: #333;
 }
 
 @media (width >= 900px) {
   .columns-challenges > div {
-    align-items: center;
-    flex-direction: unset;
-    gap: 24px;
+    flex-direction: row;
+    gap: 40px;
+    align-items: flex-start;
   }
 
   .columns-challenges > div > div {
-    flex: 1;
-    order: unset;
+    flex: 1 1 0;
+  }
+
+  .columns-challenges h2 {
+    font-size: 36px;
+    line-height: 40px;
   }
 }
