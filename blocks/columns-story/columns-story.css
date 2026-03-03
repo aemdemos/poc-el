@@ -1,3 +1,14 @@
+main > .section.columns-story-container {
+  margin: 0;
+  padding-left: 8.33333%;
+  padding-right: 8.33333%;
+}
+
+main > .section.columns-story-container > div {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .columns-story > div {
   display: flex;
   flex-direction: column;
