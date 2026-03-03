@@ -27,21 +27,26 @@
   color: var(--text-color);
 }
 
-.hero-customer-story picture {
+/* Hero background image (desktop) */
+.hero-customer-story .hero-bg picture {
   position: absolute;
   z-index: -1;
   inset: 0;
-  object-fit: cover;
   box-sizing: border-box;
 }
 
-.hero-customer-story img {
+.hero-customer-story .hero-bg img {
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
-/* Below 1200px: show full hero image (with logo) as inline content below text */
+/* Logo row: hidden at desktop */
+.hero-customer-story .hero-logo {
+  display: none;
+}
+
+/* Below 1200px: use logo image instead of hero background */
 @media (width < 1200px) {
   .hero-customer-story {
     display: flex;
@@ -56,31 +61,30 @@
     padding: 20px 8.3334% 40px;
   }
 
-  /* Image row: show only the logo (right side of hero image) */
-  .hero-customer-story > div:first-child {
-    order: 1;
-    background: var(--background-color);
+  /* Hide the hero background image */
+  .hero-customer-story .hero-bg {
+    display: none;
+  }
+
+  /* Show the logo on white background */
+  .hero-customer-story .hero-logo {
     display: flex;
     justify-content: center;
+    order: 1;
+    background: var(--background-color);
     padding: 40px 8.3334%;
   }
 
-  .hero-customer-story picture {
+  .hero-customer-story .hero-logo picture {
     position: static;
-    display: flex;
-    align-items: center;
-    width: 300px;
-    max-width: 100%;
-    height: 80px;
-    overflow: hidden;
   }
 
-  .hero-customer-story img {
-    display: block;
-    width: 350%;
-    max-width: none;
+  .hero-customer-story .hero-logo img {
+    width: auto;
+    max-width: 300px;
     height: auto;
-    transform: translateX(-71.43%);
+    max-height: 80px;
+    object-fit: contain;
   }
 }
 
