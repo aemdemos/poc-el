@@ -7,7 +7,7 @@
   position: relative;
   padding: 40px 8.3334%;
   min-height: unset;
-  padding-top:20px;
+  padding-top: 20px;
 }
 
 .hero-customer-story h1,
@@ -41,7 +41,41 @@
   height: 100%;
 }
 
+/* Below 1200px: show full hero image (with logo) as inline content below text */
+@media (width < 1200px) {
+  .hero-customer-story {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    background: linear-gradient(90deg, #f95e4a, #fb6742 35%, #fb812c 94%, #fb8429);
+  }
 
+  /* Text row appears first */
+  .hero-customer-story > div:last-child {
+    order: -1;
+    padding: 20px 8.3334% 40px;
+  }
+
+  /* Image row shows inline below text */
+  .hero-customer-story > div:first-child {
+    order: 1;
+    background: var(--background-color);
+    display: flex;
+    justify-content: center;
+    padding: 20px 8.3334% 40px;
+  }
+
+  .hero-customer-story picture {
+    position: static;
+    max-width: 600px;
+  }
+
+  .hero-customer-story img {
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+  }
+}
 
 @media (width >= 1200px) {
   .hero-customer-story {
