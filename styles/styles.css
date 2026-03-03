@@ -58,6 +58,8 @@
   --transition-easing: ease-in;
 }
 
+
+
 /* fallback fonts */
 @font-face {
   font-family: Gotham-fallback;
@@ -70,6 +72,7 @@
   size-adjust: 105%;
   src: local('Arial');
 }
+
 
 main .section.orange h1 {
   font-size: 24px;
@@ -91,6 +94,9 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1600px;
 }
 
 body.appear {
