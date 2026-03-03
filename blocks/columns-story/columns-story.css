@@ -9,6 +9,32 @@ main > .section.columns-story-container > div {
   padding-right: 0;
 }
 
+main .section.columns-story-container a:any-link {
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 8.5px 17px;
+  border: 2px solid var(--brand-coral);
+  border-radius: 2em;
+  background-color: var(--background-color);
+  color: var(--brand-primary);
+  font-weight: 700;
+  font-size: var(--body-font-size-s);
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color var(--transition-duration) var(--transition-easing),
+    border-color var(--transition-duration) var(--transition-easing),
+    color var(--transition-duration) var(--transition-easing);
+width:100%
+}
+
+main .section.columns-story-container a.button:hover,
+main .section.columns-story-container a.button:focus {
+  background-color: var(--brand-coral);
+  color: var(--background-color);
+  border-color: var(--brand-coral);
+}
+
 .columns-story > div {
   display: flex;
   flex-direction: column;
@@ -24,21 +50,37 @@ main > .section.columns-story-container > div {
 
 .columns-story > div > .columns-story-img-col {
   order: 1;
+  padding-top: 40px;
 }
 
 .columns-story > div > .columns-story-img-col img {
   display: block;
 }
 
-@media (width >= 1024px) {
+@media (width > 1024px) {
+  main > .section.columns-story-container {
+    padding-top: 60px;
+  }
+
+  main .section.columns-story-container h3 {
+    font-size: 48px;
+    line-height: 50px;
+    font-weight: 700;
+  }
+
   .columns-story > div {
     align-items: center;
     flex-direction: unset;
-    gap: 24px;
+    gap: 60px;
   }
 
   .columns-story > div > div {
     flex: 1;
     order: unset;
+  }
+}
+@media (width > 1200px) {
+  main > .section.columns-story-container {
+    padding-top: 80px;
   }
 }
