@@ -1,21 +1,94 @@
+/* Cards Product – carousel on mobile, 3-up row on desktop */
+
+.cards-product-container .cards-product-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 8.3334%;
+}
+
+/* Mobile: horizontal scroll carousel */
 .cards-product > ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.cards-product > ul::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 .cards-product > ul > li {
-  border: 1px solid #dadada;
+  border: 1px solid #d0d4d9;
+  border-radius: 8px;
   background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+  min-width: 80%;
+  flex-shrink: 0;
 }
 
 .cards-product .cards-product-card-body {
-  margin: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
+.cards-product .cards-product-card-body p {
+  font-size: 16px;
+  line-height: 24px;
+  color: #333;
+  margin: 0;
+}
+
+.cards-product .cards-product-card-body p:first-child {
+  margin-top: 0;
+}
+
+.cards-product .cards-product-card-body strong {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 500;
+  color: #000;
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* Push button container to bottom of card */
+.cards-product .cards-product-card-body .button-container {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+/* CTA "Learn more" button – override EDS defaults and section-level overrides */
+main .cards-product .cards-product-card-body a:any-link {
+  display: inline-block;
+  color: #fff;
+  background-color: #f95e4a;
+  border: 3px solid #f95e4a;
+  border-radius: 0 21px 21px;
+  padding: 8px 17px;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+main .cards-product .cards-product-card-body a:any-link:hover {
+  background-color: #e04d3a;
+  border-color: #e04d3a;
+  color: #fff;
+}
+
+/* Image cards (if any have images) */
 .cards-product .cards-product-card-image {
   line-height: 0;
 }
@@ -24,4 +97,20 @@
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Desktop: 3-up equal columns, no carousel */
+@media (width >= 900px) {
+  .cards-product > ul {
+    overflow-x: visible;
+    scroll-snap-type: none;
+    gap: 40px;
+  }
+
+  .cards-product > ul > li {
+    flex: 1 1 0;
+    min-width: 0;
+    scroll-snap-align: unset;
+  }
 }
