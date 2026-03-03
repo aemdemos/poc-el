@@ -45,7 +45,13 @@
 .hero-customer-story .hero-logo {
   display: none;
 }
-
+@media (width >= 768px) {
+  .hero-customer-story .hero-logo {
+  zoom:130%;
+  padding: 40px 8.3334%;
+  border: 1px solid hsla(0, 0%, 78%, .8);
+}
+}
 /* Below 1200px: use logo image instead of hero background */
 @media (width < 1200px) {
   .hero-customer-story {
