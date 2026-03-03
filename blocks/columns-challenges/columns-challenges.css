@@ -19,8 +19,20 @@
   margin: 0 0 12px;
 }
 
+.columns-challenges h3 {
+  font-weight: 400;
+}
+
+.columns-challenges p {
+  font-size: 16px;
+  line-height: 24px;
+  font-family: Gotham-book, Arial, Helvetica;
+  font-style: normal;
+  color: #333;
+}
+
 .columns-challenges ul {
-  padding: 0 0 0 20px;
+  padding: 4.5px 0 0 40px;
   margin: 0;
 }
 
