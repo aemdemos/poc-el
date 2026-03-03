@@ -45,3 +45,10 @@
     padding: 40px 32px;
   }
 }
+
+
+@media (width >= 1200px) {
+  .hero-customer-story {
+    min-height: unset;
+  }
+}
