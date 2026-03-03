@@ -24,8 +24,8 @@
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
-  min-width: 80%;
   flex-shrink: 0;
+  width:100%;
 }
 
 .cards-product .cards-product-card-body {
