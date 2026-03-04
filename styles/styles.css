@@ -92,6 +92,15 @@ main .section.blue p {
   font-weight: 700;
 }
 
+main .section.yellow h1 {
+  font-size: 24px;
+}
+
+main .section.yellow p {
+  font-size: 20px;
+  font-weight: 700;
+}
+
 
 body {
   display: none;
@@ -369,6 +378,33 @@ main .section.blue p {
   color:black;
 }
 
+main .section.yellow {
+  margin: 0;
+  padding-top: 0;
+  background: linear-gradient(90deg, #fed71a, #fed11b 19%, #fdbf1e 45%, #fca224 75%, #fb8429) 0 0 no-repeat;
+  color: var(--background);
+}
+
+main .section.yellow h1,
+main .section.yellow h2,
+main .section.yellow h3,
+main .section.yellow h4,
+main .section.yellow h5,
+main .section.yellow h6 {
+  color: var(--background-color);
+}
+
+main .section.yellow h1 {
+  font-size: 24px;
+  color:black;
+}
+
+main .section.yellow p {
+  font-size: 20px;
+  font-weight: 700;
+  color:black;
+}
+
 /* focus styles */
 :focus-visible {
   outline: 2px solid var(--link-color);
@@ -400,6 +436,15 @@ main .section.blue p {
   }
 
   main .section.blue p {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  main .section.yellow h1 {
+    font-size: 38px;
+  }
+
+  main .section.yellow p {
     font-size: 20px;
     font-weight: 700;
   }
@@ -456,6 +501,21 @@ main .section.blue p {
   }
 
   main .section.blue p {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    word-break: break-word;
+  }
+
+  main .section.yellow {
+    background: none;
+  }
+
+  main .section.yellow h1 {
+    font-size: 48px;
+  }
+
+  main .section.yellow p {
     font-size: 20px;
     font-weight: 500;
     line-height: 28px;

@@ -62,6 +62,14 @@
     background: linear-gradient(90deg, #f95e4a, #fb6742 35%, #fb812c 94%, #fb8429);
   }
 
+  main .section.blue .hero-customer-story {
+    background: linear-gradient(90deg, #15fdf4, #15faf1 22%, #13f0e8 39%, #11e0d8 54%, #0dc9c2 69%, #08aca6 82%, #038883 95%, #007672) 0 0 no-repeat;
+  }
+
+  main .section.yellow .hero-customer-story {
+    background: linear-gradient(90deg, #fed71a, #fed11b 19%, #fdbf1e 45%, #fca224 75%, #fb8429) 0 0 no-repeat;
+  }
+
   /* Text row appears first */
   .hero-customer-story > div:last-child {
     order: -1;
