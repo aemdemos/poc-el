@@ -112,6 +112,7 @@ main .cards-stories .cards-stories-card-body a:any-link:hover {
 @media (width > 425px) {
   main .section.section.cards-stories-container h2 {
     font-size: 30px;
+    text-align: center;
   }
 }
 
