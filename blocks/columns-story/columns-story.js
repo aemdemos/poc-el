@@ -6,36 +6,55 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     [...row.children].forEach((col) => {
       const pic = col.querySelector('picture');
-      if (pic) {
+      const link = col.querySelector('a[href*="players.brightcove.net"]');
+
+      if (link) {
+        // Video column: poster image + Brightcove link + caption
+        const videoSrc = link.href;
+        const caption = link.textContent.trim();
+        const poster = col.querySelector('picture');
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'columns-story-video-col';
+
+        // Build poster with play button overlay
+        const posterContainer = document.createElement('div');
+        posterContainer.className = 'columns-story-video-poster';
+        if (poster) {
+          posterContainer.append(poster);
+        }
+        // Play button overlay
+        const playBtn = document.createElement('button');
+        playBtn.className = 'columns-story-video-play';
+        playBtn.setAttribute('aria-label', 'Play video');
+        posterContainer.append(playBtn);
+
+        wrapper.append(posterContainer);
+
+        // Caption below the video
+        if (caption && !caption.startsWith('http')) {
+          const captionEl = document.createElement('p');
+          captionEl.className = 'columns-story-video-caption';
+          captionEl.textContent = caption;
+          wrapper.append(captionEl);
+        }
+
+        // Click handler: replace poster with iframe
+        posterContainer.addEventListener('click', () => {
+          posterContainer.innerHTML = `<div class="columns-story-video-iframe">
+            <iframe src="${videoSrc}?autoplay=1" allowfullscreen=""
+              allow="autoplay; encrypted-media" title="Video"></iframe>
+          </div>`;
+        });
+
+        col.textContent = '';
+        col.append(wrapper);
+      } else if (pic) {
         const picWrapper = pic.closest('div');
         if (picWrapper && picWrapper.children.length === 1) {
           // picture is only content in column
           picWrapper.classList.add('columns-story-img-col');
         }
-      }
-
-      // handle video embeds (Brightcove or other iframe-embeddable URLs)
-      const link = col.querySelector('a[href*="players.brightcove.net"]');
-      const text = col.textContent.trim();
-      if (link) {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'columns-story-video-col';
-        wrapper.innerHTML = `<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
-          <iframe src="${link.href}" style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;"
-            allowfullscreen="" allow="encrypted-media" title="Video" loading="lazy"></iframe>
-        </div>`;
-        col.textContent = '';
-        col.append(wrapper);
-      } else if (!pic && text.startsWith('https://') && text.includes('players.brightcove.net')) {
-        // plain text URL or URL wrapped in <p> tag
-        const wrapper = document.createElement('div');
-        wrapper.className = 'columns-story-video-col';
-        wrapper.innerHTML = `<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
-          <iframe src="${text}" style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;"
-            allowfullscreen="" allow="encrypted-media" title="Video" loading="lazy"></iframe>
-        </div>`;
-        col.textContent = '';
-        col.append(wrapper);
       }
     });
   });
