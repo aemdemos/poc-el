@@ -1,6 +1,8 @@
 .columns-quote > div {
   display: flex;
   flex-direction: column;
+  padding-bottom: 40px;
+  padding-top: 40px;
 }
 
 .columns-quote img {
@@ -24,6 +26,7 @@
     align-items: center;
     flex-direction: unset;
     gap: 24px;
+
   }
 
   .columns-quote > div > div {

@@ -95,6 +95,12 @@ main .section.columns-story-container a.button:focus {
     flex: 1;
     order: unset;
   }
+
+  .columns-story > div > .columns-story-img-col {
+    order: 1;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
 }
 @media (width > 1200px) {
   main > .section.columns-story-container {
