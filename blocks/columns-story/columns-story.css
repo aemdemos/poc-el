@@ -51,6 +51,7 @@ main .section.columns-story-container a.button:focus {
 .columns-story > div > .columns-story-img-col {
   order: 1;
   padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .columns-story > div > .columns-story-img-col img {
