@@ -1,27 +1,109 @@
+/* Cards Stories – carousel on mobile, 3-up row on desktop */
+
+/* Mobile: horizontal scroll carousel */
 .cards-stories > ul {
   list-style: none;
   margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  padding: 0 0 40px;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.cards-stories > ul::-webkit-scrollbar {
+  display: none;
 }
 
 .cards-stories > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
-}
-
-.cards-stories .cards-stories-card-body {
-  margin: 16px;
+  border: 1px solid #d0d4d9;
+  border-radius: 8px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+  min-width: 85%;
+  flex-shrink: 0;
 }
 
 .cards-stories .cards-stories-card-image {
   line-height: 0;
+  text-align: center;
+  padding: 20px 20px 0;
 }
 
 .cards-stories > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.cards-stories .cards-stories-card-body {
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cards-stories .cards-stories-card-body p {
+  font-size: 16px;
+  line-height: 24px;
+  color: #333;
+  margin: 0;
+}
+
+.cards-stories .cards-stories-card-body strong {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #000;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* "Read story" link – teal text with arrow, not a button */
+.cards-stories .cards-stories-card-body .button-container {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+main .cards-stories .cards-stories-card-body a:any-link {
+  display: inline-block;
+  color: #007981;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+main .cards-stories .cards-stories-card-body a:any-link::after {
+  content: " \2192";
+}
+
+main .cards-stories .cards-stories-card-body a:any-link:hover {
+  color: #005a60;
+  background: none;
+  border: none;
+}
+
+/* Desktop: 3-up equal columns, no carousel */
+@media (width >= 900px) {
+  .cards-stories > ul {
+    overflow-x: visible;
+    gap: 40px;
+  }
+
+  .cards-stories > ul > li {
+    flex: 1 1 0;
+    min-width: 0;
+    scroll-snap-align: unset;
+  }
 }
