@@ -41,7 +41,7 @@ main .section.cards-product-container h2 {
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
-  width: 85%;
+  max-width: 85%;
   flex-shrink: 0;
 }
 
@@ -110,6 +110,29 @@ main .cards-product .cards-product-card-body a:any-link:hover {
   object-fit: cover;
   border-radius: 8px 8px 0 0;
 }
+
+@media (width > 425px) {
+  main .section.cards-product-container h2 {
+    text-align: center;
+    font-size: 30px;
+  }
+}
+
+@media (width >= 768px) {
+  .cards-product > ul {
+    gap: 40px;
+    padding-inline-start: 8.33333%;
+    padding-right:8.33333%;
+  }
+  .cards-product > ul > li {
+    max-width: 43%;
+  }
+
+  main .section.cards-product-container h2 {
+    font-size: 36px;
+  }
+}
+
 
 /* Desktop: 3-up equal columns, no carousel */
 @media (width >= 900px) {

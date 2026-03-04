@@ -7,6 +7,8 @@ main > .section.cards-stories-container > div {
 
 main .section.cards-stories-container h2 {
   padding-inline-start: 20px;
+  font-size: 20px;
+  line-height: 28px;
 }
 
 
@@ -20,7 +22,7 @@ main .section.cards-stories-container h2 {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding-top:40px;
+  padding-top:30px;
   padding-inline-start:20px;
 }
 
@@ -35,7 +37,7 @@ main .section.cards-stories-container h2 {
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
-  width: 97%;
+  max-width: 85%;
   flex-shrink: 0;
 }
 
@@ -43,6 +45,7 @@ main .section.cards-stories-container h2 {
   line-height: 0;
   text-align: center;
   padding: 20px 20px 0;
+  padding-top:0;
 }
 
 .cards-stories > ul > li img {
@@ -98,12 +101,35 @@ main .cards-stories .cards-stories-card-body a:any-link {
 
 main .cards-stories .cards-stories-card-body a:any-link::after {
   content: " \2192";
+  color:#ff6d00;
 }
 
 main .cards-stories .cards-stories-card-body a:any-link:hover {
   color: #005a60;
   background: none;
   border: none;
+}
+
+@media (width > 425px) {
+  main .section.section.cards-stories-container h2 {
+    text-align: center;
+    font-size: 30px;
+  }
+}
+
+@media (width >= 768px) {
+  .cards-stories > ul {
+    gap: 40px;
+    padding-inline-start: 8.33333%;
+    padding-right:8.33333%;
+  }
+  .cards-stories > ul > li {
+    max-width: 43%;
+  }
+
+  main .section.section.cards-stories-container h2 {
+    font-size: 36px;
+  }
 }
 
 /* Desktop: 3-up equal columns, no carousel */
