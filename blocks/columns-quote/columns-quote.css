@@ -6,7 +6,7 @@
 }
 
 .columns-quote img {
-  width: 60%;
+  width: 50%;
 }
 
 .columns-quote > div > div {
@@ -35,7 +35,7 @@ margin-bottom:20px;
 }
 
 
-@media (width >= 1014px) {
+@media (width >= 1024px) {
   .columns-quote > div {
     align-items: center;
     flex-direction: unset;
@@ -45,5 +45,9 @@ margin-bottom:20px;
   .columns-quote > div > div {
     flex: 1;
     order: unset;
+  }
+
+  .columns-quote img {
+    width: 45%;
   }
 }
