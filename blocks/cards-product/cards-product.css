@@ -1,9 +1,9 @@
 /* Cards Product – carousel on mobile, 3-up row on desktop */
 
 .cards-product-container .cards-product-wrapper {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 8.3334%;
+  padding: 0;
 }
 
 main .section.cards-product-container {
@@ -11,15 +11,17 @@ main .section.cards-product-container {
 }
 
 main .section.cards-product-container h2 {
-  font-size: 20px;
+  font-size: 24px;
   line-height: 28px;
+  margin-bottom: 40px;
+  font-weight: 700;
 }
 
 /* Mobile: horizontal scroll carousel */
 .cards-product > ul {
   list-style: none;
   margin: 0;
-  padding: 0 0 40px;
+  padding-inline-start: 20px;
   display: flex;
   gap: 20px;
   overflow-x: auto;
@@ -39,7 +41,7 @@ main .section.cards-product-container h2 {
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
-  min-width: 85%;
+  width: 95%;
   flex-shrink: 0;
 }
 
@@ -74,6 +76,7 @@ main .section.cards-product-container h2 {
 .cards-product .cards-product-card-body .button-container {
   margin-top: auto;
   padding-top: 16px;
+  text-align: center;
 }
 
 /* CTA "Learn more" button – override EDS defaults and section-level overrides */
