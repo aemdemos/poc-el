@@ -86,7 +86,6 @@ main .section.columns-story-container a.button:focus {
   }
 
   .columns-story > div {
-    align-items: center;
     flex-direction: unset;
     gap: 60px;
   }

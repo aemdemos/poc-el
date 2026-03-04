@@ -146,7 +146,7 @@ main .cards-stories .cards-stories-card-body a:any-link:hover {
 
 @media (width >= 1024px) {
   main .section.section.cards-stories-container h2 {
-    font-size: 48px;
+    font-size: 36px;
     line-height: 50px;
   }
 }
