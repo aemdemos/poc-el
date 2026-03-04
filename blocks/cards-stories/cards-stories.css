@@ -1,16 +1,27 @@
 /* Cards Stories – carousel on mobile, 3-up row on desktop */
 
+main > .section.cards-stories-container > div {
+  padding-right: 10px;
+  padding-left: 0;
+}
+
+main .section.cards-stories-container h2 {
+  padding-inline-start: 20px;
+}
+
+
 /* Mobile: horizontal scroll carousel */
 .cards-stories > ul {
   list-style: none;
   margin: 0;
-  padding: 0 0 40px;
   display: flex;
   gap: 20px;
   overflow-x: auto;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  padding-top:40px;
+  padding-inline-start:20px;
 }
 
 .cards-stories > ul::-webkit-scrollbar {
@@ -24,7 +35,7 @@
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
-  min-width: 85%;
+  width: 97%;
   flex-shrink: 0;
 }
 
@@ -40,6 +51,7 @@
   width: auto;
   height: auto;
   object-fit: contain;
+  padding-bottom:20px;
 }
 
 .cards-stories .cards-stories-card-body {
@@ -57,7 +69,7 @@
 }
 
 .cards-stories .cards-stories-card-body strong {
-  font-size: 24px;
+  font-size: 20px;
   line-height: 32px;
   font-weight: 500;
   color: #000;
