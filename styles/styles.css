@@ -83,6 +83,15 @@ main .section.orange p {
   font-weight: 700;
 }
 
+main .section.blue h1 {
+  font-size: 24px;
+}
+
+main .section.blue p {
+  font-size: 20px;
+  font-weight: 700;
+}
+
 
 body {
   display: none;
@@ -333,6 +342,31 @@ main .section.orange p {
   font-weight: 700;
 }
 
+main .section.blue {
+  color: var(--background-color);
+  margin: 0;
+  padding-top: 0;
+  background: linear-gradient(90deg, #15fdf4, #15faf1 22%, #13f0e8 39%, #11e0d8 54%, #0dc9c2 69%, #08aca6 82%, #038883 95%, #007672) 0 0 no-repeat;
+}
+
+main .section.blue h1,
+main .section.blue h2,
+main .section.blue h3,
+main .section.blue h4,
+main .section.blue h5,
+main .section.blue h6 {
+  color: var(--background-color);
+}
+
+main .section.blue h1 {
+  font-size: 24px;
+}
+
+main .section.blue p {
+  font-size: 20px;
+  font-weight: 700;
+}
+
 /* focus styles */
 :focus-visible {
   outline: 2px solid var(--link-color);
@@ -358,7 +392,15 @@ main .section.orange p {
     font-size: 20px;
     font-weight: 700;
   }
-  
+
+  main .section.blue h1 {
+    font-size: 38px;
+  }
+
+  main .section.blue p {
+    font-size: 20px;
+    font-weight: 700;
+  }
 }
 
 
@@ -402,7 +444,21 @@ main .section.orange p {
     line-height: 28px;
     word-break: break-word;
   }
-  
+
+  main .section.blue {
+    background: none;
+  }
+
+  main .section.blue h1 {
+    font-size: 48px;
+  }
+
+  main .section.blue p {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    word-break: break-word;
+  }
 }
 
 
