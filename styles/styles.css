@@ -360,11 +360,13 @@ main .section.blue h6 {
 
 main .section.blue h1 {
   font-size: 24px;
+  color:black;
 }
 
 main .section.blue p {
   font-size: 20px;
   font-weight: 700;
+  color:black;
 }
 
 /* focus styles */
