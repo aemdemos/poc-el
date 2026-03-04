@@ -6,7 +6,6 @@ main > .section.cards-stories-container > div {
 }
 
 main .section.cards-stories-container h2 {
-  padding-inline-start: 20px;
   font-size: 20px;
   line-height: 28px;
 }
@@ -112,7 +111,6 @@ main .cards-stories .cards-stories-card-body a:any-link:hover {
 
 @media (width > 425px) {
   main .section.section.cards-stories-container h2 {
-    text-align: center;
     font-size: 30px;
   }
 }
