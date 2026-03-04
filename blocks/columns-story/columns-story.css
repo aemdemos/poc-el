@@ -1,7 +1,37 @@
+/* Base block styles (lower specificity first) */
+.columns-story > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-story img {
+  width: 100%;
+}
+
+.columns-story > div > div {
+  order: 0;
+}
+
+.columns-story > div > .columns-story-img-col,
+.columns-story > div > div:has(.columns-story-video-col) {
+  order: 1;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.columns-story > div > .columns-story-img-col img {
+  display: block;
+}
+
+.columns-story-video-col {
+  width: 100%;
+}
+
+/* Section-level overrides (higher specificity) */
 main > .section.columns-story-container {
   margin: 0;
-  padding-left: 8.33333%;
-  padding-right: 8.33333%;
+  padding-left: 8.3334%;
+  padding-right: 8.3334%;
 }
 
 main > .section.columns-story-container > div {
@@ -25,7 +55,7 @@ main .section.columns-story-container a:any-link {
   transition: background-color var(--transition-duration) var(--transition-easing),
     border-color var(--transition-duration) var(--transition-easing),
     color var(--transition-duration) var(--transition-easing);
-width:100%
+  width: 100%;
 }
 
 main .section.columns-story-container a.button:hover,
@@ -35,32 +65,9 @@ main .section.columns-story-container a.button:focus {
   border-color: var(--brand-coral);
 }
 
-.columns-story > div {
-  display: flex;
-  flex-direction: column;
-}
-
-.columns-story img {
-  width: 100%;
-}
-
-.columns-story > div > div {
-  order: 0;
-}
-
-.columns-story > div > .columns-story-img-col {
-  order: 1;
-  padding-top: 40px;
-  padding-bottom: 40px;
-}
-
-.columns-story > div > .columns-story-img-col img {
-  display: block;
-}
-
 @media (width > 425px) {
   main .section.columns-story-container a:any-link {
-  width:auto;
+    width: auto;
   }
 
   main .section.columns-story-container h3 {
@@ -75,16 +82,6 @@ main .section.columns-story-container a.button:focus {
 }
 
 @media (width > 1024px) {
-  main > .section.columns-story-container {
-    padding-top: 60px;
-  }
-
-  main .section.columns-story-container h3 {
-    font-size: 48px;
-    line-height: 50px;
-    font-weight: 700;
-  }
-
   .columns-story > div {
     flex-direction: unset;
     gap: 60px;
@@ -95,12 +92,24 @@ main .section.columns-story-container a.button:focus {
     order: unset;
   }
 
-  .columns-story > div > .columns-story-img-col {
+  .columns-story > div > .columns-story-img-col,
+  .columns-story > div > div:has(.columns-story-video-col) {
     order: 1;
     padding-top: 60px;
     padding-bottom: 60px;
   }
+
+  main > .section.columns-story-container {
+    padding-top: 60px;
+  }
+
+  main .section.columns-story-container h3 {
+    font-size: 48px;
+    line-height: 50px;
+    font-weight: 700;
+  }
 }
+
 @media (width > 1200px) {
   main > .section.columns-story-container {
     padding-top: 80px;
