@@ -1,0 +1,98 @@
+{
+  "variantName": "tabs-legal",
+  "baseBlock": "tabs",
+  "version": "1.0.0",
+  "created": "2026-03-05T12:34:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.lumen.com/en-us/about/legal/acceptable-use-policy.html",
+    "originPage": "Acceptable Use Policy (representative legal page)",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "legal-sub-navigation",
+    "imagePattern": "none"
+  },
+  "contentPattern": {
+    "structure": "horizontal-link-list (3 navigation links)",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "legal and policy pages sub-navigation",
+      "trust center pages sub-navigation",
+      "horizontal tab-style navigation with few items"
+    ],
+    "notSuitableFor": [
+      "content tabs with panels",
+      "numbered step navigation",
+      "vertical navigation menus",
+      "navigation with more than 5 items"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "content/en-us/about/legal",
+      "content/en-us/about/legal/acceptable-use-policy",
+      "content/en-us/about/legal/api-developer-terms-and-conditions",
+      "content/en-us/about/legal/business-customer-terms-conditions",
+      "content/en-us/about/legal/business-customer-terms-conditions/file-integrity-monitoring-service-guide",
+      "content/en-us/about/legal/business-customer-terms-conditions/security-log-monitoring-sla",
+      "content/en-us/about/legal/business-customer-terms-conditions/security-log-monitoring-supplemental-terms",
+      "content/en-us/about/legal/california",
+      "content/en-us/about/legal/commission-for-complaints-for-telecom-television-services-ccts",
+      "content/en-us/about/legal/control-center-terms-and-conditions",
+      "content/en-us/about/legal/cookie-notice",
+      "content/en-us/about/legal/data-protection",
+      "content/en-us/about/legal/ddos-mitigation-schedule",
+      "content/en-us/about/legal/ddos-mitigation-service-guide",
+      "content/en-us/about/legal/digital-platform",
+      "content/en-us/about/legal/digital-platform/historical",
+      "content/en-us/about/legal/digital-platform/historical/feb202024",
+      "content/en-us/about/legal/digital-platform/historical/july172023",
+      "content/en-us/about/legal/digital-platform/historical/nov232020",
+      "content/en-us/about/legal/disconnect-terms-and-conditions",
+      "content/en-us/about/legal/general-control-center-terms-and-conditions",
+      "content/en-us/about/legal/hosting-supplemental-terms",
+      "content/en-us/about/legal/internet-on-demand",
+      "content/en-us/about/legal/iod-promotions",
+      "content/en-us/about/legal/legacy-company-documents",
+      "content/en-us/about/legal/lumen-defender-managed-rules-aws-firewall-service-guide",
+      "content/en-us/about/legal/lumen-defender-service-guide",
+      "content/en-us/about/legal/naas-ports-service-schedule",
+      "content/en-us/about/legal/network-on-demand",
+      "content/en-us/about/legal/peering-policy",
+      "content/en-us/about/legal/privacy-center",
+      "content/en-us/about/legal/privacy-data",
+      "content/en-us/about/legal/privacy-notice",
+      "content/en-us/about/legal/private-cloud-on-vcf-service-guide",
+      "content/en-us/about/legal/promos/ipvpn-on-demand-one-month-free",
+      "content/en-us/about/legal/promos/vod-first-month-free",
+      "content/en-us/about/legal/service-attachments",
+      "content/en-us/about/legal/service-attachments/historical",
+      "content/en-us/about/legal/service-attachments/historical/network-on-demand",
+      "content/en-us/about/legal/service-attachments/historical/network-on-demand/dec192023",
+      "content/en-us/about/legal/sms-terms",
+      "content/en-us/about/legal/state-privacy-rights",
+      "content/en-us/about/legal/terms-of-use-apac",
+      "content/en-us/about/legal/terms-of-use-india",
+      "content/en-us/about/legal/terms-of-use-philippines",
+      "content/en-us/about/legal/terms-of-use-singapore",
+      "content/en-us/about/legal/trials-promotions",
+      "content/en-us/about/legal/trust-center",
+      "content/en-us/about/legal/trust-center/processing-lumen-services",
+      "content/en-us/about/legal/trust-center/security-and-compliance",
+      "content/en-us/about/legal/trust-center/security-and-compliance/compliance-and-audit",
+      "content/en-us/about/legal/trust-center/transparency-reports",
+      "content/en-us/about/legal/trust-center/trust-and-safety",
+      "content/en-us/about/legal/trust-center/trust-and-safety-agency-faqs",
+      "content/en-us/about/legal/trust-center/trust-and-safety-customer-faqs",
+      "content/en-us/about/legal/trust-center/trust-and-safety-third-party-faqs",
+      "content/en-us/about/legal/validator-privacy-notice"
+    ],
+    "reuseCount": 57,
+    "lastUsed": "2026-03-05T12:48:00.000Z"
+  }
+}

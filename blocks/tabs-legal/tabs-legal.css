@@ -1,0 +1,67 @@
+.tabs-legal {
+  background-color: var(--color-gray-100, #f5f5f5);
+  padding: 0;
+  margin: 0;
+}
+
+.tabs-legal .tabs-legal-nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  gap: 0;
+}
+
+.tabs-legal .tabs-legal-nav li {
+  margin: 0;
+  padding: 0;
+  border-right: 1px solid var(--color-gray-300, #ccc);
+}
+
+.tabs-legal .tabs-legal-nav li:last-child {
+  border-right: none;
+}
+
+.tabs-legal .tabs-legal-nav a {
+  display: block;
+  padding: 16px 32px;
+  color: var(--color-gray-700, #333);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: var(--body-font-size-xs, 14px);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.tabs-legal .tabs-legal-nav a:hover {
+  color: var(--link-color, #0070c0);
+  background-color: var(--color-gray-200, #eee);
+}
+
+.tabs-legal .tabs-legal-nav li.active a {
+  color: var(--link-color, #0070c0);
+  border-bottom: 3px solid var(--link-color, #0070c0);
+}
+
+/* Mobile: stack vertically */
+@media (width < 600px) {
+  .tabs-legal .tabs-legal-nav ul {
+    flex-direction: column;
+  }
+
+  .tabs-legal .tabs-legal-nav li {
+    border-right: none;
+    border-bottom: 1px solid var(--color-gray-300, #ccc);
+  }
+
+  .tabs-legal .tabs-legal-nav li:last-child {
+    border-bottom: none;
+  }
+
+  .tabs-legal .tabs-legal-nav a {
+    padding: 12px 16px;
+    text-align: center;
+  }
+}
