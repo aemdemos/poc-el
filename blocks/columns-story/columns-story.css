@@ -123,12 +123,16 @@ main .section.columns-story-container a.button:focus {
   border-color: var(--brand-coral);
 }
 
+main .section.columns-story-container .columns-story h2 {
+  text-align: left;
+}
+
 @media (width > 425px) {
   main .section.columns-story-container a:any-link {
     width: auto;
   }
 
-  main .section.columns-story-container h3 {
+  main .section.columns-story-container .columns-story h2 {
     font-size: 38px;
   }
 
@@ -161,7 +165,7 @@ main .section.columns-story-container a.button:focus {
     padding-top: 60px;
   }
 
-  main .section.columns-story-container h3 {
+  main .section.columns-story-container .columns-story h2{
     font-size: 48px;
     line-height: 50px;
     font-weight: 700;
