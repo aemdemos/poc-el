@@ -280,6 +280,9 @@ main .section.highlight {
 
 main .section.legal {
   background-color: none;
+}
+
+main .section.legal > div {
   padding-left: 8.3333333333%;
   padding-right: 8.3333333333%;
 }
