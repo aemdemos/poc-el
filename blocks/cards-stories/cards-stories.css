@@ -1,5 +1,10 @@
 /* Cards Stories – carousel on mobile, 3-up row on desktop */
 
+main > .section.cards-stories-container {
+  padding-left:0;
+  padding-right:0;
+} 
+
 main > .section.cards-stories-container > div {
   padding-right: 10px;
   padding-left: 0;
@@ -123,7 +128,7 @@ main .cards-stories .cards-stories-card-body a:any-link:hover {
     padding-right:8.33333%;
   }
   .cards-stories > ul > li {
-    max-width: 43%;
+    max-width: 60%;
   }
 
   main .section.cards-stories-container h2 {
@@ -149,5 +154,11 @@ main .cards-stories .cards-stories-card-body a:any-link:hover {
   main .section.cards-stories-container h2 {
     font-size: 36px;
     line-height: 50px;
+  }
+}
+
+@media (width >= 1200px) {
+  .cards-stories > ul > li {
+    max-width: 70%;
   }
 }

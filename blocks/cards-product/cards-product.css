@@ -111,6 +111,11 @@ main .cards-product .cards-product-card-body a:any-link:hover {
   border-radius: 8px 8px 0 0;
 }
 
+main .section.cards-product-container h2 {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
 @media (width > 425px) {
   main .section.cards-product-container h2 {
     font-size: 30px;
