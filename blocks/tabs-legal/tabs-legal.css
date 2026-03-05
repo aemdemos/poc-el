@@ -20,11 +20,10 @@
 .tabs-legal .tabs-legal-nav li {
   margin: 0;
   padding: 0;
-  border-top: 1px solid #fff;
 }
 
 .tabs-legal .tabs-legal-nav li:first-child {
-  border-top: none;
+color: black;
 }
 
 .tabs-legal .tabs-legal-nav a,
@@ -32,7 +31,6 @@
   display: flex;
   place-content: center center;
   flex-wrap: wrap;
-  min-height: 60px;
   padding: 20px;
   color: #333;
   background: none;
@@ -47,18 +45,24 @@
   line-height: 18px;
   cursor: pointer;
   transition: color 0.2s;
+  border-top: 1px solid white;
+  font-family: Gotham, Arial, Helvetica;
+  height:20px;
 }
+
+.tabs-legal .tabs-legal-nav > ul >li >a {
+  border-top: 1px solid white;
+}
+
 
 .tabs-legal .tabs-legal-nav a:hover,
 .tabs-legal .tabs-legal-nav a.button:hover {
-  color: #083176;
   background: none;
 }
 
 .tabs-legal .tabs-legal-nav li.active a {
-  background-color: #fff;
-  color: #0075c9;
-  font-weight: 700;
+  background-color: #d0d4d9;
+  border-top: 1px solid white;
 }
 
 /* Tablet: horizontal flex row, no dividers */
