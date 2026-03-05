@@ -280,6 +280,29 @@ main .section.highlight {
 
 main .section.legal {
   background-color: none;
+  padding-left: 8.3333333333%;
+  padding-right: 8.3333333333%;
+}
+
+main .section.legal h1 {
+  font-size: 24px;
+  margin-top:-20px;
+  line-height: 30px;
+}
+
+main .section.legal p {
+  font-size: 16px;
+  line-height: 24px;
+  font-family: Gotham, Arial, Helvetica;
+}
+
+main .section.legal  ul {
+  padding-left: 20px;
+}
+
+main .section.legal ul li {
+  font-family: Gotham, Arial, Helvetica;
+  font-size: 16px;
 }
 
 main .section.dark {
@@ -376,6 +399,27 @@ main .section.yellow p {
   outline-offset: 2px;
 }
 
+@media (width > 425px) {
+  main .section.legal h1 {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 40px;
+    text-align: center;
+  }
+
+  main .section.legal p {
+    font-size: 18px;
+    line-height: 26px;
+  margin-top: 20px;
+  }
+
+  main .section.legal ul li {
+    font-family: Gotham, Arial, Helvetica;
+    font-size: 18px;
+      line-height: 26px;
+}
+}
+
 /* tablet breakpoint */
 @media (width >= 768px) {
   :root {
@@ -396,6 +440,14 @@ main .section.yellow p {
 
   main > .section > div {
     padding: 0 32px;
+  }
+}
+
+@media (width > 1024px) {
+  main .section.legal h1 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 50px;
   }
 }
 
