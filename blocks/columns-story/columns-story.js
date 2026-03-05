@@ -41,8 +41,9 @@ export default function decorate(block) {
 
         // Click handler: replace poster with iframe
         posterContainer.addEventListener('click', () => {
+          const separator = videoSrc.includes('?') ? '&' : '?';
           posterContainer.innerHTML = `<div class="columns-story-video-iframe">
-            <iframe src="${videoSrc}?autoplay=1" allowfullscreen=""
+            <iframe src="${videoSrc}${separator}autoplay=1" allowfullscreen=""
               allow="autoplay; encrypted-media" title="Video"></iframe>
           </div>`;
         });
