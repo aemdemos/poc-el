@@ -278,6 +278,10 @@ main .section.highlight {
   padding: var(--section-spacing) 0;
 }
 
+main .section.legal {
+  background-color: none;
+}
+
 main .section.dark {
   background-color: var(--brand-primary);
   color: var(--background-color);
