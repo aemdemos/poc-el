@@ -15,12 +15,21 @@
 .hero-customer-story h3,
 .hero-customer-story h4,
 .hero-customer-story h5,
-.hero-customer-story h6,
-.hero-customer-story p {
+.hero-customer-story h6 {
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  margin-right: 0;
   color: var(--background-color);
+}
+
+.hero-customer-story p {
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  color: var(--background-color);
+  overflow-wrap: break-word;
+  font-size: 20px;
+  line-height: 28px;
 }
 
 .hero-customer-story.no-image * {
@@ -45,15 +54,31 @@
 .hero-customer-story .hero-logo {
   display: none;
 }
-@media (width >= 768px) {
-  .hero-customer-story .hero-logo {
-  zoom:130%;
-  padding: 40px 8.3334%;
+
+@media (width > 425px) {
+  .hero-customer-story p {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+
+  }
+
+  .hero-customer-story h1 {
+    font-size: 38px;
+    line-height: 40px;
+  }
 }
+
+@media (width > 1024) {
+  .hero-customer-story h1 {
+    font-size: 48px;
+    line-height: 50px;
+  }
 }
 
 /* Below 1200px: use logo image instead of hero background */
 @media (width < 1200px) {
+
   .hero-customer-story {
     display: flex;
     flex-direction: column;
@@ -100,10 +125,18 @@
     max-height: 80px;
     object-fit: contain;
   }
+
+  .hero-customer-story {
+    min-height: unset;
+  }
 }
 
 @media (width >= 1200px) {
   .hero-customer-story {
-    min-height: unset;
+    min-height: 147px;
+  }
+
+  .hero-customer-story p {
+    max-width: 65%;
   }
 }

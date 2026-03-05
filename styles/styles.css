@@ -74,34 +74,6 @@
 }
 
 
-main .section.orange h1 {
-  font-size: 24px;
-}
-
-main .section.orange p {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-main .section.blue h1 {
-  font-size: 24px;
-}
-
-main .section.blue p {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-main .section.yellow h1 {
-  font-size: 24px;
-}
-
-main .section.yellow p {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-
 body {
   display: none;
   margin: 0;
@@ -342,14 +314,6 @@ main .section.orange h6 {
   color: var(--background-color);
 }
 
-main .section.orange h1 {
-  font-size: 24px;
-}
-
-main .section.orange p {
-  font-size: 20px;
-  font-weight: 700;
-}
 
 main .section.blue {
   color: var(--background-color);
@@ -368,13 +332,10 @@ main .section.blue h6 {
 }
 
 main .section.blue h1 {
-  font-size: 24px;
   color:black;
 }
 
 main .section.blue p {
-  font-size: 20px;
-  font-weight: 700;
   color:black;
 }
 
@@ -421,33 +382,6 @@ main .section.yellow p {
     --heading-font-size-s: 18px;
     --heading-font-size-xs: 16px;
   }
-
-  main .section.orange h1 {
-    font-size: 38px;
-  }
-  
-  main .section.orange p {
-    font-size: 20px;
-    font-weight: 700;
-  }
-
-  main .section.blue h1 {
-    font-size: 38px;
-  }
-
-  main .section.blue p {
-    font-size: 20px;
-    font-weight: 700;
-  }
-
-  main .section.yellow h1 {
-    font-size: 38px;
-  }
-
-  main .section.yellow p {
-    font-size: 20px;
-    font-weight: 700;
-  }
 }
 
 
@@ -481,46 +415,16 @@ main .section.yellow p {
     background: none;
   }
 
-  main .section.orange h1 {
-    font-size: 48px;
-  }
   
-  main .section.orange p {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 28px;
-    word-break: break-word;
-  }
-
   main .section.blue {
     background: none;
   }
 
-  main .section.blue h1 {
-    font-size: 48px;
-  }
-
-  main .section.blue p {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 28px;
-    word-break: break-word;
-  }
 
   main .section.yellow {
     background: none;
   }
 
-  main .section.yellow h1 {
-    font-size: 48px;
-  }
-
-  main .section.yellow p {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 28px;
-    word-break: break-word;
-  }
 }
 
 
