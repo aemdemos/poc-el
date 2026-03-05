@@ -1,0 +1,153 @@
+/* Cards Product – carousel on mobile, 3-up row on desktop */
+
+.cards-product-container .cards-product-wrapper {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+main .section.cards-product-container {
+  margin: 0;
+}
+
+main .section.cards-product-container h2 {
+  font-size: 24px;
+  line-height: 28px;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+/* Mobile: horizontal scroll carousel */
+.cards-product > ul {
+  list-style: none;
+  margin: 0;
+  padding-inline-start: 20px;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.cards-product > ul::-webkit-scrollbar {
+  display: none;
+}
+
+.cards-product > ul > li {
+  border: 1px solid #d0d4d9;
+  border-radius: 8px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+  max-width: 85%;
+  flex-shrink: 0;
+}
+
+.cards-product .cards-product-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cards-product .cards-product-card-body p {
+  font-size: 16px;
+  line-height: 24px;
+  color: #333;
+  margin: 0;
+}
+
+.cards-product .cards-product-card-body p:first-child {
+  margin-top: 0;
+}
+
+.cards-product .cards-product-card-body strong {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+  color: #000;
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* Push button container to bottom of card */
+.cards-product .cards-product-card-body .button-container {
+  margin-top: auto;
+  padding-top: 16px;
+  text-align: center;
+}
+
+/* CTA "Learn more" button – override EDS defaults and section-level overrides */
+main .cards-product .cards-product-card-body a:any-link {
+  display: inline-block;
+  color: #fff;
+  background-color: #f95e4a;
+  border: 3px solid #f95e4a;
+  border-radius: 0 21px 21px;
+  padding: 8px 17px;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+main .cards-product .cards-product-card-body a:any-link:hover {
+  background-color: #e04d3a;
+  border-color: #e04d3a;
+  color: #fff;
+}
+
+/* Image cards (if any have images) */
+.cards-product .cards-product-card-image {
+  line-height: 0;
+}
+
+.cards-product > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+main .section.cards-product-container h2 {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+@media (width > 425px) {
+  main .section.cards-product-container h2 {
+    font-size: 30px;
+  }
+}
+
+@media (width >= 768px) {
+  .cards-product > ul {
+    gap: 40px;
+    padding-inline-start: 8.33333%;
+    padding-right:8.33333%;
+  }
+  .cards-product > ul > li {
+    max-width: 43%;
+  }
+
+  main .section.cards-product-container h2 {
+    font-size: 36px;
+  }
+}
+
+
+/* Desktop: 3-up equal columns, no carousel */
+@media (width >= 900px) {
+  .cards-product > ul {
+    overflow-x: visible;
+    gap: 40px;
+  }
+
+  .cards-product > ul > li {
+    flex: 1 1 0;
+    min-width: 0;
+    scroll-snap-align: unset;
+  }
+}

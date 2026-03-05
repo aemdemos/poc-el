@@ -1,0 +1,164 @@
+/* Cards Stories – carousel on mobile, 3-up row on desktop */
+
+main > .section.cards-stories-container {
+  padding-left:0;
+  padding-right:0;
+} 
+
+main > .section.cards-stories-container > div {
+  padding-right: 10px;
+  padding-left: 0;
+}
+
+main .section.cards-stories-container h2 {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+
+/* Mobile: horizontal scroll carousel */
+.cards-stories > ul {
+  list-style: none;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-top:30px;
+  padding-inline-start:20px;
+}
+
+.cards-stories > ul::-webkit-scrollbar {
+  display: none;
+}
+
+.cards-stories > ul > li {
+  border: 1px solid #d0d4d9;
+  border-radius: 8px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+  max-width: 85%;
+  flex-shrink: 0;
+}
+
+.cards-stories .cards-stories-card-image {
+  line-height: 0;
+  text-align: center;
+  padding: 20px 20px 0;
+  padding-top:0;
+}
+
+.cards-stories > ul > li img {
+  max-width: 100%;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  padding-bottom:20px;
+}
+
+.cards-stories .cards-stories-card-body {
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cards-stories .cards-stories-card-body p {
+  font-size: 16px;
+  line-height: 24px;
+  color: #333;
+  margin: 0;
+}
+
+.cards-stories .cards-stories-card-body strong {
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #000;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* "Read story" link – teal text with arrow, not a button */
+.cards-stories .cards-stories-card-body .button-container {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+main .cards-stories .cards-stories-card-body a:any-link {
+  display: inline-block;
+  color: #007981;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+main .cards-stories .cards-stories-card-body a:any-link::after {
+  content: " \2192";
+  color:#ff6d00;
+}
+
+main .cards-stories .cards-stories-card-body a:any-link:hover {
+  color: #005a60;
+  background: none;
+  border: none;
+}
+
+@media (width > 425px) {
+  main .section.cards-stories-container h2 {
+    font-size: 30px;
+    text-align: center;
+  }
+}
+
+@media (width >= 768px) {
+  .cards-stories > ul {
+    gap: 40px;
+    padding-inline-start: 8.33333%;
+    padding-right:8.33333%;
+  }
+  .cards-stories > ul > li {
+    max-width: 60%;
+  }
+
+  main .section.cards-stories-container h2 {
+    font-size: 36px;
+  }
+}
+
+/* Desktop: 3-up equal columns, no carousel */
+@media (width >= 900px) {
+  .cards-stories > ul {
+    overflow-x: visible;
+    gap: 40px;
+  }
+
+  .cards-stories > ul > li {
+    flex: 1 1 0;
+    min-width: 0;
+    scroll-snap-align: unset;
+  }
+}
+
+@media (width >= 1024px) {
+  main .section.cards-stories-container h2 {
+    font-size: 36px;
+    line-height: 50px;
+  }
+}
+
+@media (width >= 1200px) {
+  .cards-stories > ul > li {
+    max-width: 70%;
+  }
+}

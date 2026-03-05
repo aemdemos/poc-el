@@ -1,0 +1,53 @@
+.columns-quote > div {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  padding-top: 40px;
+}
+
+.columns-quote img {
+  width: 50%;
+}
+
+.columns-quote > div > div {
+  order: 0;
+}
+
+.columns-quote > div > .columns-quote-img-col {
+  order: 1;
+  padding-top:20px;
+}
+
+.columns-quote > div > .columns-quote-img-col img {
+  display: block;
+}
+
+/* 2nd image (portrait in 2nd column): full width */
+.columns-quote > div > div:nth-child(2) img {
+  width: 100%;
+}
+
+.columns-quote > div > div > p {
+font-size: 16px;
+line-height: 24px;
+margin-top:10px;
+margin-bottom:20px;
+}
+
+
+@media (width >= 1024px) {
+  .columns-quote > div {
+    align-items: center;
+    flex-direction: unset;
+    gap: 24px;
+  }
+
+  .columns-quote > div > div {
+    flex: 1;
+    order: unset;
+  }
+
+  .columns-quote img {
+    width: 45%;
+  }
+}

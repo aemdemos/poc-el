@@ -1,0 +1,40 @@
+{
+  "variantName": "columns-challenges",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-02-23T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.lumen.com/en-us/resources/customer-stories/accolade.html",
+    "originPage": "customer story page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "challenges-solutions-results",
+    "imagePattern": "noimg",
+    "structure": "3 columns with heading + bullet list each"
+  },
+  "contentPattern": {
+    "structure": "3-column: heading + bullet list | heading + bullet list | heading + bullet list",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "customer story challenges/solutions/results sections",
+      "3-column text-only comparisons",
+      "feature comparison layouts with bullet lists"
+    ],
+    "notSuitableFor": [
+      "image-heavy layouts",
+      "2-column text+image layouts",
+      "layouts requiring CTAs or buttons"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/en-us/resources/customer-stories/accolade"],
+    "reuseCount": 1,
+    "lastUsed": "2026-02-23T00:00:00.000Z"
+  }
+}
