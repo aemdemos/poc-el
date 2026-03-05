@@ -8,6 +8,7 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     const link = row.querySelector('a');
     if (link) {
+      link.classList.remove('button');
       const li = document.createElement('li');
       li.append(link);
 
