@@ -3,7 +3,6 @@ header .nav-wrapper {
   background-color: #fff;
   width: 100%;
   z-index: 2;
-  position: fixed;
   border-bottom: 1px solid #e0e0e0;
   transition: transform 0.3s ease;
 }
@@ -249,7 +248,7 @@ header nav .nav-brand img {
   header .nav-brand {
     grid-area: brand;
     text-align: left;
-    padding: 20px 0;
+    padding: 40px 0;
     margin-left: 36%;
   }
 }
