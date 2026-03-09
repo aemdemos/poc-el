@@ -279,32 +279,7 @@ main .section.highlight {
 }
 
 main .section.legal {
-  background-color: none;
-}
-
-main .section.legal > div {
-  padding-left: 8.3333333333%;
-  padding-right: 8.3333333333%;
-}
-
-main .section.legal h1 {
-  font-size: 24px;
-  line-height: 30px;
-}
-
-main .section.legal p {
-  font-size: 16px;
-  line-height: 24px;
-  font-family: Gotham, Arial, Helvetica;
-}
-
-main .section.legal  ul {
-  padding-left: 20px;
-}
-
-main .section.legal ul li {
-  font-family: Gotham, Arial, Helvetica;
-  font-size: 16px;
+  background-color: transparent;
 }
 
 main .section.dark {
@@ -401,27 +376,6 @@ main .section.yellow p {
   outline-offset: 2px;
 }
 
-@media (width > 425px) {
-  main .section.legal h1 {
-    font-size: 38px;
-    font-weight: 700;
-    line-height: 40px;
-    text-align: center;
-  }
-
-  main .section.legal p {
-    font-size: 18px;
-    line-height: 26px;
-  margin-top: 20px;
-  }
-
-  main .section.legal ul li {
-    font-family: Gotham, Arial, Helvetica;
-    font-size: 18px;
-      line-height: 26px;
-}
-}
-
 /* tablet breakpoint */
 @media (width >= 768px) {
   :root {
@@ -445,14 +399,6 @@ main .section.yellow p {
   }
 }
 
-@media (width > 1024px) {
-  main .section.legal h1 {
-    font-size: 48px;
-    font-weight: 700;
-    line-height: 50px;
-  }
-}
-
 
 @media (width >= 1200px) {
   :root {
@@ -473,7 +419,7 @@ main .section.yellow p {
     background: none;
   }
 
-  
+
   main .section.blue {
     background: none;
   }
@@ -485,4 +431,79 @@ main .section.yellow p {
 
 }
 
+/* Accordion-item section style: collapsible sections using details/summary */
+.section.accordion-item {
+  padding: 0;
+}
 
+.section.accordion-item .accordion-section-item {
+  border: 1px solid #dadada;
+  margin-bottom: -1px;
+}
+
+.section.accordion-item .accordion-section-label {
+  position: relative;
+  padding: 16px;
+  padding-right: 46px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.section.accordion-item .accordion-section-label::-webkit-details-marker {
+  display: none;
+}
+
+.section.accordion-item .accordion-section-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%) rotate(135deg);
+  width: 8px;
+  height: 8px;
+  border: 2px solid;
+  border-width: 2px 2px 0 0;
+  transition: transform 0.2s;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.section.accordion-item .accordion-section-label:focus,
+.section.accordion-item .accordion-section-label:hover {
+  background-color: var(--light-color);
+}
+
+.section.accordion-item .accordion-section-item[open] .accordion-section-label {
+  background-color: var(--light-color);
+}
+
+.section.accordion-item .accordion-section-item[open] .accordion-section-label::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.section.accordion-item .accordion-section-body {
+  padding: 0 16px 16px;
+  border-top: 1px solid #dadada;
+  background-color: var(--background-color);
+}
+
+.section.accordion-item .accordion-section-body p {
+  margin-bottom: 0.8em;
+}
+
+.section.accordion-item .accordion-section-body .table-wrapper {
+  overflow-x: auto;
+}
+
+.section.accordion-item .accordion-section-body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.section.accordion-item .accordion-section-body table td {
+  padding: 8px 12px;
+  border: 1px solid #dadada;
+  vertical-align: top;
+}
