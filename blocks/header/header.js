@@ -242,7 +242,7 @@ export default async function decorate(block) {
         },
         {
           label: 'By Industry',
-          match: (h) => h.includes('/industries/'),
+          match: (h) => h.includes('/industries/') || h.includes('/public-sector'),
           expected: [
             { text: 'Energy', href: '/en-us/industries/energy-utilities' },
             { text: 'Financial Services', href: '/en-us/industries/financial-services' },
@@ -251,6 +251,16 @@ export default async function decorate(block) {
             { text: 'Manufacturing', href: '/en-us/industries/manufacturing' },
             { text: 'Media & Entertainment', href: '/en-us/industries/media-entertainment' },
             { text: 'Pharmaceuticals', href: '/en-us/industries/pharmaceuticals' },
+            {
+              text: 'Public Sector',
+              children: [
+                { text: 'Federal', href: '/en-us/public-sector/federal-government' },
+                { text: 'Defense & IC', href: '/en-us/public-sector/defense-ic' },
+                { text: 'State & Local', href: '/en-us/public-sector/state-local/state-local-government' },
+                { text: 'Public Safety', href: '/en-us/public-sector/state-local/public-safety' },
+                { text: 'Higher Education', href: '/en-us/public-sector/education/higher-education' },
+              ],
+            },
             { text: 'Retail', href: '/en-us/industries/retail' },
             { text: 'Technology', href: '/en-us/industries/technology' },
           ],
@@ -293,7 +303,6 @@ export default async function decorate(block) {
             { text: 'Ethernet', href: '/en-us/services/ethernet', desc: 'Scalable, high-performance Ethernet services for site-to-site connectivity.' },
             { text: 'IP VPN', href: '/en-us/services/ip-vpn', desc: 'Secure, private network connectivity across your enterprise locations.' },
             { text: 'Multi-Cloud Gateway', href: '/en-us/services/multi-cloud-gateway', desc: 'Seamless, secure connections to multiple cloud providers.' },
-            { text: 'SD-WAN', href: '/en-us/services/sd-wan', desc: 'Intelligent, software-defined WAN for optimized application performance.' },
           ],
         },
         {
@@ -301,6 +310,7 @@ export default async function decorate(block) {
           match: (h) => ['ddos', 'sase'].some((s) => h.includes(s)),
           expected: [
             { text: 'DDoS', href: '/en-us/services/ddos', desc: 'Proactive DDoS mitigation powered by Black Lotus Labs threat intelligence.' },
+            { text: 'SD-WAN', href: '/en-us/services/sd-wan', desc: 'Intelligent, software-defined WAN for optimized application performance.' },
             { text: 'SASE', href: '/en-us/services/sase', desc: 'Converged networking and security for secure access from anywhere.' },
           ],
         },
@@ -395,12 +405,12 @@ export default async function decorate(block) {
         });
         // Build complete item list from expected, using DOM nodes when available
         const completeItems = (cat.expected || []).map((exp) => {
+          if (exp.children) return { expandable: true, text: exp.text, children: exp.children };
           const found = matched.find((li) => {
             const a = li.querySelector('a');
             return a && a.getAttribute('href') === exp.href;
           });
           if (found) return found.cloneNode(true);
-          // Create fallback li for items dropped by the pipeline
           const li = document.createElement('li');
           const a = document.createElement('a');
           a.href = exp.href;
@@ -441,18 +451,74 @@ export default async function decorate(block) {
         group.className = `mega-menu-group${i === 0 ? ' active' : ''}`;
         group.dataset.index = i;
 
-        // Category title heading with underline
         const heading = document.createElement('div');
         heading.className = 'mega-menu-heading';
         heading.textContent = grp.label;
         group.append(heading);
 
-        // Items with title + description
+        const hasExpandable = grp.items.some((it) => it.expandable);
+        const columnsWrapper = hasExpandable ? document.createElement('div') : null;
+        if (columnsWrapper) columnsWrapper.className = 'mega-menu-columns';
+
         const itemsContainer = document.createElement('div');
         itemsContainer.className = 'mega-menu-items';
         const expectedItems = catConfig[i].expected || [];
-        grp.items.forEach((li, j) => {
-          const a = li.querySelector('a');
+
+        let subpanel = null;
+        grp.items.forEach((item, j) => {
+          if (item.expandable) {
+            const expandableEl = document.createElement('div');
+            expandableEl.className = 'mega-menu-item-expandable';
+            expandableEl.tabIndex = 0;
+            expandableEl.setAttribute('role', 'button');
+            expandableEl.setAttribute('aria-expanded', 'false');
+            const title = document.createElement('span');
+            title.className = 'mega-menu-item-title';
+            title.textContent = item.text;
+            const chevron = document.createElement('span');
+            chevron.className = 'mega-menu-item-chevron';
+            chevron.setAttribute('aria-hidden', 'true');
+            expandableEl.append(title, chevron);
+            expandableEl.dataset.subpanel = `subpanel-${i}-${j}`;
+
+            if (!subpanel) {
+              subpanel = document.createElement('div');
+              subpanel.className = 'mega-menu-subpanel';
+            }
+            subpanel.innerHTML = '';
+            const subItems = document.createElement('div');
+            subItems.className = 'mega-menu-items';
+            item.children.forEach((child) => {
+              const childLink = document.createElement('a');
+              childLink.href = child.href;
+              childLink.className = 'mega-menu-item';
+              const childTitle = document.createElement('span');
+              childTitle.className = 'mega-menu-item-title';
+              childTitle.textContent = child.text;
+              childLink.append(childTitle);
+              subItems.append(childLink);
+            });
+            subpanel.append(subItems);
+            subpanel.id = expandableEl.dataset.subpanel;
+
+            const showSubpanel = () => {
+              itemsContainer.querySelectorAll('.mega-menu-item-expandable').forEach((e) => {
+                e.classList.remove('active');
+                e.setAttribute('aria-expanded', 'false');
+              });
+              if (subpanel) subpanel.classList.remove('active');
+              expandableEl.classList.add('active');
+              expandableEl.setAttribute('aria-expanded', 'true');
+              if (subpanel) subpanel.classList.add('active');
+            };
+            expandableEl.addEventListener('mouseenter', showSubpanel);
+            expandableEl.addEventListener('focus', showSubpanel);
+            subpanel?.addEventListener('mouseenter', showSubpanel);
+            itemsContainer.append(expandableEl);
+            return;
+          }
+
+          const a = item.querySelector('a');
           if (!a) return;
           const itemEl = document.createElement('a');
           itemEl.href = a.getAttribute('href') || a.href;
@@ -461,7 +527,6 @@ export default async function decorate(block) {
           title.className = 'mega-menu-item-title';
           title.textContent = a.textContent;
           itemEl.append(title);
-          // Add description if available
           const expItem = expectedItems[j];
           if (expItem && expItem.desc) {
             const desc = document.createElement('span');
@@ -471,7 +536,20 @@ export default async function decorate(block) {
           }
           itemsContainer.append(itemEl);
         });
-        group.append(itemsContainer);
+
+        if (hasExpandable && columnsWrapper && subpanel) {
+          columnsWrapper.append(itemsContainer, subpanel);
+          columnsWrapper.addEventListener('mouseleave', () => {
+            itemsContainer.querySelectorAll('.mega-menu-item-expandable').forEach((e) => {
+              e.classList.remove('active');
+              e.setAttribute('aria-expanded', 'false');
+            });
+            if (subpanel) subpanel.classList.remove('active');
+          });
+          group.append(columnsWrapper);
+        } else {
+          group.append(itemsContainer);
+        }
         contentPanel.append(group);
       });
 

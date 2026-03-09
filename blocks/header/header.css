@@ -586,8 +586,8 @@ header nav .nav-drop-icon {
     border-radius: 0 0 4px 4px;
     z-index: 100;
     padding: 0;
-    max-height: 80vh;
-    overflow-y: auto;
+    max-height: 95vh;
+    overflow: visible;
   }
 
   /* Categories panel (left) */
@@ -647,6 +647,12 @@ header nav .nav-drop-icon {
     white-space: normal;
   }
 
+  /* Wider content when By Industry (with sub-panel) is active */
+  header nav .mega-menu-content:has(.mega-menu-columns) {
+    flex: 0 0 540px;
+    min-width: 540px;
+  }
+
   header nav .mega-menu-group {
     display: none;
   }
@@ -699,6 +705,59 @@ header nav .nav-drop-icon {
     font-weight: 400;
     color: #6b7071;
     line-height: 1.5;
+  }
+
+  /* Two-column layout for categories with expandable items (e.g. By Industry) */
+  header nav .mega-menu-columns {
+    display: flex;
+    gap: 0;
+    min-width: 0;
+  }
+
+  header nav .mega-menu-columns .mega-menu-items:first-child {
+    flex: 0 0 200px;
+  }
+
+  header nav .mega-menu-subpanel {
+    display: none;
+    flex: 0 0 300px;
+    min-width: 300px;
+    padding: 0 0 0 24px;
+    margin: 0;
+    border-left: 1px solid #d0d4d9;
+    overflow: visible;
+  }
+
+  header nav .mega-menu-subpanel.active {
+    display: block;
+  }
+
+  /* Expandable item (no link, has chevron) */
+  header nav .mega-menu-item-expandable {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f3133;
+  }
+
+  header nav .mega-menu-item-expandable:hover,
+  header nav .mega-menu-item-expandable.active {
+    color: #00827f;
+  }
+
+  header nav .mega-menu-item-chevron {
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+
+  header nav .mega-menu-item-chevron::after {
+    content: '\203A';
+    font-size: 22px;
+    font-weight: 400;
   }
 
 }
