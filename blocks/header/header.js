@@ -265,7 +265,7 @@ export default async function decorate(block) {
     });
 
     // Build mobile drill-down panels for mega nav items
-    function buildMobileDrillDown(navDrop, catGroups, parentLabel) {
+    function buildMobileDrillDown(navDrop, catGroups, parentLabel, standalone = []) {
       const drilldown = document.createElement('div');
       drilldown.className = 'mobile-drilldown';
 
@@ -281,6 +281,15 @@ export default async function decorate(block) {
         catChevron.textContent = '\u203A';
         catItem.append(catLabel, catChevron);
         drilldown.append(catItem);
+
+        // Interleave standalone direct link after each category (if available)
+        if (standalone[idx]) {
+          const directLink = document.createElement('a');
+          directLink.className = 'mobile-direct-link';
+          directLink.href = standalone[idx].href;
+          directLink.textContent = standalone[idx].text;
+          drilldown.append(directLink);
+        }
 
         // Slide panel for this category
         const panel = document.createElement('div');
@@ -390,7 +399,9 @@ export default async function decorate(block) {
       }
 
       // Parse flat list into category groups using bold markers
+      // Links before the first bold marker are "standalone" items (shown as direct links on mobile)
       const catGroups = [];
+      const standaloneItems = [];
       let currentGroup = null;
       let expandableCtx = null;
 
@@ -416,10 +427,12 @@ export default async function decorate(block) {
           return;
         }
 
-        // Link item — belongs to expandable context or current category
-        if (link && currentGroup) {
+        // Link item — standalone (before first bold) or belongs to category
+        if (link) {
           const item = { href: link.getAttribute('href') || link.href, text: link.textContent };
-          if (expandableCtx) {
+          if (!currentGroup) {
+            standaloneItems.push(item);
+          } else if (expandableCtx) {
             expandableCtx.children.push(item);
           } else {
             currentGroup.items.push(item);
@@ -567,7 +580,7 @@ export default async function decorate(block) {
 
       // Build mobile drill-down for this nav item
       const parentLabel = navDrop.querySelector(':scope > p')?.textContent?.trim() || '';
-      buildMobileDrillDown(navDrop, catGroups, parentLabel);
+      buildMobileDrillDown(navDrop, catGroups, parentLabel, standaloneItems);
     });
 
     // Close mega-menus when clicking outside on desktop
