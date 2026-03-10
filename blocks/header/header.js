@@ -5,6 +5,12 @@ import { loadFragment } from '../fragment/fragment.js';
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 1200px)');
 
+function closeMobileDrillDown(nav) {
+  nav.querySelectorAll('.mobile-slide-panel.active').forEach((panel) => {
+    panel.classList.remove('active');
+  });
+}
+
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
@@ -15,6 +21,7 @@ function closeOnEscape(e) {
       toggleAllNavSections(navSections);
       navSectionExpanded.focus();
     } else if (!isDesktop.matches) {
+      closeMobileDrillDown(nav);
       // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections);
       nav.querySelector('button').focus();
@@ -75,6 +82,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, 'false');
+  closeMobileDrillDown(nav);
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
@@ -222,12 +230,19 @@ export default async function decorate(block) {
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
+      navSection.addEventListener('click', (e) => {
+        if (e.target.closest('.mobile-drilldown')) return;
         const expanded = navSection.getAttribute('aria-expanded') === 'true';
         if (isDesktop.matches) {
           toggleAllNavSections(navSections);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        } else {
+          if (e.target.closest('a') && !navSection.classList.contains('nav-drop')) return;
+          e.preventDefault();
+          toggleAllNavSections(navSections);
+          closeMobileDrillDown(nav);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
-        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       });
       // Desktop: open on hover
       navSection.addEventListener('mouseenter', () => {
@@ -272,7 +287,9 @@ export default async function decorate(block) {
       }
 
       // Parse flat list into category groups using bold markers
+      // Links before the first bold marker are standalone direct links
       const catGroups = [];
+      const standaloneItems = [];
       let currentGroup = null;
       let expandableCtx = null;
 
@@ -298,10 +315,12 @@ export default async function decorate(block) {
           return;
         }
 
-        // Link item — belongs to expandable context or current category
-        if (link && currentGroup) {
+        // Link item — standalone if before first category, else belongs to current group
+        if (link) {
           const item = { href: link.getAttribute('href') || link.href, text: link.textContent };
-          if (expandableCtx) {
+          if (!currentGroup) {
+            standaloneItems.push(item);
+          } else if (expandableCtx) {
             expandableCtx.children.push(item);
           } else {
             currentGroup.items.push(item);
@@ -435,6 +454,89 @@ export default async function decorate(block) {
 
       // Prevent clicks inside mega-menu from closing dropdown
       megaMenu.addEventListener('click', (e) => e.stopPropagation());
+
+      // Build mobile drill-down for this mega nav item
+      const parentLabel = (navDrop.querySelector(':scope > a') || navDrop.querySelector(':scope > p'))?.textContent.trim() || '';
+      const drillDown = document.createElement('div');
+      drillDown.className = 'mobile-drilldown';
+
+      // Interleave standalone direct links and drillable categories
+      // Standalone links go first, then categories
+      standaloneItems.forEach((item) => {
+        const row = document.createElement('div');
+        row.className = 'mobile-direct-link';
+        const a = document.createElement('a');
+        a.href = item.href;
+        a.textContent = item.text;
+        row.append(a);
+        drillDown.append(row);
+      });
+
+      catGroups.forEach((cat, ci) => {
+        const catRow = document.createElement('div');
+        catRow.className = 'mobile-cat-item';
+        const catText = document.createElement('span');
+        catText.textContent = cat.label;
+        const catChevron = document.createElement('span');
+        catChevron.className = 'mobile-cat-chevron';
+        catRow.append(catText, catChevron);
+        drillDown.append(catRow);
+
+        // Slide panel for this category
+        const panel = document.createElement('div');
+        panel.className = 'mobile-slide-panel';
+
+        const backBtn = document.createElement('button');
+        backBtn.className = 'mobile-back-btn';
+        backBtn.textContent = `Back to ${parentLabel}`;
+        backBtn.addEventListener('click', () => panel.classList.remove('active'));
+
+        const heading = document.createElement('div');
+        heading.className = 'mobile-panel-heading';
+        heading.textContent = cat.label;
+
+        const links = document.createElement('div');
+        links.className = 'mobile-panel-links';
+
+        cat.items.forEach((item) => {
+          const a = document.createElement('a');
+          a.href = item.href;
+          a.textContent = item.text;
+          links.append(a);
+        });
+
+        // Expandable sub-accordions within the panel
+        cat.expandables.forEach((exp) => {
+          const expHeader = document.createElement('div');
+          expHeader.className = 'mobile-expandable-header';
+          expHeader.textContent = exp.label;
+
+          const expChildren = document.createElement('div');
+          expChildren.className = 'mobile-expandable-children';
+          exp.children.forEach((child) => {
+            const a = document.createElement('a');
+            a.href = child.href;
+            a.textContent = child.text;
+            expChildren.append(a);
+          });
+
+          expHeader.addEventListener('click', () => {
+            expHeader.classList.toggle('open');
+            expChildren.classList.toggle('open');
+          });
+
+          links.append(expHeader, expChildren);
+        });
+
+        panel.append(backBtn, heading, links);
+        catRow.addEventListener('click', () => panel.classList.add('active'));
+
+        drillDown.append(panel);
+      });
+
+      // Prevent drill-down clicks from bubbling to nav section toggle
+      drillDown.addEventListener('click', (e) => e.stopPropagation());
+      navDrop.append(drillDown);
 
       // Category hover switching
       catPanel.addEventListener('mouseover', (e) => {
