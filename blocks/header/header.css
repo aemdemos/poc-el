@@ -38,6 +38,7 @@ header nav[aria-expanded='true'] {
   background: #fff;
   position: relative;
   z-index: 100;
+  max-width:420px;
 }
 
 /* nav-tools-bottom hidden on mobile */
