@@ -177,7 +177,27 @@ export default async function decorate(block) {
   // load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/en-us/nav';
-  const fragment = await loadFragment(navPath);
+  let fragment = await loadFragment(navPath);
+
+  // Dev override: always prefer local nav-dev.html over CDN nav (CDN may be stale)
+  try {
+    const devResp = await fetch('/blocks/header/nav-dev.html');
+    if (devResp.ok) {
+      const devFragment = document.createElement('main');
+      devFragment.innerHTML = await devResp.text();
+      // Wrap each top-level div as a section (mimic fragment loading)
+      [...devFragment.querySelectorAll(':scope > div')].forEach((div) => {
+        const section = document.createElement('div');
+        section.classList.add('section');
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('default-content-wrapper');
+        while (div.firstChild) wrapper.append(div.firstChild);
+        section.append(wrapper);
+        div.replaceWith(section);
+      });
+      fragment = devFragment;
+    }
+  } catch (e) { /* use CDN fragment as-is */ }
 
   // decorate nav DOM
   block.textContent = '';
@@ -227,165 +247,21 @@ export default async function decorate(block) {
       buttonContainer.querySelector('.button').classList.remove('button');
     });
 
-    // Mega-menu: category groupings by URL pattern with fallback items
-    // Fallback items ensure all nav links render even if the pipeline drops some
-    const megaMenuConfig = {
-      Solutions: [
-        {
-          label: 'By Business Outcome',
-          match: (h) => h.includes('/solutions/use-case/') && !['artificial-intelligence', 'cloud-connectivity', 'network-on-demand'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'Reliable & Secure Connectivity', href: '/en-us/solutions/use-case/reliable-secure-connectivity', desc: 'DIA and SASE integrate to offer secure, consistent connectivity with proactive threat protection enabling seamless and scalable network modernization.' },
-            { text: 'Secure Customer Experience & Connectivity', href: '/en-us/solutions/use-case/secure-reliable-connectivity-for-business-continuity', desc: 'Provide secure, uninterrupted internet connectivity to all your locations and cloud resources with bundled DIA and DDoS Mitigation.' },
-            { text: 'Flexible Networking for Secure Access', href: '/en-us/solutions/use-case/flexible-networking-for-secure-access', desc: 'IP VPN and SASE provide secure, flexible connections between sites, data centers, private networks, cloud environments and over the internet.' },
-          ],
-        },
-        {
-          label: 'By Industry',
-          match: (h) => h.includes('/industries/') || h.includes('/public-sector'),
-          expected: [
-            { text: 'Energy', href: '/en-us/industries/energy-utilities' },
-            { text: 'Financial Services', href: '/en-us/industries/financial-services' },
-            { text: 'Gaming Network', href: '/en-us/industries/gaming-network' },
-            { text: 'Healthcare', href: '/en-us/industries/healthcare' },
-            { text: 'Manufacturing', href: '/en-us/industries/manufacturing' },
-            { text: 'Media & Entertainment', href: '/en-us/industries/media-entertainment' },
-            { text: 'Pharmaceuticals', href: '/en-us/industries/pharmaceuticals' },
-            {
-              text: 'Public Sector',
-              children: [
-                { text: 'Federal', href: '/en-us/public-sector/federal-government' },
-                { text: 'Defense & IC', href: '/en-us/public-sector/defense-ic' },
-                { text: 'State & Local', href: '/en-us/public-sector/state-local/state-local-government' },
-                { text: 'Public Safety', href: '/en-us/public-sector/state-local/public-safety' },
-                { text: 'Higher Education', href: '/en-us/public-sector/education/higher-education' },
-              ],
-            },
-            { text: 'Retail', href: '/en-us/industries/retail' },
-            { text: 'Technology', href: '/en-us/industries/technology' },
-          ],
-        },
-        {
-          label: 'By Business Type',
-          match: (h) => h.includes('/solutions/business-size/') || h.includes('/public-sector'),
-          expected: [
-            { text: 'Enterprise Business', href: '/en-us/solutions/business-size/large-enterprise', desc: 'Explore next-gen connectivity and security solutions for your large, distributed enterprise.' },
-            { text: 'Midsize Business', href: '/en-us/solutions/business-size/midsize', desc: 'Discover how to achieve speed, scale and security for your midsize business with resources and product recommendations.' },
-            { text: 'Public Sector', href: '/en-us/public-sector', desc: 'Explore how to attain efficiency, security and connectivity solutions for your public sector organization utilizing helpful resources.' },
-            { text: 'Wholesale', href: '/en-us/solutions/business-size/wholesale', desc: 'Future-ready wholesale networking, security and voice solutions to meet your customers\u2019 digital business demands.' },
-          ],
-        },
-        {
-          label: 'By Technical Use Case',
-          match: (h) => ['artificial-intelligence', 'cloud-connectivity', 'network-on-demand'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'AI', href: '/en-us/solutions/use-case/artificial-intelligence', desc: 'Support large AI workloads by using programmable connectivity to control bandwidth, path and latency.' },
-            { text: 'Cloud Connectivity', href: '/en-us/solutions/use-case/cloud-connectivity', desc: 'Connect across high-bandwidth clouds or dynamic multiclouds with expansive network reach and simplified architecture designed to support AI workloads.' },
-            { text: 'Network-as-a-Service', href: '/en-us/solutions/use-case/network-on-demand', desc: 'Quickly deliver reliable, secure connectivity services that scale to your business and offer affordable pay-as-you-go pricing.' },
-          ],
-        },
-      ],
-      Services: [
-        {
-          label: 'Infrastructure',
-          match: (h) => ['wavelengths', 'colocation', 'dark-fiber', 'enterprise-broadband'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'Wavelengths', href: '/en-us/services/wavelengths', desc: 'High-capacity optical transport for reliable, scalable connectivity.' },
-            { text: 'Colocation', href: '/en-us/services/colocation', desc: 'Secure, reliable data center space with robust connectivity options.' },
-            { text: 'Dark Fiber', href: '/en-us/services/dark-fiber', desc: 'Dedicated fiber infrastructure for maximum control and scalability.' },
-            { text: 'Enterprise Broadband', href: '/en-us/services/enterprise-broadband', desc: 'High-speed, reliable internet access for distributed business locations.' },
-          ],
-        },
-        {
-          label: 'Connectivity',
-          match: (h) => ['ethernet', 'ip-vpn', 'multi-cloud-gateway', 'sd-wan'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'Ethernet', href: '/en-us/services/ethernet', desc: 'Scalable, high-performance Ethernet services for site-to-site connectivity.' },
-            { text: 'IP VPN', href: '/en-us/services/ip-vpn', desc: 'Secure, private network connectivity across your enterprise locations.' },
-            { text: 'Multi-Cloud Gateway', href: '/en-us/services/multi-cloud-gateway', desc: 'Seamless, secure connections to multiple cloud providers.' },
-          ],
-        },
-        {
-          label: 'Security',
-          match: (h) => ['ddos', 'sase'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'DDoS', href: '/en-us/services/ddos', desc: 'Proactive DDoS mitigation powered by Black Lotus Labs threat intelligence.' },
-            { text: 'SD-WAN', href: '/en-us/services/sd-wan', desc: 'Intelligent, software-defined WAN for optimized application performance.' },
-            { text: 'SASE', href: '/en-us/services/sase', desc: 'Converged networking and security for secure access from anywhere.' },
-          ],
-        },
-        {
-          label: 'Communication',
-          match: (h) => ['cloud-voice', 'ucc', 'contact-center'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'Cloud Voice', href: '/en-us/services/lumen-cloud-voice', desc: 'Cloud-based voice services for modern business communication.' },
-            { text: 'UC&C', href: '/en-us/services/ucc', desc: 'Unified communications and collaboration to connect distributed teams.' },
-            { text: 'Contact Center', href: '/en-us/services/contact-center', desc: 'Intelligent contact center solutions to enhance customer experience.' },
-          ],
-        },
-      ],
-      Partners: [
-        {
-          label: 'Connected Ecosystem',
-          match: (h) => h.includes('/partner/'),
-          expected: [
-            { text: 'Strategic Technology Partners', href: '/en-us/partner/strategic-technology-partners', desc: 'Explore our ecosystem of technology partners driving innovation.' },
-            { text: 'Lumen Validated Designs', href: '/en-us/partner/validated-designs', desc: 'Pre-tested, partner-integrated solutions for faster deployment.' },
-          ],
-        },
-        {
-          label: 'By Technology Partner',
-          match: (h) => h.includes('/alliances/'),
-          expected: [
-            { text: 'Amazon Web Services', href: '/en-us/alliances/aws', desc: 'Direct, low-latency connectivity to AWS cloud services.' },
-            { text: 'Cisco', href: '/en-us/alliances/cisco', desc: 'Integrated networking solutions powered by Cisco technology.' },
-            { text: 'Google Cloud', href: '/en-us/alliances/google-cloud', desc: 'Optimized connectivity to Google Cloud Platform.' },
-            { text: 'Microsoft', href: '/en-us/alliances/microsoft', desc: 'Enterprise-grade connections to Microsoft Azure and 365.' },
-          ],
-        },
-      ],
-      Resources: [
-        {
-          label: 'Why Lumen',
-          match: (h) => ['why-lumen', 'black-lotus', 'network-maps'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'Why Lumen', href: '/en-us/why-lumen', desc: 'Discover what sets Lumen apart as the trusted network for AI.' },
-            { text: 'Black Lotus Labs', href: '/en-us/security/black-lotus-labs', desc: 'Threat intelligence research protecting businesses worldwide.' },
-            { text: 'Network Maps', href: '/en-us/resources/network-maps', desc: 'Explore our global fiber network and data center footprint.' },
-          ],
-        },
-        {
-          label: 'About Us',
-          match: (h) => ['customer-success', '/about'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'Customer Stories', href: '/en-us/resources/customer-success-stories', desc: 'See how businesses achieve results with Lumen solutions.' },
-            { text: 'About Us', href: '/en-us/about', desc: 'Learn about Lumen\u2019s mission, leadership and global presence.' },
-          ],
-        },
-        {
-          label: 'Newsroom',
-          match: (h) => ['blog.lumen', 'ir.lumen', 'developer.lumen'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'Blog & News', href: 'https://blog.lumen.com', desc: 'Latest insights and thought leadership from Lumen experts.' },
-            { text: 'News Releases', href: 'https://ir.lumen.com/news/default.aspx', desc: 'Official press releases and corporate announcements.' },
-            { text: 'Developers', href: 'https://developer.lumen.com/devcenter/home', desc: 'APIs, tools and resources for developers building on Lumen.' },
-          ],
-        },
-      ],
-    };
-
-    // Build mega-menu for nav-drops that have category config
+    // Build mega-menu from flat list with bold category markers authored in nav.md
+    // Pattern: **Bold Text** = category separator, _Italic Text_ = expandable parent
+    // Regular link items are grouped under the preceding category
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li.nav-drop').forEach((navDrop) => {
-      const label = getDirectTextContent(navDrop);
-      const config = megaMenuConfig[label];
-      if (!config) return;
-
       const subUl = navDrop.querySelector(':scope > ul');
       if (!subUl) return;
 
+      // Detect bold markers (<strong>) as category separators in the flat list
+      const allItems = [...subUl.querySelectorAll(':scope > li')];
+      const hasMarkers = allItems.some((li) => !li.querySelector('a') && li.querySelector('strong'));
+      if (!hasMarkers) return;
+
       navDrop.classList.add('nav-mega');
 
-      // Add inline chevron inside the text element (position:static breaks ::after)
+      // Add inline chevron
       const dropIcon = document.createElement('span');
       dropIcon.className = 'nav-drop-icon';
       const textEl = navDrop.querySelector(':scope > p');
@@ -395,33 +271,47 @@ export default async function decorate(block) {
         navDrop.insertBefore(dropIcon, navDrop.querySelector('ul'));
       }
 
-      // Group items into categories, using DOM items where available and
-      // injecting fallback items for any the pipeline may have dropped
-      const domItems = [...subUl.querySelectorAll(':scope > li')];
-      const groups = config.map((cat) => {
-        const matched = domItems.filter((li) => {
-          const a = li.querySelector('a');
-          return a && cat.match(a.getAttribute('href') || '');
-        });
-        // Build complete item list from expected, using DOM nodes when available
-        const completeItems = (cat.expected || []).map((exp) => {
-          if (exp.children) return { expandable: true, text: exp.text, children: exp.children };
-          const found = matched.find((li) => {
-            const a = li.querySelector('a');
-            return a && a.getAttribute('href') === exp.href;
-          });
-          if (found) return found.cloneNode(true);
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = exp.href;
-          a.textContent = exp.text;
-          li.append(a);
-          return li;
-        });
-        return { label: cat.label, items: completeItems };
+      // Parse flat list into category groups using bold markers
+      const catGroups = [];
+      let currentGroup = null;
+      let expandableCtx = null;
+
+      allItems.forEach((li) => {
+        const strong = li.querySelector('strong');
+        const em = li.querySelector('em');
+        const link = li.querySelector('a');
+
+        // Bold text without link = category separator
+        if (strong && !link && !em) {
+          expandableCtx = null;
+          currentGroup = { label: strong.textContent.trim(), items: [], expandables: [] };
+          catGroups.push(currentGroup);
+          return;
+        }
+
+        // Italic text without link = expandable parent (e.g., Public Sector)
+        if (em && !link && !strong) {
+          if (currentGroup) {
+            expandableCtx = { label: em.textContent.trim(), children: [] };
+            currentGroup.expandables.push(expandableCtx);
+          }
+          return;
+        }
+
+        // Link item — belongs to expandable context or current category
+        if (link && currentGroup) {
+          const item = { href: link.getAttribute('href') || link.href, text: link.textContent };
+          if (expandableCtx) {
+            expandableCtx.children.push(item);
+          } else {
+            currentGroup.items.push(item);
+          }
+        }
       });
 
-      // Desktop: build two-panel mega-menu
+      if (catGroups.length === 0) return;
+
+      // Build two-panel mega-menu
       const megaMenu = document.createElement('div');
       megaMenu.className = 'mega-menu';
 
@@ -431,110 +321,97 @@ export default async function decorate(block) {
       const contentPanel = document.createElement('div');
       contentPanel.className = 'mega-menu-content';
 
-      // Find the matching config to get descriptions
-      const catConfig = config;
-
-      groups.forEach((grp, i) => {
+      catGroups.forEach((cat, i) => {
         // Category label with chevron
         const catEl = document.createElement('div');
         catEl.className = `mega-menu-cat${i === 0 ? ' active' : ''}`;
         const catText = document.createElement('span');
-        catText.textContent = grp.label;
+        catText.textContent = cat.label;
         const chevron = document.createElement('span');
         chevron.className = 'mega-menu-chevron';
         catEl.append(catText, chevron);
         catEl.dataset.index = i;
         catPanel.append(catEl);
 
-        // Content group with category heading + items with descriptions
+        // Content group
         const group = document.createElement('div');
         group.className = `mega-menu-group${i === 0 ? ' active' : ''}`;
         group.dataset.index = i;
 
         const heading = document.createElement('div');
         heading.className = 'mega-menu-heading';
-        heading.textContent = grp.label;
+        heading.textContent = cat.label;
         group.append(heading);
 
-        const hasExpandable = grp.items.some((it) => it.expandable);
+        const hasExpandable = cat.expandables.length > 0;
         const columnsWrapper = hasExpandable ? document.createElement('div') : null;
         if (columnsWrapper) columnsWrapper.className = 'mega-menu-columns';
 
         const itemsContainer = document.createElement('div');
         itemsContainer.className = 'mega-menu-items';
-        const expectedItems = catConfig[i].expected || [];
 
-        let subpanel = null;
-        grp.items.forEach((item, j) => {
-          if (item.expandable) {
-            const expandableEl = document.createElement('div');
-            expandableEl.className = 'mega-menu-item-expandable';
-            expandableEl.tabIndex = 0;
-            expandableEl.setAttribute('role', 'button');
-            expandableEl.setAttribute('aria-expanded', 'false');
-            const title = document.createElement('span');
-            title.className = 'mega-menu-item-title';
-            title.textContent = item.text;
-            const chevron = document.createElement('span');
-            chevron.className = 'mega-menu-item-chevron';
-            chevron.setAttribute('aria-hidden', 'true');
-            expandableEl.append(title, chevron);
-            expandableEl.dataset.subpanel = `subpanel-${i}-${j}`;
-
-            if (!subpanel) {
-              subpanel = document.createElement('div');
-              subpanel.className = 'mega-menu-subpanel';
-            }
-            subpanel.innerHTML = '';
-            const subItems = document.createElement('div');
-            subItems.className = 'mega-menu-items';
-            item.children.forEach((child) => {
-              const childLink = document.createElement('a');
-              childLink.href = child.href;
-              childLink.className = 'mega-menu-item';
-              const childTitle = document.createElement('span');
-              childTitle.className = 'mega-menu-item-title';
-              childTitle.textContent = child.text;
-              childLink.append(childTitle);
-              subItems.append(childLink);
-            });
-            subpanel.append(subItems);
-            subpanel.id = expandableEl.dataset.subpanel;
-
-            const showSubpanel = () => {
-              itemsContainer.querySelectorAll('.mega-menu-item-expandable').forEach((e) => {
-                e.classList.remove('active');
-                e.setAttribute('aria-expanded', 'false');
-              });
-              if (subpanel) subpanel.classList.remove('active');
-              expandableEl.classList.add('active');
-              expandableEl.setAttribute('aria-expanded', 'true');
-              if (subpanel) subpanel.classList.add('active');
-            };
-            expandableEl.addEventListener('mouseenter', showSubpanel);
-            expandableEl.addEventListener('focus', showSubpanel);
-            subpanel?.addEventListener('mouseenter', showSubpanel);
-            itemsContainer.append(expandableEl);
-            return;
-          }
-
-          const a = item.querySelector('a');
-          if (!a) return;
+        // Regular link items
+        cat.items.forEach((item) => {
           const itemEl = document.createElement('a');
-          itemEl.href = a.getAttribute('href') || a.href;
+          itemEl.href = item.href;
           itemEl.className = 'mega-menu-item';
           const title = document.createElement('span');
           title.className = 'mega-menu-item-title';
-          title.textContent = a.textContent;
+          title.textContent = item.text;
           itemEl.append(title);
-          const expItem = expectedItems[j];
-          if (expItem && expItem.desc) {
-            const desc = document.createElement('span');
-            desc.className = 'mega-menu-item-desc';
-            desc.textContent = expItem.desc;
-            itemEl.append(desc);
-          }
           itemsContainer.append(itemEl);
+        });
+
+        // Expandable items (e.g., Public Sector with sub-children)
+        let subpanel = null;
+        cat.expandables.forEach((exp, j) => {
+          const expandableEl = document.createElement('div');
+          expandableEl.className = 'mega-menu-item-expandable';
+          expandableEl.tabIndex = 0;
+          expandableEl.setAttribute('role', 'button');
+          expandableEl.setAttribute('aria-expanded', 'false');
+          const title = document.createElement('span');
+          title.className = 'mega-menu-item-title';
+          title.textContent = exp.label;
+          const chevronEl = document.createElement('span');
+          chevronEl.className = 'mega-menu-item-chevron';
+          chevronEl.setAttribute('aria-hidden', 'true');
+          expandableEl.append(title, chevronEl);
+
+          if (!subpanel) {
+            subpanel = document.createElement('div');
+            subpanel.className = 'mega-menu-subpanel';
+          }
+          subpanel.innerHTML = '';
+          const subItems = document.createElement('div');
+          subItems.className = 'mega-menu-items';
+          exp.children.forEach((child) => {
+            const childLink = document.createElement('a');
+            childLink.href = child.href;
+            childLink.className = 'mega-menu-item';
+            const childTitle = document.createElement('span');
+            childTitle.className = 'mega-menu-item-title';
+            childTitle.textContent = child.text;
+            childLink.append(childTitle);
+            subItems.append(childLink);
+          });
+          subpanel.append(subItems);
+          subpanel.id = `subpanel-${i}-${j}`;
+
+          const showSubpanel = () => {
+            itemsContainer.querySelectorAll('.mega-menu-item-expandable').forEach((e) => {
+              e.classList.remove('active');
+              e.setAttribute('aria-expanded', 'false');
+            });
+            if (subpanel) subpanel.classList.remove('active');
+            expandableEl.classList.add('active');
+            expandableEl.setAttribute('aria-expanded', 'true');
+            if (subpanel) subpanel.classList.add('active');
+          };
+          expandableEl.addEventListener('mouseenter', showSubpanel);
+          expandableEl.addEventListener('focus', showSubpanel);
+          subpanel?.addEventListener('mouseenter', showSubpanel);
+          itemsContainer.append(expandableEl);
         });
 
         if (hasExpandable && columnsWrapper && subpanel) {
