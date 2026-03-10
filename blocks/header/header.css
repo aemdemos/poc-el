@@ -39,6 +39,8 @@ header nav[aria-expanded='true'] {
   position: relative;
   z-index: 100;
   max-width:420px;
+  padding-top:30px;
+  padding-left:20px;
 }
 
 /* nav-tools-bottom hidden on mobile */
@@ -46,88 +48,7 @@ header nav .nav-tools-bottom {
   display: none;
 }
 
-@media (width >= 1200px) {
-  header nav {
-    display: grid;
-    grid-template:
-      'brand search tools' auto
-      'sections sections sections' auto / auto 1fr auto;
-    align-items: center;
-    gap: 0;
-    max-width: none;
-    padding: 0;
-    min-height: auto;
-    border-bottom: none;
-    position: relative;
-  }
 
-  header nav[aria-expanded='true'] {
-    grid-template:
-      'brand search tools' auto
-      'sections sections sections' auto / auto 1fr auto;
-    min-height: 0;
-    overflow: visible;
-  }
-
-  header nav p {
-    line-height: 3;
-  }
-
-  /* Row 1 right side: show search + Sign In only */
-  header nav .nav-tools,
-  header nav[aria-expanded='true'] .nav-tools {
-    grid-area: tools;
-    display: flex;
-    visibility: visible;
-    align-items: center;
-    justify-content: flex-end;
-  }
-
-  /* Hide non-signin items from nav-tools at desktop (shown in nav-tools-bottom) */
-  header nav .nav-tools ul > li:not(.nav-tools-signin) {
-    display: none;
-  }
-
-  /* Row 2: tools-bottom positioned absolutely on same line as sections */
-  header nav .nav-tools-bottom {
-    grid-area: sections;
-    display: flex;
-    align-items: center;
-    justify-self: end;
-    padding-right: 48px;
-    z-index: 11;
-  }
-
-  header nav .nav-tools-bottom ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 24px;
-    align-items: center;
-  }
-
-  /* Force Support before Contact Us (pipeline alphabetizes by href) */
-  header nav .nav-tools-bottom ul li:first-child {
-    order: 2;
-  }
-
-  header nav .nav-tools-bottom ul li:nth-child(2) {
-    order: 1;
-  }
-
-  header nav .nav-tools-bottom a {
-    font-size: 16px;
-    font-weight: 500;
-    color: #000;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  header nav .nav-tools-bottom a:hover {
-    color: #00827f;
-  }
-}
 
 header nav p {
   margin: 0;
@@ -227,12 +148,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   transform: rotate(-45deg);
 }
 
-@media (width >= 1200px) {
-  header nav .nav-hamburger {
-    display: none;
-    visibility: hidden;
-  }
-}
+
 
 /* brand */
 header .nav-brand {
@@ -249,14 +165,7 @@ header nav .nav-brand img {
   height: auto;
 }
 
-@media (width >= 1200px) {
-  header .nav-brand {
-    grid-area: brand;
-    text-align: left;
-    padding: 40px 0;
-    margin-left: 36%;
-  }
-}
+
 
 /* sections */
 header nav .nav-sections {
@@ -300,41 +209,10 @@ header nav[aria-expanded='true'] .nav-tools ul > li a {
   text-decoration: none;
   color: currentcolor;
   position: relative;
+  padding-left:10px;
+  padding-top:30px;
 }
 
-/* Desktop: override mobile expanded nav-tools for two-row grid */
-@media (width >= 1200px) {
-  header nav[aria-expanded='true'] .nav-tools {
-    grid-area: tools;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-
-  header nav[aria-expanded='true'] .nav-tools ul {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-  }
-
-  header nav[aria-expanded='true'] .nav-tools ul > li {
-    display: none;
-  }
-
-  header nav[aria-expanded='true'] .nav-tools ul > li.nav-tools-signin {
-    display: block;
-  }
-
-  /* stylelint-disable-next-line no-descending-specificity */
-  header nav[aria-expanded='true'] .nav-tools ul > li a {
-    padding: 0;
-    padding-right: 50px;
-    border-bottom: none;
-    font-size: 16px;
-    font-weight: 500;
-    font-family: Gotham, Arial, sans-serif;
-  }
-}
 
 /* stylelint-disable-next-line no-descending-specificity */
 header nav .nav-sections ul {
@@ -348,7 +226,6 @@ header nav .nav-sections ul > li {
   font-weight: 500;
   font-size: 16px;
   color: #000;
-  border-bottom: 1px solid #e0e0e0;
 }
 
 /* Collapse sub-menus on mobile */
@@ -374,6 +251,8 @@ header nav .nav-sections .default-content-wrapper > ul > li {
   padding: 16px 20px 16px 0;
   background-color: #fff;
   margin: 0;
+  padding-left:10px;
+  padding-right:10px;
 }
 
 header nav .nav-sections .default-content-wrapper > ul > li > a,
@@ -383,6 +262,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > p {
   color: inherit;
   font-size: 16px;
   font-weight: 500;
+  padding-bottom:6px;
 }
 
 /* Chevron for the 4 dropdowns (Solutions, Services, Partners, Resources) – downward when closed */
@@ -408,9 +288,6 @@ header nav .nav-sections .nav-drop::after {
   transition: transform 0.2s;
 }
 
-header nav .nav-sections .nav-drop[aria-expanded='true']::after {
-  transform: rotate(315deg);
-}
 
 /* Sub-menu items padding on mobile */
 /* stylelint-disable-next-line no-descending-specificity */
@@ -446,11 +323,12 @@ header nav .nav-mega[aria-expanded='true'] > .mobile-drilldown {
   align-items: center;
   justify-content: space-between;
   padding: 14px 0;
-  border-bottom: 1px solid #e0e0e0;
   font-size: 16px;
-  font-weight: 400;
-  color: #0f3133;
+  font-weight: 500;
+  color: black;
   cursor: pointer;
+  line-height: 24px;
+  padding-left:18px;
 }
 
 .mobile-direct-link {
@@ -594,8 +472,6 @@ header nav[aria-expanded='true'] .nav-tools-bottom {
   grid-area: bottom;
   align-items: center;
   justify-content: center;
-  padding: 16px 20px;
-  border-top: 1px solid #e0e0e0;
   background: #fff;
   position: sticky;
   bottom: 0;
@@ -606,8 +482,7 @@ header nav[aria-expanded='true'] .nav-tools-bottom ul {
   padding: 0;
   margin: 0;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  gap: 2px;
   width: 100%;
 }
 
@@ -624,7 +499,6 @@ header nav[aria-expanded='true'] .nav-tools-bottom a {
   background-color: #e87722;
   color: #fff;
   text-align: center;
-  border-radius: 24px;
   font-size: 16px;
   font-weight: 600;
   text-decoration: none;
@@ -641,7 +515,173 @@ header nav .nav-drop-icon {
   display: none;
 }
 
+
+@media (width > 425px) {
+  header nav[aria-expanded='true'] .nav-tools-bottom ul {
+    flex-direction: column;
+  }
+}
+
+
+
+/* Desktop: hide all mobile-specific elements */
 @media (width >= 1200px) {
+  .mobile-drilldown,
+  .mobile-cat-item,
+  .mobile-direct-link,
+  .mobile-slide-panel,
+  .mobile-back-btn,
+  .mobile-panel-heading,
+  .mobile-panel-links,
+  .mobile-expandable-header,
+  .mobile-expandable-children,
+  .mobile-cat-chevron {
+    display: none !important;
+  }
+
+  header nav .nav-hamburger {
+    display: none;
+    visibility: hidden;
+  }
+
+  header nav {
+    display: grid;
+    grid-template-areas:
+      'brand search tools'
+      'sections . tools-bottom';
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 0;
+    max-width: none;
+    padding: 0;
+    min-height: auto;
+    border-bottom: none;
+    position: relative;
+    background: #fff;
+  }
+
+  /* Row 2: light grey bar behind nav links */
+  header nav::after {
+    content: '';
+    grid-area: 2 / 1 / 3 / -1;
+    background-color: #f2f0f1;
+    z-index: 0;
+  }
+
+  header nav > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  header nav[aria-expanded='true'] {
+    grid-template-areas:
+      'brand search tools'
+      'sections . tools-bottom';
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    min-height: 0;
+    overflow: visible;
+    padding-top:0;
+  }
+
+  header nav p {
+    line-height: 1;
+  }
+
+  /* Row 1 right side: show search + Sign In only */
+  header nav .nav-tools,
+  header nav[aria-expanded='true'] .nav-tools {
+    grid-area: tools;
+    display: flex;
+    visibility: visible;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  /* Hide non-signin items from nav-tools at desktop (shown in nav-tools-bottom) */
+  header nav .nav-tools ul > li:not(.nav-tools-signin) {
+    display: none;
+  }
+
+  /* Row 2 right: Support & Contact Us */
+  header nav .nav-tools-bottom {
+    grid-area: tools-bottom;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 48px;
+  }
+
+  header nav .nav-tools-bottom ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+
+  /* Force Support before Contact Us (pipeline alphabetizes by href) */
+  header nav .nav-tools-bottom ul li:first-child {
+    order: 2;
+  }
+
+  header nav .nav-tools-bottom ul li:nth-child(2) {
+    order: 1;
+  }
+
+  header nav .nav-tools-bottom a {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  header nav .nav-tools-bottom a:hover {
+    color: #00827f;
+  }
+  
+  header .nav-brand {
+    grid-area: brand;
+    text-align: left;
+    padding: 35px 0;
+    margin-left: 10%;
+    padding-bottom:25px;
+  }
+
+  header nav[aria-expanded='true'] .nav-tools {
+    grid-area: tools;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  header nav[aria-expanded='true'] .nav-tools ul {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  header nav[aria-expanded='true'] .nav-tools ul > li {
+    display: none;
+  }
+
+  header nav[aria-expanded='true'] .nav-tools ul > li.nav-tools-signin {
+    display: block;
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  header nav[aria-expanded='true'] .nav-tools ul > li a {
+    padding: 0;
+    padding-right: 50px;
+    border-bottom: none;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: Gotham, Arial, sans-serif;
+  }
+
   header nav .nav-sections {
     grid-area: sections;
     background-color: #f2f0f1;
@@ -759,22 +799,6 @@ header nav .nav-drop-icon {
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding: 8px 0;
-  }
-}
-
-/* Desktop: hide all mobile-specific elements */
-@media (width >= 1200px) {
-  .mobile-drilldown,
-  .mobile-cat-item,
-  .mobile-direct-link,
-  .mobile-slide-panel,
-  .mobile-back-btn,
-  .mobile-panel-heading,
-  .mobile-panel-links,
-  .mobile-expandable-header,
-  .mobile-expandable-children,
-  .mobile-cat-chevron {
-    display: none !important;
   }
 
   /* Desktop: show mega item original sub-list */
