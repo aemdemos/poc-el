@@ -29,16 +29,47 @@ header nav {
 header nav[aria-expanded='true'] {
   grid-template:
     'hamburger brand search' auto
+    'tools tools tools' auto
     'sections sections sections' 1fr
-    'tools tools tools' auto / auto 1fr auto;
+    'bottom bottom bottom' auto / auto 1fr auto;
   overflow-y: auto;
   min-height: 100dvh;
   height: auto;
+  background: #fff;
+  position: relative;
+  z-index: 100;
 }
 
-/* nav-tools-bottom hidden on mobile */
+/* nav-tools-bottom: hidden by default, shown at bottom of mobile expanded menu */
 header nav .nav-tools-bottom {
   display: none;
+}
+
+header nav[aria-expanded='true'] .nav-tools-bottom {
+  grid-area: bottom;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0;
+  border-top: 1px solid #e0e0e0;
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+}
+
+header nav[aria-expanded='true'] .nav-tools-bottom ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 24px;
+}
+
+header nav[aria-expanded='true'] .nav-tools-bottom a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #0f3133;
+  text-decoration: none;
 }
 
 @media (width >= 1200px) {
@@ -268,7 +299,7 @@ header nav[aria-expanded='true'] .nav-sections {
 }
 
 header nav[aria-expanded='true'] .nav-tools {
-  grid-area: nav-tools;
+  grid-area: tools;
   display: block;
   visibility: visible;
 }
@@ -286,14 +317,14 @@ header nav[aria-expanded='true'] .nav-tools ul > li.nav-tools-signin {
   display: block;
 }
 
-header nav[aria-expanded='true'] .nav-tools ul > li a {
+header nav[aria-expanded='true'] .nav-tools ul > li.nav-tools-signin a {
   display: block;
   padding: 16px 0;
   border-bottom: 1px solid #e0e0e0;
-  font-size: var(--body-font-size-s);
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 700;
   text-decoration: none;
-  color: currentcolor;
+  color: #0f3133;
 }
 
 /* Desktop: override mobile expanded nav-tools for two-row grid */
@@ -406,14 +437,168 @@ header nav .nav-sections ul > li > ul > li > a {
   font-size: var(--body-font-size-xs);
 }
 
-/* Hide mega-menu panel on mobile (desktop-only feature) */
+/* ========== Mobile drill-down panels ========== */
+
+/* Hide mega-menu and mobile-drilldown by default */
 header nav .mega-menu {
   display: none;
+}
+
+header nav .mobile-drilldown {
+  display: none;
+}
+
+/* On mobile, hide original sub-list for mega items; show drilldown instead */
+header nav .nav-sections .nav-mega[aria-expanded='true'] > ul {
+  display: none !important;
+}
+
+header nav .nav-mega[aria-expanded='true'] > .mobile-drilldown {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Category list items */
+header nav .mobile-cat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f3133;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+header nav .mobile-cat-chevron {
+  font-size: 18px;
+  color: #6b7071;
+  padding-right: 4px;
+}
+
+/* Slide panel (fixed full-screen, slides in from right) */
+header nav .mobile-slide-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  background: #fff;
+  z-index: 200;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+header nav .mobile-slide-panel.active {
+  transform: translateX(0);
+}
+
+/* Back button */
+header nav .mobile-back-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #007981;
+  cursor: pointer;
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+}
+
+/* Panel heading */
+header nav .mobile-panel-heading {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f3133;
+  padding: 16px 0 12px;
+  border-bottom: 2px solid #0f3133;
+  margin-bottom: 8px;
+}
+
+/* Panel link items */
+header nav .mobile-panel-links a {
+  display: block;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #0f3133;
+  text-decoration: none;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+header nav .mobile-panel-links a:hover {
+  color: #00827f;
+}
+
+/* Expandable sub-items inside drill-down panels (e.g., Public Sector) */
+header nav .mobile-expandable-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: italic;
+  color: #0f3133;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+header nav .mobile-expandable-header span {
+  transition: transform 0.2s;
+}
+
+header nav .mobile-expandable-children {
+  display: none;
+  padding-left: 16px;
+}
+
+header nav .mobile-expandable.expanded .mobile-expandable-children {
+  display: block;
+}
+
+header nav .mobile-expandable-children a {
+  display: block;
+  padding: 10px 0;
+  font-size: 15px;
+  font-weight: 500;
+  font-style: normal;
+  color: #0f3133;
+  text-decoration: none;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+header nav .mobile-expandable-children a:hover {
+  color: #00827f;
+}
+
+header nav .mobile-expandable.expanded .mobile-expandable-header span:last-child {
+  transform: rotate(180deg);
 }
 
 /* Hide inline chevron on mobile (::after handles it) */
 header nav .nav-drop-icon {
   display: none;
+}
+
+@media (width >= 1200px) {
+  header nav .mobile-drilldown,
+  header nav .mobile-slide-panel {
+    display: none !important;
+  }
+
+  /* Restore original sub-list visibility for mega items on desktop */
+  header nav .nav-mega[aria-expanded='true'] > ul {
+    display: none !important; /* mega-menu takes over on desktop too */
+  }
 }
 
 @media (width >= 1200px) {

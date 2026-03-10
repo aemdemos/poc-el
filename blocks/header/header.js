@@ -16,6 +16,8 @@ function closeOnEscape(e) {
       navSectionExpanded.focus();
     } else if (!isDesktop.matches) {
       // eslint-disable-next-line no-use-before-define
+      closeMobileDrillDown(nav);
+      // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections);
       nav.querySelector('button').focus();
     }
@@ -63,6 +65,12 @@ function toggleAllNavSections(sections, expanded = false) {
   });
 }
 
+function closeMobileDrillDown(navEl) {
+  navEl.querySelectorAll('.mobile-slide-panel.active').forEach((panel) => {
+    panel.classList.remove('active');
+  });
+}
+
 /**
  * Toggles the entire nav
  * @param {Element} nav The container element
@@ -75,6 +83,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, 'false');
+  closeMobileDrillDown(nav);
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
@@ -222,12 +231,20 @@ export default async function decorate(block) {
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
-        const expanded = navSection.getAttribute('aria-expanded') === 'true';
+      navSection.addEventListener('click', (e) => {
+        if (e.target.closest('.mobile-drilldown')) return;
         if (isDesktop.matches) {
+          const expanded = navSection.getAttribute('aria-expanded') === 'true';
           toggleAllNavSections(navSections);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        } else {
+          if (e.target.closest('a') && !navSection.classList.contains('nav-drop')) return;
+          e.preventDefault();
+          const expanded = navSection.getAttribute('aria-expanded') === 'true';
+          toggleAllNavSections(navSections);
+          closeMobileDrillDown(nav);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
-        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       });
       // Desktop: open on hover
       navSection.addEventListener('mouseenter', () => {
@@ -246,6 +263,107 @@ export default async function decorate(block) {
       buttonContainer.classList.remove('button-container');
       buttonContainer.querySelector('.button').classList.remove('button');
     });
+
+    // Build mobile drill-down panels for mega nav items
+    function buildMobileDrillDown(navDrop, catGroups, parentLabel) {
+      const drilldown = document.createElement('div');
+      drilldown.className = 'mobile-drilldown';
+
+      catGroups.forEach((cat, idx) => {
+        // Category row with chevron
+        const catItem = document.createElement('div');
+        catItem.className = 'mobile-cat-item';
+        catItem.dataset.index = idx;
+        const catLabel = document.createElement('span');
+        catLabel.textContent = cat.label;
+        const catChevron = document.createElement('span');
+        catChevron.className = 'mobile-cat-chevron';
+        catChevron.textContent = '\u203A';
+        catItem.append(catLabel, catChevron);
+        drilldown.append(catItem);
+
+        // Slide panel for this category
+        const panel = document.createElement('div');
+        panel.className = 'mobile-slide-panel';
+        panel.dataset.index = idx;
+
+        const backBtn = document.createElement('button');
+        backBtn.className = 'mobile-back-btn';
+        backBtn.textContent = `\u2039 Back to ${parentLabel}`;
+        panel.append(backBtn);
+
+        const heading = document.createElement('div');
+        heading.className = 'mobile-panel-heading';
+        heading.textContent = cat.label;
+        panel.append(heading);
+
+        const linksContainer = document.createElement('div');
+        linksContainer.className = 'mobile-panel-links';
+
+        cat.items.forEach((item) => {
+          const a = document.createElement('a');
+          a.href = item.href;
+          a.textContent = item.text;
+          linksContainer.append(a);
+        });
+
+        // Expandable sub-items (e.g., Public Sector)
+        cat.expandables.forEach((exp) => {
+          const expandable = document.createElement('div');
+          expandable.className = 'mobile-expandable';
+
+          const expHeader = document.createElement('div');
+          expHeader.className = 'mobile-expandable-header';
+          const expLabel = document.createElement('span');
+          expLabel.textContent = exp.label;
+          const expChevron = document.createElement('span');
+          expChevron.textContent = '\u25BE';
+          expHeader.append(expLabel, expChevron);
+          expandable.append(expHeader);
+
+          const children = document.createElement('div');
+          children.className = 'mobile-expandable-children';
+          exp.children.forEach((child) => {
+            const a = document.createElement('a');
+            a.href = child.href;
+            a.textContent = child.text;
+            children.append(a);
+          });
+          expandable.append(children);
+          linksContainer.append(expandable);
+        });
+
+        panel.append(linksContainer);
+        drilldown.append(panel);
+      });
+
+      // Event delegation
+      drilldown.addEventListener('click', (e) => {
+        const catItem = e.target.closest('.mobile-cat-item');
+        if (catItem) {
+          const idx2 = catItem.dataset.index;
+          const panel2 = drilldown.querySelector(`.mobile-slide-panel[data-index="${idx2}"]`);
+          if (panel2) panel2.classList.add('active');
+          e.stopPropagation();
+          return;
+        }
+
+        const backBtn2 = e.target.closest('.mobile-back-btn');
+        if (backBtn2) {
+          backBtn2.closest('.mobile-slide-panel').classList.remove('active');
+          e.stopPropagation();
+          return;
+        }
+
+        const expandHeader = e.target.closest('.mobile-expandable-header');
+        if (expandHeader) {
+          expandHeader.closest('.mobile-expandable').classList.toggle('expanded');
+          e.stopPropagation();
+        }
+      });
+
+      navDrop.append(drilldown);
+    }
 
     // Build mega-menu from flat list with bold category markers authored in nav.md
     // Pattern: **Bold Text** = category separator, _Italic Text_ = expandable parent
@@ -446,6 +564,10 @@ export default async function decorate(block) {
         const g = contentPanel.querySelector(`.mega-menu-group[data-index="${catEl.dataset.index}"]`);
         if (g) g.classList.add('active');
       });
+
+      // Build mobile drill-down for this nav item
+      const parentLabel = navDrop.querySelector(':scope > p')?.textContent?.trim() || '';
+      buildMobileDrillDown(navDrop, catGroups, parentLabel);
     });
 
     // Close mega-menus when clicking outside on desktop
