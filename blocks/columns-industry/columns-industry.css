@@ -1,33 +1,244 @@
-.columns-industry > div {
+/* --- Mobile-first (default) --- */
+
+/* Section container: full-width, no margins */
+.columns-industry-container {
+  padding: 0;
+  margin: 0;
+}
+
+.columns-industry-container > .columns-industry-wrapper {
+  padding: 0;
+  max-width: none;
+}
+
+/* Block: stacked layout on mobile */
+.columns-industry {
   display: flex;
   flex-direction: column;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
 }
 
-.columns-industry img {
+/* Image section */
+.columns-industry .columns-industry-img-section {
   width: 100%;
+  overflow: hidden;
 }
 
-.columns-industry > div > div {
-  order: 1;
+.columns-industry .columns-industry-img-section picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-.columns-industry > div > .columns-industry-img-col {
-  order: 0;
-}
-
-.columns-industry > div > .columns-industry-img-col img {
+.columns-industry .columns-industry-img-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
-@media (width >= 900px) {
-  .columns-industry > div {
-    align-items: center;
-    flex-direction: unset;
-    gap: 24px;
+/* Content section: dark teal */
+.columns-industry .columns-industry-content-section {
+  background-color: rgb(15 49 51);
+  color: rgb(255 255 255);
+  padding: 40px 20px;
+}
+
+/* Eyebrow text */
+.columns-industry .columns-industry-eyebrow {
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.4;
+  color: rgb(156 159 165);
+  margin: 0;
+}
+
+/* Dropdown container */
+.columns-industry .columns-industry-dropdown {
+  position: relative;
+  width: 328px;
+  max-width: 100%;
+  margin-top: 8px;
+}
+
+/* Dropdown header/button */
+.columns-industry .columns-industry-dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+  color: rgb(209 211 214);
+  background-color: rgb(15 49 51);
+  border: 2px solid rgb(223 224 226);
+  border-radius: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* Dropdown arrow */
+.columns-industry .columns-industry-arrow {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid rgb(209 211 214);
+  border-bottom: 2px solid rgb(209 211 214);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.columns-industry .columns-industry-dropdown-header[aria-expanded="true"] .columns-industry-arrow {
+  transform: rotate(-135deg);
+}
+
+/* Dropdown list */
+.columns-industry .columns-industry-dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: rgb(15 49 51);
+  border: 2px solid transparent;
+  z-index: 100;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  color: rgb(255 255 255);
+}
+
+.columns-industry .columns-industry-dropdown-option {
+  padding: 16px;
+  cursor: pointer;
+}
+
+.columns-industry .columns-industry-dropdown-option:hover {
+  background: linear-gradient(90deg, rgb(250 110 92), rgb(251 134 45));
+  color: rgb(5 5 5);
+  font-weight: 700;
+}
+
+.columns-industry .columns-industry-dropdown-option.selected {
+  background: linear-gradient(90deg, rgb(250 110 92), rgb(251 134 45));
+  color: rgb(5 5 5);
+  font-weight: 700;
+}
+
+/* Case study item */
+.columns-industry .columns-industry-item {
+  color: rgb(255 255 255);
+}
+
+.columns-industry .columns-industry-label {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  color: rgb(250 250 250);
+  margin-top: 48px;
+}
+
+.columns-industry .columns-industry-company {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: rgb(250 250 250);
+}
+
+.columns-industry .columns-industry-title {
+  font-family: Gotham, Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  color: rgb(255 255 255);
+  margin: 24px 0 0;
+}
+
+.columns-industry .columns-industry-description {
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+  color: rgb(209 211 214);
+  margin-top: 24px;
+}
+
+/* CTA */
+.columns-industry .columns-industry-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.columns-industry .columns-industry-cta-link {
+  display: inline-block;
+  padding: 14px 32px;
+  margin-top: 10px;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: rgb(5 5 5);
+  background: linear-gradient(90deg, rgb(250 110 92), rgb(251 134 45));
+  border-radius: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.columns-industry .columns-industry-cta-link:hover {
+  opacity: 0.9;
+}
+
+/* --- Tablet: 768px+ --- */
+@media (width >= 768px) {
+  .columns-industry .columns-industry-title {
+    font-size: 40px;
+    line-height: 50px;
   }
 
-  .columns-industry > div > div {
-    flex: 1;
-    order: unset;
+  .columns-industry .columns-industry-cta {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+}
+
+/* --- Desktop: 1200px+ --- */
+@media (width >= 1200px) {
+  .columns-industry {
+    flex-direction: row;
+  }
+
+  .columns-industry .columns-industry-img-section {
+    width: 50%;
+    flex-shrink: 0;
+  }
+
+  .columns-industry .columns-industry-content-section {
+    width: 50%;
+    padding: 40px;
+    box-sizing: border-box;
+  }
+
+  .columns-industry .columns-industry-label {
+    margin-top: 136px;
+    font-size: 18px;
+  }
+
+  .columns-industry .columns-industry-title {
+    font-size: 48px;
+    line-height: 60px;
   }
 }
