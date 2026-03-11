@@ -5,6 +5,23 @@
   color: #414448;
 }
 
+.cards-support-container h2 {
+  font-size: 48px;
+  line-height: 60px;
+  font-weight: 700;
+  font-family: Gotham, Arial, Helvetica;
+  color: #0f3133;
+  letter-spacing: -0.96px;
+}
+
+.cards-support-container a:any-link {
+  color: black;
+  font-family: Gotham;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: -0.32px;
+}
+
 .cards-support > ul {
   list-style: none;
   margin: 0;
@@ -17,10 +34,12 @@
 .cards-support > ul > li {
   border: 1px solid #dadada;
   background-color: var(--background-color);
+  padding: 24px;
+  border-radius: 24px;
 }
 
 .cards-support .cards-support-card-body {
-  margin: 16px;
+  margin: 0;
 }
 
 .cards-support .cards-support-card-image {
@@ -28,7 +47,5 @@
 }
 
 .cards-support > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
