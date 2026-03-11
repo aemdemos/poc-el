@@ -288,8 +288,10 @@ export default async function decorate(block) {
 
       // Parse flat list into category groups using bold markers
       // Links before the first bold marker are standalone direct links
+      // Bold text wrapping a link = trailing direct link (e.g., "View All Products")
       const catGroups = [];
       const standaloneItems = [];
+      const trailingItems = [];
       let currentGroup = null;
       let expandableCtx = null;
 
@@ -297,6 +299,12 @@ export default async function decorate(block) {
         const strong = li.querySelector('strong');
         const em = li.querySelector('em');
         const link = li.querySelector('a');
+
+        // Bold text WITH link = trailing direct link (e.g., View All Products)
+        if (strong && link) {
+          trailingItems.push({ href: link.getAttribute('href') || link.href, text: link.textContent });
+          return;
+        }
 
         // Bold text without link = category separator
         if (strong && !link && !em) {
@@ -449,6 +457,15 @@ export default async function decorate(block) {
         contentPanel.append(group);
       });
 
+      // Add trailing direct links to the categories panel (e.g., "View All Products")
+      trailingItems.forEach((item) => {
+        const catLink = document.createElement('a');
+        catLink.href = item.href;
+        catLink.className = 'mega-menu-cat mega-menu-cat-link';
+        catLink.textContent = item.text;
+        catPanel.append(catLink);
+      });
+
       megaMenu.append(catPanel, contentPanel);
       navDrop.append(megaMenu);
 
@@ -534,14 +551,25 @@ export default async function decorate(block) {
         drillDown.append(panel);
       });
 
+      // Trailing direct links at bottom of mobile drilldown (e.g., "View All Products")
+      trailingItems.forEach((item) => {
+        const row = document.createElement('div');
+        row.className = 'mobile-direct-link';
+        const a = document.createElement('a');
+        a.href = item.href;
+        a.textContent = item.text;
+        row.append(a);
+        drillDown.append(row);
+      });
+
       // Prevent drill-down clicks from bubbling to nav section toggle
       drillDown.addEventListener('click', (e) => e.stopPropagation());
       navDrop.append(drillDown);
 
-      // Category hover switching
+      // Category hover switching (skip direct link items)
       catPanel.addEventListener('mouseover', (e) => {
         const catEl = e.target.closest('.mega-menu-cat');
-        if (!catEl) return;
+        if (!catEl || catEl.classList.contains('mega-menu-cat-link')) return;
         catPanel.querySelectorAll('.mega-menu-cat').forEach((c) => c.classList.remove('active'));
         contentPanel.querySelectorAll('.mega-menu-group').forEach((g) => g.classList.remove('active'));
         catEl.classList.add('active');
