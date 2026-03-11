@@ -1,34 +1,99 @@
+/* --- Mobile-first (default) --- */
+
 .cards-industry {
-  font-size: var(--body-font-size-s);
-  line-height: 150%;
-  font-family: Gotham-book, Arial, Helvetica, sans-serif;
-  color: #414448;
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  line-height: 27px;
+  color: rgb(65 68 72);
 }
 
 .cards-industry > ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .cards-industry > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: none;
 }
 
-.cards-industry .cards-industry-card-body {
-  margin: 16px;
-}
-
+/* Card image */
 .cards-industry .cards-industry-card-image {
   line-height: 0;
 }
 
 .cards-industry > ul > li img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
+}
+
+/* Card body */
+.cards-industry .cards-industry-card-body {
+  margin: 24px 0 0;
+}
+
+/* Card title */
+.cards-industry .cards-industry-card-body strong {
+  display: block;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  color: rgb(15 49 51);
+  margin-bottom: 14px;
+}
+
+/* CTA link - pill shape */
+.cards-industry .cards-industry-card-body a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 32px;
+  margin-top: 24px;
+  border: 2px solid rgb(250 110 92);
+  border-radius: 16px;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: rgb(17 18 19);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cards-industry .cards-industry-card-body a::after {
+  content: " \2192";
+}
+
+.cards-industry .cards-industry-card-body a:hover {
+  background-color: rgb(250 110 92);
+  color: rgb(255 255 255);
+}
+
+/* --- Tablet: 768px+ — staggered zigzag layout --- */
+@media (width >= 768px) {
+  .cards-industry > ul {
+    gap: 60px;
+  }
+
+  .cards-industry > ul > li {
+    width: 55%;
+  }
+
+  /* Odd cards (1st, 3rd) align right */
+  .cards-industry > ul > li:nth-child(odd) {
+    align-self: flex-end;
+  }
+
+  /* Even cards (2nd) align left */
+  .cards-industry > ul > li:nth-child(even) {
+    align-self: flex-start;
+  }
 }
