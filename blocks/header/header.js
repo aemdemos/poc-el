@@ -287,17 +287,25 @@ export default async function decorate(block) {
       }
 
       // Parse flat list into category groups using bold markers
-      // Links before the first bold marker are standalone direct links
-      // Bold text wrapping a link = trailing direct link (e.g., "View All Products")
+      // Conventions:
+      //   **Bold Text** = category separator
+      //   Link ending in "Portfolio →" right after bold = portfolio link
+      //   <del>Section Heading</del> (~~text~~ in md) = section label (Featured Services, Categories)
+      //   link | description text = item with description
+      //   _Italic Text_ without link = expandable parent (e.g., Public Sector)
+      //   **[Bold Link](url)** = trailing direct link (e.g., View All Products)
+      //   Links before first bold = standalone direct links
       const catGroups = [];
       const standaloneItems = [];
       const trailingItems = [];
       let currentGroup = null;
       let expandableCtx = null;
+      let currentSection = 'featured';
 
       allItems.forEach((li) => {
         const strong = li.querySelector('strong');
         const em = li.querySelector('em');
+        const del = li.querySelector('del');
         const link = li.querySelector('a');
 
         // Bold text WITH link = trailing direct link (e.g., View All Products)
@@ -307,10 +315,30 @@ export default async function decorate(block) {
         }
 
         // Bold text without link = category separator
-        if (strong && !link && !em) {
+        if (strong && !link && !em && !del) {
           expandableCtx = null;
-          currentGroup = { label: strong.textContent.trim(), items: [], expandables: [] };
+          currentSection = 'featured';
+          currentGroup = {
+            label: strong.textContent.trim(),
+            portfolioLink: null,
+            featured: [],
+            categories: [],
+            expandables: [],
+            hasSectionHeadings: false,
+          };
           catGroups.push(currentGroup);
+          return;
+        }
+
+        // Strikethrough = section heading (Featured Services, Categories)
+        if (del) {
+          if (currentGroup) currentGroup.hasSectionHeadings = true;
+          const heading = del.textContent.trim().toLowerCase();
+          if (heading.includes('categories')) {
+            currentSection = 'categories';
+          } else {
+            currentSection = 'featured';
+          }
           return;
         }
 
@@ -323,15 +351,34 @@ export default async function decorate(block) {
           return;
         }
 
-        // Link item — standalone if before first category, else belongs to current group
+        // Link item
         if (link) {
-          const item = { href: link.getAttribute('href') || link.href, text: link.textContent };
+          const linkText = link.textContent.trim();
+          const href = link.getAttribute('href') || link.href;
+
+          // Portfolio link: text ends with "Portfolio →" (right after a bold category)
+          if (currentGroup && !currentGroup.portfolioLink && linkText.endsWith('Portfolio →')) {
+            currentGroup.portfolioLink = { href, text: linkText };
+            return;
+          }
+
+          // Extract description from " | description" text after the link
+          let desc = '';
+          const liText = li.textContent;
+          const pipeIdx = liText.indexOf(' | ');
+          if (pipeIdx !== -1) {
+            desc = liText.substring(pipeIdx + 3).trim();
+          }
+
+          const item = { href, text: linkText, desc };
           if (!currentGroup) {
             standaloneItems.push(item);
           } else if (expandableCtx) {
             expandableCtx.children.push(item);
+          } else if (currentSection === 'categories') {
+            currentGroup.categories.push(item);
           } else {
-            currentGroup.items.push(item);
+            currentGroup.featured.push(item);
           }
         }
       });
@@ -365,95 +412,164 @@ export default async function decorate(block) {
         group.className = `mega-menu-group${i === 0 ? ' active' : ''}`;
         group.dataset.index = i;
 
-        const heading = document.createElement('div');
-        heading.className = 'mega-menu-heading';
-        heading.textContent = cat.label;
-        group.append(heading);
+        // Portfolio link at the top (e.g., "Infrastructure Portfolio →")
+        if (cat.portfolioLink) {
+          const portfolioEl = document.createElement('a');
+          portfolioEl.href = cat.portfolioLink.href;
+          portfolioEl.className = 'mega-menu-portfolio-link';
+          portfolioEl.textContent = cat.portfolioLink.text;
+          group.append(portfolioEl);
+        }
 
-        const hasExpandable = cat.expandables.length > 0;
-        const columnsWrapper = hasExpandable ? document.createElement('div') : null;
-        if (columnsWrapper) columnsWrapper.className = 'mega-menu-columns';
+        // Determine layout: two-column if has categories or expandables
+        const hasTwoColumns = cat.categories.length > 0 || cat.expandables.length > 0;
+        const columnsWrapper = document.createElement('div');
+        columnsWrapper.className = hasTwoColumns ? 'mega-menu-columns' : 'mega-menu-single-column';
 
-        const itemsContainer = document.createElement('div');
-        itemsContainer.className = 'mega-menu-items';
+        // Featured Services column
+        const featuredCol = document.createElement('div');
+        featuredCol.className = 'mega-menu-featured';
 
-        // Regular link items
-        cat.items.forEach((item) => {
-          const itemEl = document.createElement('a');
-          itemEl.href = item.href;
-          itemEl.className = 'mega-menu-item';
-          const title = document.createElement('span');
-          title.className = 'mega-menu-item-title';
-          title.textContent = item.text;
-          itemEl.append(title);
-          itemsContainer.append(itemEl);
-        });
+        if (cat.featured.length > 0) {
+          if (cat.hasSectionHeadings) {
+            const featuredHeading = document.createElement('div');
+            featuredHeading.className = 'mega-menu-section-heading';
+            featuredHeading.textContent = 'Featured Services';
+            featuredCol.append(featuredHeading);
+          }
+
+          cat.featured.forEach((item) => {
+            const itemEl = document.createElement('a');
+            itemEl.href = item.href;
+            itemEl.className = 'mega-menu-item';
+            const title = document.createElement('span');
+            title.className = 'mega-menu-item-title';
+            title.textContent = item.text;
+            itemEl.append(title);
+            if (item.desc) {
+              const desc = document.createElement('span');
+              desc.className = 'mega-menu-item-desc';
+              desc.textContent = item.desc;
+              itemEl.append(desc);
+            }
+            featuredCol.append(itemEl);
+          });
+        }
+
+        columnsWrapper.append(featuredCol);
+
+        // Categories column (right side)
+        if (cat.categories.length > 0) {
+          const catCol = document.createElement('div');
+          catCol.className = 'mega-menu-cat-column';
+
+          if (cat.hasSectionHeadings) {
+            const catHeading = document.createElement('div');
+            catHeading.className = 'mega-menu-section-heading';
+            catHeading.textContent = 'Categories';
+            catCol.append(catHeading);
+          }
+
+          cat.categories.forEach((item) => {
+            const itemEl = document.createElement('a');
+            itemEl.href = item.href;
+            itemEl.className = 'mega-menu-item';
+            const title = document.createElement('span');
+            title.className = 'mega-menu-item-title';
+            title.textContent = item.text;
+            itemEl.append(title);
+            catCol.append(itemEl);
+          });
+
+          columnsWrapper.append(catCol);
+        }
 
         // Expandable items (e.g., Public Sector with sub-children)
-        let subpanel = null;
-        cat.expandables.forEach((exp, j) => {
-          const expandableEl = document.createElement('div');
-          expandableEl.className = 'mega-menu-item-expandable';
-          expandableEl.tabIndex = 0;
-          expandableEl.setAttribute('role', 'button');
-          expandableEl.setAttribute('aria-expanded', 'false');
-          const title = document.createElement('span');
-          title.className = 'mega-menu-item-title';
-          title.textContent = exp.label;
-          const chevronEl = document.createElement('span');
-          chevronEl.className = 'mega-menu-item-chevron';
-          chevronEl.setAttribute('aria-hidden', 'true');
-          expandableEl.append(title, chevronEl);
+        if (cat.expandables.length > 0) {
+          const itemsContainer = document.createElement('div');
+          itemsContainer.className = 'mega-menu-items';
+          let subpanel = null;
 
-          if (!subpanel) {
-            subpanel = document.createElement('div');
-            subpanel.className = 'mega-menu-subpanel';
+          // Add regular items first
+          cat.featured.forEach((item) => {
+            const itemEl = document.createElement('a');
+            itemEl.href = item.href;
+            itemEl.className = 'mega-menu-item';
+            const title = document.createElement('span');
+            title.className = 'mega-menu-item-title';
+            title.textContent = item.text;
+            itemEl.append(title);
+            itemsContainer.append(itemEl);
+          });
+
+          cat.expandables.forEach((exp, j) => {
+            const expandableEl = document.createElement('div');
+            expandableEl.className = 'mega-menu-item-expandable';
+            expandableEl.tabIndex = 0;
+            expandableEl.setAttribute('role', 'button');
+            expandableEl.setAttribute('aria-expanded', 'false');
+            const title = document.createElement('span');
+            title.className = 'mega-menu-item-title';
+            title.textContent = exp.label;
+            const chevronEl = document.createElement('span');
+            chevronEl.className = 'mega-menu-item-chevron';
+            chevronEl.setAttribute('aria-hidden', 'true');
+            expandableEl.append(title, chevronEl);
+
+            if (!subpanel) {
+              subpanel = document.createElement('div');
+              subpanel.className = 'mega-menu-subpanel';
+            }
+            subpanel.innerHTML = '';
+            const subItems = document.createElement('div');
+            subItems.className = 'mega-menu-items';
+            exp.children.forEach((child) => {
+              const childLink = document.createElement('a');
+              childLink.href = child.href;
+              childLink.className = 'mega-menu-item';
+              const childTitle = document.createElement('span');
+              childTitle.className = 'mega-menu-item-title';
+              childTitle.textContent = child.text;
+              childLink.append(childTitle);
+              subItems.append(childLink);
+            });
+            subpanel.append(subItems);
+            subpanel.id = `subpanel-${i}-${j}`;
+
+            const showSubpanel = () => {
+              itemsContainer.querySelectorAll('.mega-menu-item-expandable').forEach((e) => {
+                e.classList.remove('active');
+                e.setAttribute('aria-expanded', 'false');
+              });
+              if (subpanel) subpanel.classList.remove('active');
+              expandableEl.classList.add('active');
+              expandableEl.setAttribute('aria-expanded', 'true');
+              if (subpanel) subpanel.classList.add('active');
+            };
+            expandableEl.addEventListener('mouseenter', showSubpanel);
+            expandableEl.addEventListener('focus', showSubpanel);
+            subpanel?.addEventListener('mouseenter', showSubpanel);
+            itemsContainer.append(expandableEl);
+          });
+
+          // Replace columns with expandable layout
+          columnsWrapper.innerHTML = '';
+          columnsWrapper.className = 'mega-menu-columns';
+          if (subpanel) {
+            columnsWrapper.append(itemsContainer, subpanel);
+            columnsWrapper.addEventListener('mouseleave', () => {
+              itemsContainer.querySelectorAll('.mega-menu-item-expandable').forEach((e) => {
+                e.classList.remove('active');
+                e.setAttribute('aria-expanded', 'false');
+              });
+              subpanel.classList.remove('active');
+            });
+          } else {
+            columnsWrapper.append(itemsContainer);
           }
-          subpanel.innerHTML = '';
-          const subItems = document.createElement('div');
-          subItems.className = 'mega-menu-items';
-          exp.children.forEach((child) => {
-            const childLink = document.createElement('a');
-            childLink.href = child.href;
-            childLink.className = 'mega-menu-item';
-            const childTitle = document.createElement('span');
-            childTitle.className = 'mega-menu-item-title';
-            childTitle.textContent = child.text;
-            childLink.append(childTitle);
-            subItems.append(childLink);
-          });
-          subpanel.append(subItems);
-          subpanel.id = `subpanel-${i}-${j}`;
-
-          const showSubpanel = () => {
-            itemsContainer.querySelectorAll('.mega-menu-item-expandable').forEach((e) => {
-              e.classList.remove('active');
-              e.setAttribute('aria-expanded', 'false');
-            });
-            if (subpanel) subpanel.classList.remove('active');
-            expandableEl.classList.add('active');
-            expandableEl.setAttribute('aria-expanded', 'true');
-            if (subpanel) subpanel.classList.add('active');
-          };
-          expandableEl.addEventListener('mouseenter', showSubpanel);
-          expandableEl.addEventListener('focus', showSubpanel);
-          subpanel?.addEventListener('mouseenter', showSubpanel);
-          itemsContainer.append(expandableEl);
-        });
-
-        if (hasExpandable && columnsWrapper && subpanel) {
-          columnsWrapper.append(itemsContainer, subpanel);
-          columnsWrapper.addEventListener('mouseleave', () => {
-            itemsContainer.querySelectorAll('.mega-menu-item-expandable').forEach((e) => {
-              e.classList.remove('active');
-              e.setAttribute('aria-expanded', 'false');
-            });
-            if (subpanel) subpanel.classList.remove('active');
-          });
-          group.append(columnsWrapper);
-        } else {
-          group.append(itemsContainer);
         }
+
+        group.append(columnsWrapper);
         contentPanel.append(group);
       });
 
@@ -489,7 +605,7 @@ export default async function decorate(block) {
         drillDown.append(row);
       });
 
-      catGroups.forEach((cat, ci) => {
+      catGroups.forEach((cat) => {
         const catRow = document.createElement('div');
         catRow.className = 'mobile-cat-item';
         const catText = document.createElement('span');
@@ -515,7 +631,25 @@ export default async function decorate(block) {
         const links = document.createElement('div');
         links.className = 'mobile-panel-links';
 
-        cat.items.forEach((item) => {
+        // Portfolio link
+        if (cat.portfolioLink) {
+          const a = document.createElement('a');
+          a.href = cat.portfolioLink.href;
+          a.textContent = cat.portfolioLink.text;
+          a.className = 'mobile-portfolio-link';
+          links.append(a);
+        }
+
+        // Featured items (names only on mobile, no descriptions)
+        cat.featured.forEach((item) => {
+          const a = document.createElement('a');
+          a.href = item.href;
+          a.textContent = item.text;
+          links.append(a);
+        });
+
+        // Categories items
+        cat.categories.forEach((item) => {
           const a = document.createElement('a');
           a.href = item.href;
           a.textContent = item.text;

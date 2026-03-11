@@ -418,6 +418,12 @@ header nav .nav-mega[aria-expanded='true'] > .mobile-drilldown {
   color: #00827f;
 }
 
+/* Mobile portfolio link (e.g., "Infrastructure Portfolio →") */
+.mobile-panel-links a.mobile-portfolio-link {
+  color: #00827f;
+  font-weight: 700;
+}
+
 .mobile-expandable-header {
   display: flex;
   align-items: center;
@@ -976,18 +982,15 @@ header nav .nav-drop-icon {
 
   /* Content panel (right) */
   header nav .mega-menu-content {
-    flex: 0 0 315px;
+    flex: 1 1 auto;
     box-sizing: border-box;
-    margin: 20px 0;
-    padding-left: 20px;
-    min-width: 0;
+    margin: 0;
+    padding: 20px 24px;
+    min-width: 420px;
     white-space: normal;
-  }
-
-  /* Wider content when By Industry (with sub-panel) is active */
-  header nav .mega-menu-content:has(.mega-menu-columns) {
-    flex: 0 0 540px;
-    min-width: 540px;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
   }
 
   header nav .mega-menu-group {
@@ -998,14 +1001,58 @@ header nav .nav-drop-icon {
     display: block;
   }
 
-  /* Category heading in right panel */
-  header nav .mega-menu-heading {
-    font-size: 18px;
+  /* Portfolio link at top of content panel (e.g., "Infrastructure Portfolio →") */
+  header nav .mega-menu-portfolio-link {
+    display: inline-block;
+    font-size: 16px;
     font-weight: 700;
-    color: #0f3133;
-    padding-bottom: 12px;
+    color: #00827f;
+    text-decoration: none;
+    padding-bottom: 16px;
     border-bottom: 2px solid #0f3133;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
+    width: 100%;
+  }
+
+  header nav .mega-menu-portfolio-link:hover {
+    color: #006b6b;
+  }
+
+  /* Two-column layout: Featured Services + Categories */
+  header nav .mega-menu-columns {
+    display: flex;
+    gap: 24px;
+    min-width: 0;
+  }
+
+  header nav .mega-menu-single-column {
+    display: flex;
+    gap: 0;
+  }
+
+  /* Section heading (Featured Services, Categories) */
+  header nav .mega-menu-section-heading {
+    font-size: 11px;
+    font-weight: 700;
+    color: #6b7071;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+  }
+
+  /* Featured services column */
+  header nav .mega-menu-featured {
+    flex: 1 1 auto;
+    min-width: 250px;
+  }
+
+  /* Categories column (right side) */
+  header nav .mega-menu-cat-column {
+    flex: 0 0 220px;
+    min-width: 200px;
+    padding-left: 24px;
+    border-left: 1px solid #d0d4d9;
   }
 
   /* Items container */
@@ -1018,7 +1065,7 @@ header nav .nav-drop-icon {
   /* stylelint-disable-next-line no-descending-specificity */
   header nav .mega-menu-item {
     display: block;
-    padding: 16px 0;
+    padding: 10px 0;
     text-decoration: none;
     color: #0f3133;
   }
@@ -1033,24 +1080,29 @@ header nav .nav-drop-icon {
     font-size: 16px;
     font-weight: 700;
     color: #0f3133;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
 
   header nav .mega-menu-item-desc {
     display: block;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 400;
     color: #6b7071;
-    line-height: 1.5;
+    line-height: 1.4;
+    white-space: normal;
   }
 
-  /* Two-column layout for categories with expandable items (e.g. By Industry) */
-  header nav .mega-menu-columns {
-    display: flex;
-    gap: 0;
-    min-width: 0;
+  /* Category column items (no descriptions, simpler padding) */
+  header nav .mega-menu-cat-column .mega-menu-item {
+    padding: 8px 0;
   }
 
+  header nav .mega-menu-cat-column .mega-menu-item-title {
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+  /* Expandable columns layout (e.g. By Industry) */
   header nav .mega-menu-columns .mega-menu-items:first-child {
     flex: 0 0 200px;
   }
