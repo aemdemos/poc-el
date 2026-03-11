@@ -1,151 +1,65 @@
-import { moveInstrumentation } from '../../scripts/scripts.js';
+const LOGO_CDN_BASE = 'https://www.lumen.com/content/dam/lumen/new-homepage/logos/';
+const LOGO_MAP = {
+  'Google Cloud': 'Logo-GoogleCloud-1C.svg',
+  Alorica: 'Logo-Alorica-1C.svg',
+  AWS: 'Logo-AWS-1C.svg',
+  Ball: 'Logo-Ball-1C.svg',
+  'UC Berkeley': 'Logo-UCBerkeley-1C.svg',
+  IGT: 'Logo-IGT-1C.svg',
+  Intelsat: 'Logo-Intelsat-1C.svg',
+  'Konica Minolta': 'Logo-KonicaMinolta-1C.svg',
+  LVMH: 'Logo-LMVH-1C.svg',
+  Markel: 'Logo-Markel-1C.svg',
+  'Mary Kay': 'Logo-MaryKay-1C.svg',
+  Microsoft: 'Logo-Microsoft-1C.svg',
+  MTN: 'Logo-MTN-1C.svg',
+  Pemco: 'Logo-Pemco-1C.svg',
+  'Ralph Lauren': 'Logo-RalphLauren-1C.svg',
+  Seahawks: 'Logo-Seahawks-1C.svg',
+  Worldpay: 'Logo-WorldPay-1C.svg',
+  Zoom: 'Logo-Zoom-1C.svg',
+  Accertify: 'Logo-Accertify-1C.svg',
+};
 
-function updateActiveSlide(slide) {
-  const block = slide.closest('.carousel-logos');
-  const slideIndex = parseInt(slide.dataset.slideIndex, 10);
-  block.dataset.activeSlide = slideIndex;
-
-  const slides = block.querySelectorAll('.carousel-logos-slide');
-
-  slides.forEach((aSlide, idx) => {
-    aSlide.setAttribute('aria-hidden', idx !== slideIndex);
-    aSlide.querySelectorAll('a').forEach((link) => {
-      if (idx !== slideIndex) {
-        link.setAttribute('tabindex', '-1');
-      } else {
-        link.removeAttribute('tabindex');
-      }
-    });
-  });
-
-  const indicators = block.querySelectorAll('.carousel-logos-slide-indicator');
-  indicators.forEach((indicator, idx) => {
-    if (idx !== slideIndex) {
-      indicator.querySelector('button').removeAttribute('disabled');
-    } else {
-      indicator.querySelector('button').setAttribute('disabled', 'true');
-    }
-  });
-}
-
-export function showSlide(block, slideIndex = 0) {
-  const slides = block.querySelectorAll('.carousel-logos-slide');
-  let realSlideIndex = slideIndex < 0 ? slides.length - 1 : slideIndex;
-  if (slideIndex >= slides.length) realSlideIndex = 0;
-  const activeSlide = slides[realSlideIndex];
-
-  activeSlide.querySelectorAll('a').forEach((link) => link.removeAttribute('tabindex'));
-  block.querySelector('.carousel-logos-slides').scrollTo({
-    top: 0,
-    left: activeSlide.offsetLeft,
-    behavior: 'smooth',
-  });
-}
-
-function bindEvents(block) {
-  const slideIndicators = block.querySelector('.carousel-logos-slide-indicators');
-  if (!slideIndicators) return;
-
-  slideIndicators.querySelectorAll('button').forEach((button) => {
-    button.addEventListener('click', (e) => {
-      const slideIndicator = e.currentTarget.parentElement;
-      showSlide(block, parseInt(slideIndicator.dataset.targetSlide, 10));
-    });
-  });
-
-  block.querySelector('.slide-prev').addEventListener('click', () => {
-    showSlide(block, parseInt(block.dataset.activeSlide, 10) - 1);
-  });
-  block.querySelector('.slide-next').addEventListener('click', () => {
-    showSlide(block, parseInt(block.dataset.activeSlide, 10) + 1);
-  });
-
-  const slideObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) updateActiveSlide(entry.target);
-    });
-  }, { threshold: 0.5 });
-  block.querySelectorAll('.carousel-logos-slide').forEach((slide) => {
-    slideObserver.observe(slide);
-  });
-}
-
-function createSlide(row, slideIndex, carouselId) {
-  const slide = document.createElement('li');
-  slide.dataset.slideIndex = slideIndex;
-  slide.setAttribute('id', `carousel-logos-${carouselId}-slide-${slideIndex}`);
-  slide.classList.add('carousel-logos-slide');
-
-  row.querySelectorAll(':scope > div').forEach((column, colIdx) => {
-    column.classList.add(`carousel-logos-slide-${colIdx === 0 ? 'image' : 'content'}`);
-    slide.append(column);
-  });
-
-  const labeledBy = slide.querySelector('h1, h2, h3, h4, h5, h6');
-  if (labeledBy) {
-    slide.setAttribute('aria-labelledby', labeledBy.getAttribute('id'));
-  }
-
-  return slide;
-}
-
-let carouselId = 0;
 export default async function decorate(block) {
-  carouselId += 1;
-  block.setAttribute('id', `carousel-logos-${carouselId}`);
-  const rows = block.querySelectorAll(':scope > div');
-  const isSingleSlide = rows.length < 2;
+  const rows = [...block.querySelectorAll(':scope > div')];
 
-  const placeholders = {};
+  // Build logo list
+  const track = document.createElement('div');
+  track.classList.add('carousel-logos-track');
 
-  block.setAttribute('role', 'region');
-  block.setAttribute('aria-roledescription', placeholders.carousel || 'Carousel');
+  rows.forEach((row) => {
+    const img = row.querySelector('img');
+    if (!img) return;
 
-  const container = document.createElement('div');
-  container.classList.add('carousel-logos-slides-container');
+    const logoItem = document.createElement('div');
+    logoItem.classList.add('carousel-logos-item');
 
-  const slidesWrapper = document.createElement('ul');
-  slidesWrapper.classList.add('carousel-logos-slides');
-  block.prepend(slidesWrapper);
-
-  let slideIndicators;
-  if (!isSingleSlide) {
-    const slideIndicatorsNav = document.createElement('nav');
-    slideIndicatorsNav.setAttribute('aria-label', placeholders.carouselSlideControls || 'Carousel Slide Controls');
-    slideIndicators = document.createElement('ol');
-    slideIndicators.classList.add('carousel-logos-slide-indicators');
-    slideIndicatorsNav.append(slideIndicators);
-    block.append(slideIndicatorsNav);
-
-    const slideNavButtons = document.createElement('div');
-    slideNavButtons.classList.add('carousel-logos-navigation-buttons');
-    slideNavButtons.innerHTML = `
-      <button type="button" class= "slide-prev" aria-label="${placeholders.previousSlide || 'Previous Slide'}"></button>
-      <button type="button" class="slide-next" aria-label="${placeholders.nextSlide || 'Next Slide'}"></button>
-    `;
-
-    container.append(slideNavButtons);
-  }
-
-  rows.forEach((row, idx) => {
-    const slide = createSlide(row, idx, carouselId);
-    moveInstrumentation(row, slide);
-    slidesWrapper.append(slide);
-
-    if (slideIndicators) {
-      const indicator = document.createElement('li');
-      indicator.classList.add('carousel-logos-slide-indicator');
-      indicator.dataset.targetSlide = idx;
-      indicator.innerHTML = `<button type="button" aria-label="${placeholders.showSlide || 'Show Slide'} ${idx + 1} ${placeholders.of || 'of'} ${rows.length}"></button>`;
-      slideIndicators.append(indicator);
+    // Replace with CDN SVG if mapped
+    const logoFile = LOGO_MAP[img.alt];
+    if (logoFile) {
+      const newImg = document.createElement('img');
+      newImg.src = `${LOGO_CDN_BASE}${logoFile}`;
+      newImg.alt = img.alt;
+      newImg.loading = 'lazy';
+      logoItem.append(newImg);
+    } else {
+      logoItem.append(img);
     }
-    row.remove();
+
+    track.append(logoItem);
   });
 
-  container.append(slidesWrapper);
-  block.prepend(container);
+  // Duplicate logos for seamless infinite scroll
+  const clone = track.cloneNode(true);
+  clone.classList.add('carousel-logos-track-clone');
+  clone.setAttribute('aria-hidden', 'true');
 
-  if (!isSingleSlide) {
-    bindEvents(block);
-  }
+  // Build final structure
+  block.textContent = '';
+  const slider = document.createElement('div');
+  slider.classList.add('carousel-logos-slider');
+  slider.append(track);
+  slider.append(clone);
+  block.append(slider);
 }
