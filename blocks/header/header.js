@@ -5,6 +5,12 @@ import { loadFragment } from '../fragment/fragment.js';
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 1200px)');
 
+function closeMobileDrillDown(nav) {
+  nav.querySelectorAll('.mobile-slide-panel.active').forEach((panel) => {
+    panel.classList.remove('active');
+  });
+}
+
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
@@ -15,6 +21,7 @@ function closeOnEscape(e) {
       toggleAllNavSections(navSections);
       navSectionExpanded.focus();
     } else if (!isDesktop.matches) {
+      closeMobileDrillDown(nav);
       // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections);
       nav.querySelector('button').focus();
@@ -75,6 +82,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, 'false');
+  closeMobileDrillDown(nav);
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
@@ -177,7 +185,27 @@ export default async function decorate(block) {
   // load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/en-us/nav';
-  const fragment = await loadFragment(navPath);
+  let fragment = await loadFragment(navPath);
+
+  // Dev override: always prefer local nav-dev.html over CDN nav (CDN may be stale)
+  try {
+    const devResp = await fetch('/blocks/header/nav-dev.html');
+    if (devResp.ok) {
+      const devFragment = document.createElement('main');
+      devFragment.innerHTML = await devResp.text();
+      // Wrap each top-level div as a section (mimic fragment loading)
+      [...devFragment.querySelectorAll(':scope > div')].forEach((div) => {
+        const section = document.createElement('div');
+        section.classList.add('section');
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('default-content-wrapper');
+        while (div.firstChild) wrapper.append(div.firstChild);
+        section.append(wrapper);
+        div.replaceWith(section);
+      });
+      fragment = devFragment;
+    }
+  } catch (e) { /* use CDN fragment as-is */ }
 
   // decorate nav DOM
   block.textContent = '';
@@ -202,12 +230,19 @@ export default async function decorate(block) {
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
+      navSection.addEventListener('click', (e) => {
+        if (e.target.closest('.mobile-drilldown')) return;
         const expanded = navSection.getAttribute('aria-expanded') === 'true';
         if (isDesktop.matches) {
           toggleAllNavSections(navSections);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        } else {
+          if (e.target.closest('a') && !navSection.classList.contains('nav-drop')) return;
+          e.preventDefault();
+          toggleAllNavSections(navSections);
+          closeMobileDrillDown(nav);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
-        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       });
       // Desktop: open on hover
       navSection.addEventListener('mouseenter', () => {
@@ -227,155 +262,21 @@ export default async function decorate(block) {
       buttonContainer.querySelector('.button').classList.remove('button');
     });
 
-    // Mega-menu: category groupings by URL pattern with fallback items
-    // Fallback items ensure all nav links render even if the pipeline drops some
-    const megaMenuConfig = {
-      Solutions: [
-        {
-          label: 'By Business Outcome',
-          match: (h) => h.includes('/solutions/use-case/') && !['artificial-intelligence', 'cloud-connectivity', 'network-on-demand'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'Reliable & Secure Connectivity', href: '/en-us/solutions/use-case/reliable-secure-connectivity', desc: 'DIA and SASE integrate to offer secure, consistent connectivity with proactive threat protection enabling seamless and scalable network modernization.' },
-            { text: 'Secure Customer Experience & Connectivity', href: '/en-us/solutions/use-case/secure-reliable-connectivity-for-business-continuity', desc: 'Provide secure, uninterrupted internet connectivity to all your locations and cloud resources with bundled DIA and DDoS Mitigation.' },
-            { text: 'Flexible Networking for Secure Access', href: '/en-us/solutions/use-case/flexible-networking-for-secure-access', desc: 'IP VPN and SASE provide secure, flexible connections between sites, data centers, private networks, cloud environments and over the internet.' },
-          ],
-        },
-        {
-          label: 'By Industry',
-          match: (h) => h.includes('/industries/'),
-          expected: [
-            { text: 'Energy', href: '/en-us/industries/energy-utilities' },
-            { text: 'Financial Services', href: '/en-us/industries/financial-services' },
-            { text: 'Gaming Network', href: '/en-us/industries/gaming-network' },
-            { text: 'Healthcare', href: '/en-us/industries/healthcare' },
-            { text: 'Manufacturing', href: '/en-us/industries/manufacturing' },
-            { text: 'Media & Entertainment', href: '/en-us/industries/media-entertainment' },
-            { text: 'Pharmaceuticals', href: '/en-us/industries/pharmaceuticals' },
-            { text: 'Retail', href: '/en-us/industries/retail' },
-            { text: 'Technology', href: '/en-us/industries/technology' },
-          ],
-        },
-        {
-          label: 'By Business Type',
-          match: (h) => h.includes('/solutions/business-size/') || h.includes('/public-sector'),
-          expected: [
-            { text: 'Enterprise Business', href: '/en-us/solutions/business-size/large-enterprise', desc: 'Explore next-gen connectivity and security solutions for your large, distributed enterprise.' },
-            { text: 'Midsize Business', href: '/en-us/solutions/business-size/midsize', desc: 'Discover how to achieve speed, scale and security for your midsize business with resources and product recommendations.' },
-            { text: 'Public Sector', href: '/en-us/public-sector', desc: 'Explore how to attain efficiency, security and connectivity solutions for your public sector organization utilizing helpful resources.' },
-            { text: 'Wholesale', href: '/en-us/solutions/business-size/wholesale', desc: 'Future-ready wholesale networking, security and voice solutions to meet your customers\u2019 digital business demands.' },
-          ],
-        },
-        {
-          label: 'By Technical Use Case',
-          match: (h) => ['artificial-intelligence', 'cloud-connectivity', 'network-on-demand'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'AI', href: '/en-us/solutions/use-case/artificial-intelligence', desc: 'Support large AI workloads by using programmable connectivity to control bandwidth, path and latency.' },
-            { text: 'Cloud Connectivity', href: '/en-us/solutions/use-case/cloud-connectivity', desc: 'Connect across high-bandwidth clouds or dynamic multiclouds with expansive network reach and simplified architecture designed to support AI workloads.' },
-            { text: 'Network-as-a-Service', href: '/en-us/solutions/use-case/network-on-demand', desc: 'Quickly deliver reliable, secure connectivity services that scale to your business and offer affordable pay-as-you-go pricing.' },
-          ],
-        },
-      ],
-      Services: [
-        {
-          label: 'Infrastructure',
-          match: (h) => ['wavelengths', 'colocation', 'dark-fiber', 'enterprise-broadband'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'Wavelengths', href: '/en-us/services/wavelengths', desc: 'High-capacity optical transport for reliable, scalable connectivity.' },
-            { text: 'Colocation', href: '/en-us/services/colocation', desc: 'Secure, reliable data center space with robust connectivity options.' },
-            { text: 'Dark Fiber', href: '/en-us/services/dark-fiber', desc: 'Dedicated fiber infrastructure for maximum control and scalability.' },
-            { text: 'Enterprise Broadband', href: '/en-us/services/enterprise-broadband', desc: 'High-speed, reliable internet access for distributed business locations.' },
-          ],
-        },
-        {
-          label: 'Connectivity',
-          match: (h) => ['ethernet', 'ip-vpn', 'multi-cloud-gateway', 'sd-wan'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'Ethernet', href: '/en-us/services/ethernet', desc: 'Scalable, high-performance Ethernet services for site-to-site connectivity.' },
-            { text: 'IP VPN', href: '/en-us/services/ip-vpn', desc: 'Secure, private network connectivity across your enterprise locations.' },
-            { text: 'Multi-Cloud Gateway', href: '/en-us/services/multi-cloud-gateway', desc: 'Seamless, secure connections to multiple cloud providers.' },
-            { text: 'SD-WAN', href: '/en-us/services/sd-wan', desc: 'Intelligent, software-defined WAN for optimized application performance.' },
-          ],
-        },
-        {
-          label: 'Security',
-          match: (h) => ['ddos', 'sase'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'DDoS', href: '/en-us/services/ddos', desc: 'Proactive DDoS mitigation powered by Black Lotus Labs threat intelligence.' },
-            { text: 'SASE', href: '/en-us/services/sase', desc: 'Converged networking and security for secure access from anywhere.' },
-          ],
-        },
-        {
-          label: 'Communication',
-          match: (h) => ['cloud-voice', 'ucc', 'contact-center'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'Cloud Voice', href: '/en-us/services/lumen-cloud-voice', desc: 'Cloud-based voice services for modern business communication.' },
-            { text: 'UC&C', href: '/en-us/services/ucc', desc: 'Unified communications and collaboration to connect distributed teams.' },
-            { text: 'Contact Center', href: '/en-us/services/contact-center', desc: 'Intelligent contact center solutions to enhance customer experience.' },
-          ],
-        },
-      ],
-      Partners: [
-        {
-          label: 'Connected Ecosystem',
-          match: (h) => h.includes('/partner/'),
-          expected: [
-            { text: 'Strategic Technology Partners', href: '/en-us/partner/strategic-technology-partners', desc: 'Explore our ecosystem of technology partners driving innovation.' },
-            { text: 'Lumen Validated Designs', href: '/en-us/partner/validated-designs', desc: 'Pre-tested, partner-integrated solutions for faster deployment.' },
-          ],
-        },
-        {
-          label: 'By Technology Partner',
-          match: (h) => h.includes('/alliances/'),
-          expected: [
-            { text: 'Amazon Web Services', href: '/en-us/alliances/aws', desc: 'Direct, low-latency connectivity to AWS cloud services.' },
-            { text: 'Cisco', href: '/en-us/alliances/cisco', desc: 'Integrated networking solutions powered by Cisco technology.' },
-            { text: 'Google Cloud', href: '/en-us/alliances/google-cloud', desc: 'Optimized connectivity to Google Cloud Platform.' },
-            { text: 'Microsoft', href: '/en-us/alliances/microsoft', desc: 'Enterprise-grade connections to Microsoft Azure and 365.' },
-          ],
-        },
-      ],
-      Resources: [
-        {
-          label: 'Why Lumen',
-          match: (h) => ['why-lumen', 'black-lotus', 'network-maps'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'Why Lumen', href: '/en-us/why-lumen', desc: 'Discover what sets Lumen apart as the trusted network for AI.' },
-            { text: 'Black Lotus Labs', href: '/en-us/security/black-lotus-labs', desc: 'Threat intelligence research protecting businesses worldwide.' },
-            { text: 'Network Maps', href: '/en-us/resources/network-maps', desc: 'Explore our global fiber network and data center footprint.' },
-          ],
-        },
-        {
-          label: 'About Us',
-          match: (h) => ['customer-success', '/about'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'Customer Stories', href: '/en-us/resources/customer-success-stories', desc: 'See how businesses achieve results with Lumen solutions.' },
-            { text: 'About Us', href: '/en-us/about', desc: 'Learn about Lumen\u2019s mission, leadership and global presence.' },
-          ],
-        },
-        {
-          label: 'Newsroom',
-          match: (h) => ['blog.lumen', 'ir.lumen', 'developer.lumen'].some((s) => h.includes(s)),
-          expected: [
-            { text: 'Blog & News', href: 'https://blog.lumen.com', desc: 'Latest insights and thought leadership from Lumen experts.' },
-            { text: 'News Releases', href: 'https://ir.lumen.com/news/default.aspx', desc: 'Official press releases and corporate announcements.' },
-            { text: 'Developers', href: 'https://developer.lumen.com/devcenter/home', desc: 'APIs, tools and resources for developers building on Lumen.' },
-          ],
-        },
-      ],
-    };
-
-    // Build mega-menu for nav-drops that have category config
+    // Build mega-menu from flat list with bold category markers authored in nav.md
+    // Pattern: **Bold Text** = category separator, _Italic Text_ = expandable parent
+    // Regular link items are grouped under the preceding category
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li.nav-drop').forEach((navDrop) => {
-      const label = getDirectTextContent(navDrop);
-      const config = megaMenuConfig[label];
-      if (!config) return;
-
       const subUl = navDrop.querySelector(':scope > ul');
       if (!subUl) return;
 
+      // Detect bold markers (<strong>) as category separators in the flat list
+      const allItems = [...subUl.querySelectorAll(':scope > li')];
+      const hasMarkers = allItems.some((li) => !li.querySelector('a') && li.querySelector('strong'));
+      if (!hasMarkers) return;
+
       navDrop.classList.add('nav-mega');
 
-      // Add inline chevron inside the text element (position:static breaks ::after)
+      // Add inline chevron
       const dropIcon = document.createElement('span');
       dropIcon.className = 'nav-drop-icon';
       const textEl = navDrop.querySelector(':scope > p');
@@ -385,33 +286,106 @@ export default async function decorate(block) {
         navDrop.insertBefore(dropIcon, navDrop.querySelector('ul'));
       }
 
-      // Group items into categories, using DOM items where available and
-      // injecting fallback items for any the pipeline may have dropped
-      const domItems = [...subUl.querySelectorAll(':scope > li')];
-      const groups = config.map((cat) => {
-        const matched = domItems.filter((li) => {
-          const a = li.querySelector('a');
-          return a && cat.match(a.getAttribute('href') || '');
-        });
-        // Build complete item list from expected, using DOM nodes when available
-        const completeItems = (cat.expected || []).map((exp) => {
-          const found = matched.find((li) => {
-            const a = li.querySelector('a');
-            return a && a.getAttribute('href') === exp.href;
-          });
-          if (found) return found.cloneNode(true);
-          // Create fallback li for items dropped by the pipeline
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = exp.href;
-          a.textContent = exp.text;
-          li.append(a);
-          return li;
-        });
-        return { label: cat.label, items: completeItems };
+      // Parse flat list into category groups using bold markers
+      // Conventions:
+      //   **Bold Text** = category separator
+      //   Link ending in "Portfolio →" right after bold = portfolio link
+      //   <del>Section Heading</del> (~~text~~ in md) = section label (Featured Services, Categories)
+      //   link | description text = item with description
+      //   _Italic Text_ without link = expandable parent (e.g., Public Sector)
+      //   **[Bold Link](url)** = trailing direct link (e.g., View All Products)
+      //   Links before first bold = standalone direct links
+      const catGroups = [];
+      const standaloneItems = [];
+      const trailingItems = [];
+      let currentGroup = null;
+      let expandableCtx = null;
+      let currentSection = 'featured';
+
+      allItems.forEach((li) => {
+        const strong = li.querySelector('strong');
+        const em = li.querySelector('em');
+        const del = li.querySelector('del');
+        const link = li.querySelector('a');
+
+        // Bold text WITH link = trailing direct link (e.g., View All Products)
+        if (strong && link) {
+          trailingItems.push({ href: link.getAttribute('href') || link.href, text: link.textContent });
+          return;
+        }
+
+        // Bold text without link = category separator
+        if (strong && !link && !em && !del) {
+          expandableCtx = null;
+          currentSection = 'featured';
+          currentGroup = {
+            label: strong.textContent.trim(),
+            portfolioLink: null,
+            featured: [],
+            categories: [],
+            expandables: [],
+            hasSectionHeadings: false,
+          };
+          catGroups.push(currentGroup);
+          return;
+        }
+
+        // Strikethrough = section heading (Featured Services, Categories)
+        if (del) {
+          if (currentGroup) currentGroup.hasSectionHeadings = true;
+          const heading = del.textContent.trim().toLowerCase();
+          if (heading.includes('categories')) {
+            currentSection = 'categories';
+          } else {
+            currentSection = 'featured';
+          }
+          return;
+        }
+
+        // Italic text without link = expandable parent (e.g., Public Sector)
+        if (em && !link && !strong) {
+          if (currentGroup) {
+            expandableCtx = { label: em.textContent.trim(), children: [] };
+            currentGroup.expandables.push(expandableCtx);
+          }
+          return;
+        }
+
+        // Link item
+        if (link) {
+          const linkText = link.textContent.trim();
+          const href = link.getAttribute('href') || link.href;
+
+          // Portfolio link: text ends with "Portfolio →" (right after a bold category)
+          if (currentGroup && !currentGroup.portfolioLink && linkText.endsWith('Portfolio →')) {
+            currentGroup.portfolioLink = { href, text: linkText };
+            return;
+          }
+
+          // Extract description from " | description" text after the link
+          let desc = '';
+          const liText = li.textContent;
+          const pipeIdx = liText.indexOf(' | ');
+          if (pipeIdx !== -1) {
+            desc = liText.substring(pipeIdx + 3).trim();
+          }
+
+          const item = { href, text: linkText, desc };
+          if (!currentGroup) {
+            standaloneItems.push(item);
+          } else if (expandableCtx) {
+            expandableCtx.children.push(item);
+          } else if (currentSection === 'categories') {
+            currentGroup.categories.push(item);
+          } else {
+            currentGroup.featured.push(item);
+          }
+        }
       });
 
-      // Desktop: build two-panel mega-menu
+      if (catGroups.length === 0) return;
+
+      // Build two-panel mega-menu
       const megaMenu = document.createElement('div');
       megaMenu.className = 'mega-menu';
 
@@ -421,58 +395,191 @@ export default async function decorate(block) {
       const contentPanel = document.createElement('div');
       contentPanel.className = 'mega-menu-content';
 
-      // Find the matching config to get descriptions
-      const catConfig = config;
-
-      groups.forEach((grp, i) => {
+      catGroups.forEach((cat, i) => {
         // Category label with chevron
         const catEl = document.createElement('div');
         catEl.className = `mega-menu-cat${i === 0 ? ' active' : ''}`;
         const catText = document.createElement('span');
-        catText.textContent = grp.label;
+        catText.textContent = cat.label;
         const chevron = document.createElement('span');
         chevron.className = 'mega-menu-chevron';
         catEl.append(catText, chevron);
         catEl.dataset.index = i;
         catPanel.append(catEl);
 
-        // Content group with category heading + items with descriptions
+        // Content group
         const group = document.createElement('div');
         group.className = `mega-menu-group${i === 0 ? ' active' : ''}`;
         group.dataset.index = i;
 
-        // Category title heading with underline
-        const heading = document.createElement('div');
-        heading.className = 'mega-menu-heading';
-        heading.textContent = grp.label;
-        group.append(heading);
+        // Portfolio link at the top (e.g., "Infrastructure Portfolio →")
+        if (cat.portfolioLink) {
+          const portfolioEl = document.createElement('a');
+          portfolioEl.href = cat.portfolioLink.href;
+          portfolioEl.className = 'mega-menu-portfolio-link';
+          portfolioEl.textContent = cat.portfolioLink.text;
+          group.append(portfolioEl);
+        }
 
-        // Items with title + description
-        const itemsContainer = document.createElement('div');
-        itemsContainer.className = 'mega-menu-items';
-        const expectedItems = catConfig[i].expected || [];
-        grp.items.forEach((li, j) => {
-          const a = li.querySelector('a');
-          if (!a) return;
-          const itemEl = document.createElement('a');
-          itemEl.href = a.getAttribute('href') || a.href;
-          itemEl.className = 'mega-menu-item';
-          const title = document.createElement('span');
-          title.className = 'mega-menu-item-title';
-          title.textContent = a.textContent;
-          itemEl.append(title);
-          // Add description if available
-          const expItem = expectedItems[j];
-          if (expItem && expItem.desc) {
-            const desc = document.createElement('span');
-            desc.className = 'mega-menu-item-desc';
-            desc.textContent = expItem.desc;
-            itemEl.append(desc);
+        // Determine layout: two-column if has categories or expandables
+        const hasTwoColumns = cat.categories.length > 0 || cat.expandables.length > 0;
+        const columnsWrapper = document.createElement('div');
+        columnsWrapper.className = hasTwoColumns ? 'mega-menu-columns' : 'mega-menu-single-column';
+
+        // Featured Services column
+        const featuredCol = document.createElement('div');
+        featuredCol.className = 'mega-menu-featured';
+
+        if (cat.featured.length > 0) {
+          if (cat.hasSectionHeadings) {
+            const featuredHeading = document.createElement('div');
+            featuredHeading.className = 'mega-menu-section-heading';
+            featuredHeading.textContent = 'Featured Services';
+            featuredCol.append(featuredHeading);
           }
-          itemsContainer.append(itemEl);
-        });
-        group.append(itemsContainer);
+
+          cat.featured.forEach((item) => {
+            const itemEl = document.createElement('a');
+            itemEl.href = item.href;
+            itemEl.className = 'mega-menu-item';
+            const title = document.createElement('span');
+            title.className = 'mega-menu-item-title';
+            title.textContent = item.text;
+            itemEl.append(title);
+            if (item.desc) {
+              const desc = document.createElement('span');
+              desc.className = 'mega-menu-item-desc';
+              desc.textContent = item.desc;
+              itemEl.append(desc);
+            }
+            featuredCol.append(itemEl);
+          });
+        }
+
+        columnsWrapper.append(featuredCol);
+
+        // Categories column (right side)
+        if (cat.categories.length > 0) {
+          const catCol = document.createElement('div');
+          catCol.className = 'mega-menu-cat-column';
+
+          if (cat.hasSectionHeadings) {
+            const catHeading = document.createElement('div');
+            catHeading.className = 'mega-menu-section-heading';
+            catHeading.textContent = 'Categories';
+            catCol.append(catHeading);
+          }
+
+          cat.categories.forEach((item) => {
+            const itemEl = document.createElement('a');
+            itemEl.href = item.href;
+            itemEl.className = 'mega-menu-item';
+            const title = document.createElement('span');
+            title.className = 'mega-menu-item-title';
+            title.textContent = item.text;
+            itemEl.append(title);
+            catCol.append(itemEl);
+          });
+
+          columnsWrapper.append(catCol);
+        }
+
+        // Expandable items (e.g., Public Sector with sub-children)
+        if (cat.expandables.length > 0) {
+          const itemsContainer = document.createElement('div');
+          itemsContainer.className = 'mega-menu-items';
+          let subpanel = null;
+
+          // Add regular items first
+          cat.featured.forEach((item) => {
+            const itemEl = document.createElement('a');
+            itemEl.href = item.href;
+            itemEl.className = 'mega-menu-item';
+            const title = document.createElement('span');
+            title.className = 'mega-menu-item-title';
+            title.textContent = item.text;
+            itemEl.append(title);
+            itemsContainer.append(itemEl);
+          });
+
+          cat.expandables.forEach((exp, j) => {
+            const expandableEl = document.createElement('div');
+            expandableEl.className = 'mega-menu-item-expandable';
+            expandableEl.tabIndex = 0;
+            expandableEl.setAttribute('role', 'button');
+            expandableEl.setAttribute('aria-expanded', 'false');
+            const title = document.createElement('span');
+            title.className = 'mega-menu-item-title';
+            title.textContent = exp.label;
+            const chevronEl = document.createElement('span');
+            chevronEl.className = 'mega-menu-item-chevron';
+            chevronEl.setAttribute('aria-hidden', 'true');
+            expandableEl.append(title, chevronEl);
+
+            if (!subpanel) {
+              subpanel = document.createElement('div');
+              subpanel.className = 'mega-menu-subpanel';
+            }
+            subpanel.innerHTML = '';
+            const subItems = document.createElement('div');
+            subItems.className = 'mega-menu-items';
+            exp.children.forEach((child) => {
+              const childLink = document.createElement('a');
+              childLink.href = child.href;
+              childLink.className = 'mega-menu-item';
+              const childTitle = document.createElement('span');
+              childTitle.className = 'mega-menu-item-title';
+              childTitle.textContent = child.text;
+              childLink.append(childTitle);
+              subItems.append(childLink);
+            });
+            subpanel.append(subItems);
+            subpanel.id = `subpanel-${i}-${j}`;
+
+            const showSubpanel = () => {
+              itemsContainer.querySelectorAll('.mega-menu-item-expandable').forEach((e) => {
+                e.classList.remove('active');
+                e.setAttribute('aria-expanded', 'false');
+              });
+              if (subpanel) subpanel.classList.remove('active');
+              expandableEl.classList.add('active');
+              expandableEl.setAttribute('aria-expanded', 'true');
+              if (subpanel) subpanel.classList.add('active');
+            };
+            expandableEl.addEventListener('mouseenter', showSubpanel);
+            expandableEl.addEventListener('focus', showSubpanel);
+            subpanel?.addEventListener('mouseenter', showSubpanel);
+            itemsContainer.append(expandableEl);
+          });
+
+          // Replace columns with expandable layout
+          columnsWrapper.innerHTML = '';
+          columnsWrapper.className = 'mega-menu-columns';
+          if (subpanel) {
+            columnsWrapper.append(itemsContainer, subpanel);
+            columnsWrapper.addEventListener('mouseleave', () => {
+              itemsContainer.querySelectorAll('.mega-menu-item-expandable').forEach((e) => {
+                e.classList.remove('active');
+                e.setAttribute('aria-expanded', 'false');
+              });
+              subpanel.classList.remove('active');
+            });
+          } else {
+            columnsWrapper.append(itemsContainer);
+          }
+        }
+
+        group.append(columnsWrapper);
         contentPanel.append(group);
+      });
+
+      // Add trailing direct links to the categories panel (e.g., "View All Products")
+      trailingItems.forEach((item) => {
+        const catLink = document.createElement('a');
+        catLink.href = item.href;
+        catLink.className = 'mega-menu-cat mega-menu-cat-link';
+        catLink.textContent = item.text;
+        catPanel.append(catLink);
       });
 
       megaMenu.append(catPanel, contentPanel);
@@ -481,10 +588,122 @@ export default async function decorate(block) {
       // Prevent clicks inside mega-menu from closing dropdown
       megaMenu.addEventListener('click', (e) => e.stopPropagation());
 
-      // Category hover switching
+      // Build mobile drill-down for this mega nav item
+      const parentLabel = (navDrop.querySelector(':scope > a') || navDrop.querySelector(':scope > p'))?.textContent.trim() || '';
+      const drillDown = document.createElement('div');
+      drillDown.className = 'mobile-drilldown';
+
+      // Interleave standalone direct links and drillable categories
+      // Standalone links go first, then categories
+      standaloneItems.forEach((item) => {
+        const row = document.createElement('div');
+        row.className = 'mobile-direct-link';
+        const a = document.createElement('a');
+        a.href = item.href;
+        a.textContent = item.text;
+        row.append(a);
+        drillDown.append(row);
+      });
+
+      catGroups.forEach((cat) => {
+        const catRow = document.createElement('div');
+        catRow.className = 'mobile-cat-item';
+        const catText = document.createElement('span');
+        catText.textContent = cat.label;
+        const catChevron = document.createElement('span');
+        catChevron.className = 'mobile-cat-chevron';
+        catRow.append(catText, catChevron);
+        drillDown.append(catRow);
+
+        // Slide panel for this category
+        const panel = document.createElement('div');
+        panel.className = 'mobile-slide-panel';
+
+        const backBtn = document.createElement('button');
+        backBtn.className = 'mobile-back-btn';
+        backBtn.textContent = `Back to ${parentLabel}`;
+        backBtn.addEventListener('click', () => panel.classList.remove('active'));
+
+        const heading = document.createElement('div');
+        heading.className = 'mobile-panel-heading';
+        heading.textContent = cat.label;
+
+        const links = document.createElement('div');
+        links.className = 'mobile-panel-links';
+
+        // Portfolio link
+        if (cat.portfolioLink) {
+          const a = document.createElement('a');
+          a.href = cat.portfolioLink.href;
+          a.textContent = cat.portfolioLink.text;
+          a.className = 'mobile-portfolio-link';
+          links.append(a);
+        }
+
+        // Featured items (names only on mobile, no descriptions)
+        cat.featured.forEach((item) => {
+          const a = document.createElement('a');
+          a.href = item.href;
+          a.textContent = item.text;
+          links.append(a);
+        });
+
+        // Categories items
+        cat.categories.forEach((item) => {
+          const a = document.createElement('a');
+          a.href = item.href;
+          a.textContent = item.text;
+          links.append(a);
+        });
+
+        // Expandable sub-accordions within the panel
+        cat.expandables.forEach((exp) => {
+          const expHeader = document.createElement('div');
+          expHeader.className = 'mobile-expandable-header';
+          expHeader.textContent = exp.label;
+
+          const expChildren = document.createElement('div');
+          expChildren.className = 'mobile-expandable-children';
+          exp.children.forEach((child) => {
+            const a = document.createElement('a');
+            a.href = child.href;
+            a.textContent = child.text;
+            expChildren.append(a);
+          });
+
+          expHeader.addEventListener('click', () => {
+            expHeader.classList.toggle('open');
+            expChildren.classList.toggle('open');
+          });
+
+          links.append(expHeader, expChildren);
+        });
+
+        panel.append(backBtn, heading, links);
+        catRow.addEventListener('click', () => panel.classList.add('active'));
+
+        drillDown.append(panel);
+      });
+
+      // Trailing direct links at bottom of mobile drilldown (e.g., "View All Products")
+      trailingItems.forEach((item) => {
+        const row = document.createElement('div');
+        row.className = 'mobile-direct-link';
+        const a = document.createElement('a');
+        a.href = item.href;
+        a.textContent = item.text;
+        row.append(a);
+        drillDown.append(row);
+      });
+
+      // Prevent drill-down clicks from bubbling to nav section toggle
+      drillDown.addEventListener('click', (e) => e.stopPropagation());
+      navDrop.append(drillDown);
+
+      // Category hover switching (skip direct link items)
       catPanel.addEventListener('mouseover', (e) => {
         const catEl = e.target.closest('.mega-menu-cat');
-        if (!catEl) return;
+        if (!catEl || catEl.classList.contains('mega-menu-cat-link')) return;
         catPanel.querySelectorAll('.mega-menu-cat').forEach((c) => c.classList.remove('active'));
         contentPanel.querySelectorAll('.mega-menu-group').forEach((g) => g.classList.remove('active'));
         catEl.classList.add('active');
