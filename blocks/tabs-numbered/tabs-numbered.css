@@ -96,8 +96,12 @@
   scroll-snap-align: start;
 }
 
+.tabs-numbered .tabs-numbered-panel[aria-hidden='true'] {
+  display: none;
+}
+
 .tabs-numbered .tabs-numbered-panel h2 {
-  font-family: Gotham, Arial, Helvetica;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
   font-size: 32px;
   font-weight: 700;
   color: #0f3133;
@@ -168,8 +172,7 @@
   .tabs-numbered .tabs-numbered-track {
     grid-column: 1;
     grid-row: 2;
-    overflow-x: auto;
-    overflow-y: visible;
+    overflow: auto visible;
     scroll-snap-type: x mandatory;
     display: grid;
   }
