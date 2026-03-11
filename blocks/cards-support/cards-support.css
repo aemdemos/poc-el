@@ -1,25 +1,49 @@
+/* Section-level styling for the cards-support container */
+.cards-support-container {
+  background-color: #f4f4f4;
+  padding: 40px 40px 64px;
+}
+
+.cards-support-container > .default-content-wrapper {
+  margin-bottom: 32px;
+}
+
+.cards-support-container > .default-content-wrapper h2 {
+  font-size: 48px;
+  line-height: 60px;
+  font-weight: 700;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
+  color: #0f3133;
+  letter-spacing: -0.96px;
+  margin: 0 0 16px;
+}
+
+.cards-support-container > .default-content-wrapper p {
+  font-size: 16px;
+  line-height: 24px;
+  color: #333;
+  margin: 0;
+}
+
+.cards-support-container a:any-link {
+  color: black;
+  font-family: Gotham, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: -0.32px;
+}
+
+/* Hero image banner - hidden on mobile */
+.cards-support-hero {
+  display: none;
+}
+
+/* Cards block styling */
 .cards-support {
   font-size: var(--body-font-size-s);
   line-height: 150%;
   font-family: Gotham-book, Arial, Helvetica, sans-serif;
   color: #414448;
-}
-
-.cards-support-container h2 {
-  font-size: 48px;
-  line-height: 60px;
-  font-weight: 700;
-  font-family: Gotham, Arial, Helvetica;
-  color: #0f3133;
-  letter-spacing: -0.96px;
-}
-
-.cards-support-container a:any-link {
-  color: black;
-  font-family: Gotham;
-  font-weight: 500;
-  font-size: 16px;
-  letter-spacing: -0.32px;
 }
 
 .cards-support > ul {
@@ -48,4 +72,54 @@
 
 .cards-support > ul > li img {
   object-fit: cover;
+}
+
+/* Desktop 1200+: hero image left, heading right, cards full width below */
+@media (width >= 1200px) {
+  .cards-support-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    padding: 100px 40px 64px;
+    margin-top: 120px;
+    overflow: visible;
+  }
+
+  /* Hero image: left column, overflows top */
+  .cards-support-hero {
+    display: block;
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: -220px;
+    align-self: start;
+  }
+
+  .cards-support-hero img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* Heading + text: right column */
+  .cards-support-container > .default-content-wrapper {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 0;
+    padding-left: 24px;
+  }
+
+  /* Cards: span full width below */
+  .cards-support-container > .cards-support-wrapper {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 40px;
+  }
+
+  .cards-support > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
