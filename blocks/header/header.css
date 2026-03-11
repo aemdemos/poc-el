@@ -960,6 +960,20 @@ header nav .nav-drop-icon {
     color: #0f3133;
   }
 
+  /* Direct link in categories panel (e.g., View All Products) — no chevron, navigates */
+  header nav .mega-menu-cat-link {
+    text-decoration: none;
+    color: #000;
+    margin-top: 8px;
+    border-top: 1px solid #d0d4d9;
+    padding-top: 18px;
+  }
+
+  header nav .mega-menu-cat-link:hover {
+    color: #00827f;
+    background-color: #f2f0f1;
+  }
+
   /* Content panel (right) */
   header nav .mega-menu-content {
     flex: 0 0 315px;
