@@ -26,8 +26,10 @@
   line-height: 28px;
 }
 
-.table table th p,
-.table table td p {
+
+
+main .section.legal .table table th p,
+main .section.legal .table table td p {
   margin: 0;
 }
 
