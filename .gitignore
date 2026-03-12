@@ -9,3 +9,7 @@ helix-importer-ui
 .idea
 localhost.pem
 localhost-key.pem
+
+# Local dev artifacts
+en-us/
+.migration/
