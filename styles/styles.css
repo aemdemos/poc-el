@@ -516,10 +516,15 @@ main .section.yellow p {
 }
 
 @media (width > 1024px) {
-  main .section.legal h1,h2 {
+  main .section.legal h1 {
     font-size: 48px;
-        line-height: 50px;
+    line-height: 50px;
   }  
+
+  main .section.legal h2 {
+    font-size: 38px;
+    line-height: 40px;
+  }
 }
 
 @media (width >= 1200px) {
