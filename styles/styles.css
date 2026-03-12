@@ -316,6 +316,7 @@ main .section.legal p {
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
+  margin-top: 24px;
 }
 
 main .section.legal a:any-link {
@@ -446,6 +447,21 @@ main .section.yellow p {
       font-size: 48px;
       line-height: 50px;
     }
+
+    main .section.legal h2 {
+      font-size: 38px;
+      line-height: 40px;
+      text-align: center;
+    }
+
+    main .section.legal p {
+      font-size: 18px;
+        line-height: 26px;
+    }
+
+    main .section.legal a:any-link {
+      font-size: 18px;
+    }
 }
 
 
@@ -459,6 +475,12 @@ main .section.yellow p {
   }
 }
 
+@media (width > 1024px) {
+  main .section.legal h2 {
+    font-size: 48px;
+        line-height: 50px;
+  }  
+}
 
 @media (width >= 1200px) {
   :root {
