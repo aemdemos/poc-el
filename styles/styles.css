@@ -312,11 +312,15 @@ main > .section.legal > div {
 padding-right: 8.333%;
 }
 
-main .section.legal p {
+main .section.legal p,ul  {
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
   margin-top: 24px;
+}
+
+main .section.legal p > strong {
+  font-size:20px;
 }
 
 main .section.legal p > u {
@@ -481,7 +485,7 @@ main .section.yellow p {
       text-align: center;
     }
 
-    main .section.legal p {
+    main .section.legal p, ul {
       font-size: 18px;  
         line-height: 26px;
     }
