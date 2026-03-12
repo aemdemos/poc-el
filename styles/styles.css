@@ -319,6 +319,10 @@ main .section.legal p {
   margin-top: 24px;
 }
 
+main .section.legal p > u {
+  color: #007981;
+}
+
 main .section.legal a:any-link {
   text-decoration: underline;
   font-size: 16px;
@@ -330,8 +334,9 @@ main .section.legal a:any-link {
   padding: 0;
 }
 
+
 /* Back to top button — dark teal pill */
-a.button[href="#top"] {
+a.button[aria-label="Back to top"] {
   display: inline-block;
   padding: 8px 17px;
   background-color: #0f3133;
@@ -346,7 +351,7 @@ a.button[href="#top"] {
   margin-top: 24px;
 }
 
-a.button[href="#top"]:hover {
+a.button[aria-label="Back to top"]:hover {
   background-color: #1a4a4d;
   border-color: #1a4a4d;
   color: #fafafa;
@@ -477,7 +482,7 @@ main .section.yellow p {
     }
 
     main .section.legal p {
-      font-size: 18px;
+      font-size: 18px;  
         line-height: 26px;
     }
 
