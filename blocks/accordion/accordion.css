@@ -1,5 +1,17 @@
 .accordion details {
-  border: 1px solid #dadada;
+  border: 2px solid #007981;
+}
+
+.section.legal .accordion details {
+  border-radius: 6px;
+}
+
+.section.legal .accordion details p {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 26px;
+  color: #007981;
+  margin-top:10px;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -13,8 +25,7 @@
 
 .accordion details summary {
   position: relative;
-  padding: 0 16px;
-  padding-right: 46px;
+  padding: 0 46px;
   cursor: pointer;
   list-style: none;
   overflow: auto;
@@ -22,12 +33,12 @@
 }
 
 .accordion details[open] summary {
-  background-color: var(--light-color);
+  background-color: black;
+  color: white;
 }
 
-.accordion details summary:focus,
-.accordion details summary:hover {
-  background-color: var(--light-color);
+.accordion details summary{
+  background-color: white;
 }
 
 .accordion details summary::-webkit-details-marker {
@@ -63,3 +74,18 @@
   border-top: 1px solid #dadada;
   background-color: var(--background-color);
 }
+
+.main .section.legal > div .accordion details {
+  border-radius: 6px;
+}
+
+@media (width > 425px) {
+  .section.legal .accordion details p {
+  font-size: 24px;
+  }
+
+  .section.legal .accordion a:any-link {
+    font-size: 18px;
+  }
+
+  }

@@ -299,7 +299,8 @@ main .section.legal-hero h1 {
   letter-spacing: -0.18px;
 }
 
-main .section.legal h2 {
+
+main .section.legal h1, h2 {
 font-size: 24px;
 font-weight: 700;
 line-height: 30px;
@@ -308,8 +309,9 @@ letter-spacing: 0.6px;
 }
 
 main > .section.legal > div {
-  padding-left: 8.333%;
+padding-left: 8.333%;
 padding-right: 8.333%;
+padding-top:30px;
 }
 
 main .section.legal p,ul  {
@@ -455,10 +457,16 @@ main .section.yellow p {
   outline-offset: 2px;
 }
 
-@media (width >= 426px) {
+@media (width > 425px) {
   main .section.legal-hero h1 {
     font-size: 38px;
     line-height: 40px;
+  }
+
+  main .section.legal h1, h2 {
+    font-size: 38px;
+    line-height: 40px;
+    text-align: center;
   }
 
 }
@@ -479,10 +487,11 @@ main .section.yellow p {
       line-height: 50px;
     }
 
-    main .section.legal h2 {
+
+    main .section.legal h1, h2 {
       font-size: 38px;
       line-height: 40px;
-      text-align: center;
+      
     }
 
     main .section.legal p, ul {
@@ -507,7 +516,7 @@ main .section.yellow p {
 }
 
 @media (width > 1024px) {
-  main .section.legal h2 {
+  main .section.legal h1,h2 {
     font-size: 48px;
         line-height: 50px;
   }  
