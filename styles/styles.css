@@ -318,6 +318,7 @@ main .section.legal p,ul  {
   line-height: 24px;
   font-weight: 400;
   margin-top: 24px;
+  font-family: Gotham, Arial, Helvetica;
 }
 
 main .section.legal p > strong {

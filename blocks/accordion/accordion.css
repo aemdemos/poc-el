@@ -2,6 +2,10 @@
   border: 2px solid #007981;
 }
 
+.section.legal .accordion-wrapper {
+  padding-top: 20px;
+}
+
 .section.legal .accordion details {
   border-radius: 6px;
 }
