@@ -10,12 +10,18 @@
   border-radius: 6px;
 }
 
-.section.legal .accordion details p {
+.section.legal .accordion details summary p {
   font-size: 20px;
   font-weight: 700;
   line-height: 26px;
   color: #007981;
-  margin-top:10px;
+  margin-top: 10px;
+}
+
+.section.legal .accordion details .accordion-item-body p {
+  color: black;
+  font-weight: 400;
+  font-size: 18px;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -77,6 +83,8 @@
 .accordion details[open] .accordion-item-body {
   border-top: 1px solid #dadada;
   background-color: var(--background-color);
+  color: black;
+  font-weight: 400;
 }
 
 .main .section.legal > div .accordion details {
@@ -88,8 +96,11 @@
   font-size: 24px;
   }
 
+  .section.legal .accordion details summary p {
+    font-size: 24px;
+  }
+
   .section.legal .accordion a:any-link {
     font-size: 18px;
   }
-
   }
