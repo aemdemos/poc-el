@@ -299,6 +299,36 @@ main .section.legal-hero h1 {
   letter-spacing: -0.18px;
 }
 
+main .section.legal h2 {
+font-size: 24px;
+font-weight: 700;
+line-height: 30px;
+font-family: Gotham, Arial, Helvetica;
+letter-spacing: 0.6px;
+}
+
+main > .section.legal > div {
+  padding-left: 8.33333%;
+padding-right: 8.33333%;
+}
+
+main .section.legal p {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+main .section.legal a:any-link {
+  text-decoration: underline;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #007981;
+  border:none;
+  background-color: white;
+  padding: 0;
+}
+
 main .section.dark {
   background-color: var(--brand-primary);
   color: var(--background-color);
