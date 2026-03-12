@@ -295,7 +295,7 @@ main .section.legal-hero h1 {
   font-size: 24px;
   line-height: 30px;
   font-weight: 700;
-  font-family: Gotham, Arial, Helvetica;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
   letter-spacing: -0.18px;
 }
 
@@ -303,13 +303,13 @@ main .section.legal h2 {
 font-size: 24px;
 font-weight: 700;
 line-height: 30px;
-font-family: Gotham, Arial, Helvetica;
+font-family: Gotham, Arial, Helvetica, sans-serif;
 letter-spacing: 0.6px;
 }
 
 main > .section.legal > div {
-  padding-left: 8.33333%;
-padding-right: 8.33333%;
+  padding-left: 8.333%;
+padding-right: 8.333%;
 }
 
 main .section.legal p {
@@ -328,6 +328,28 @@ main .section.legal a:any-link {
   border:none;
   background-color: white;
   padding: 0;
+}
+
+/* Back to top button — dark teal pill */
+a.button[href="#top"] {
+  display: inline-block;
+  padding: 8px 17px;
+  background-color: #0f3133;
+  color: #fafafa;
+  border: 3px solid #0f3133;
+  border-radius: 0 21px 21px;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-decoration: none;
+  margin-top: 24px;
+}
+
+a.button[href="#top"]:hover {
+  background-color: #1a4a4d;
+  border-color: #1a4a4d;
+  color: #fafafa;
 }
 
 main .section.dark {
