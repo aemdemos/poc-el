@@ -1,3 +1,7 @@
+.section.tabs-legal-container {
+  margin-top: 0;
+}
+
 /* Full-bleed background */
 .tabs-legal-wrapper {
   max-width: none !important;
