@@ -295,12 +295,14 @@ main .section.legal-hero {
   color: var(--background-color);
   margin: 0;
   padding: 0;
-  background-color: #0f3133;
+  background:linear-gradient(90deg, #15fdf4, #15faf1 22%, #13f0e8 39%, #11e0d8 54%, #0dc9c2 69%, #08aca6 82%, #038883 95%, #007672) 0 0 no-repeat;
+
 }
 
 main .section.legal-hero > div {
   padding: 0;
   max-width: none;
+  min-height: 110px;
 }
 
 main .section.legal-hero .hero > div:not(.hero-bg) {
@@ -314,6 +316,7 @@ main .section.legal-hero h1 {
   font-weight: 700;
   font-family: Gotham, Arial, Helvetica, sans-serif;
   letter-spacing: -0.18px;
+  color: black;
 }
 
 /* --- Legal content section (mobile-first) --- */
@@ -786,4 +789,12 @@ main .section.legal-side h1 {
   padding: 8px 12px;
   border: 1px solid #dadada;
   vertical-align: top;
+}
+
+@media (width >= 1200px) {
+  main .section.legal-hero .hero > div:not(.hero-bg) {
+    display: flex;
+    align-items: center;
+    min-height: 290px;
+  }
 }
