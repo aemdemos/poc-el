@@ -267,6 +267,17 @@ main > .section > div {
   padding: 0 24px;
 }
 
+main > .section.legal > div {
+  padding-left: 8.333%;
+  padding-right: 8.333%;
+  border-bottom: 1px solid #dadada;
+}
+
+main > .section.legal-col > div {
+  padding-left: 8.333%;
+  padding-right: 8.333%;
+}
+
 main > .section:first-of-type {
   margin-top: 0;
 }
@@ -283,11 +294,16 @@ main .section.highlight {
 main .section.legal-hero {
   color: var(--background-color);
   margin: 0;
-  padding-top: 0;
+  padding: 0;
   background-color: #0f3133;
 }
 
 main .section.legal-hero > div {
+  padding: 0;
+  max-width: none;
+}
+
+main .section.legal-hero .hero > div:not(.hero-bg) {
   padding: 40px 8.333%;
 }
 
@@ -322,12 +338,6 @@ main .section.legal h2 {
   margin: 0 0 16px;
   padding-top: 30px;
   padding-bottom: 20px;
-}
-
-main > .section.legal > div {
-  padding-left: 8.333%;
-  padding-right: 8.333%;
-  border-bottom: 1px solid #dadada;
 }
 
 main .section.legal p,
@@ -388,11 +398,6 @@ main .section.legal-col p >strong {
   font-size: 16px;
     font-style: normal;
     font-weight: 700 
-}
-
-main > .section.legal-col > div {
-  padding-left: 8.333%;
-  padding-right: 8.333%;
 }
 
 main .section.legal-col p,
@@ -582,146 +587,128 @@ main .section.legal-side h1 {
 }
 
 
-@media (width > 425px) {
-  main .section.legal-hero h1, main .section.legal h1, main .section.legal h2, main .section.legal-side h1 {
+/* --- 425px+ breakpoint --- */
+@media (width >= 425px) {
+  main .section.legal-hero h1,
+  main .section.legal h1,
+  main .section.legal h2,
+  main .section.legal-side h1 {
     font-size: 38px;
     line-height: 40px;
   }
 }
 
-/* tablet breakpoint */
+/* --- 768px+ breakpoint (tablet) --- */
 @media (width >= 768px) {
   :root {
     --heading-font-size-xxl: 48px;
     --heading-font-size-xl: 36px;
     --heading-font-size-l: 24px;
-    --heading-font-size-m: 20px;
-    --heading-font-size-s: 18px;
-    --heading-font-size-xs: 16px;
+  }
+
+  main > .section > div {
+    padding: 0 32px;
   }
 
   main > .section.legal > div {
     border-bottom: none;
   }
 
-  main > .section.legal-side > div{
-    padding-left:32.333%;
-
+  main > .section.legal-side > div {
+    padding-left: 32.333%;
   }
 
-    main .section.legal-hero h1 {
-      font-size: 48px;
-      line-height: 50px;
-    }
+  main .section.legal-hero h1 {
+    font-size: 48px;
+    line-height: 50px;
+  }
 
-    main .section.legal h1,
-    main .section.legal h2, main .section.legal-side h1{
-      font-size: 38px;
-      line-height: 40px;
-    }
+  main .section.legal h1,
+  main .section.legal h2,
+  main .section.legal-side h1 {
+    font-size: 38px;
+    line-height: 40px;
+  }
 
-    main .section.legal p,
-    main .section.legal ul {
-      font-size: 18px;
-      line-height: 26px;
-    }
+  main .section.legal p,
+  main .section.legal ul {
+    font-size: 18px;
+    line-height: 26px;
+  }
 
-    main .section.legal a:any-link {
-      font-size: 18px;
-    }
+  main .section.legal a:any-link {
+    font-size: 18px;
+  }
 
-    /* Two-column layout: sidebar floats left, body creates BFC */
-    main > .section.legal-col {
-      float: left;
-      width: 30%;
-      box-sizing: border-box;
-      padding: 40px 15px 40px 4.333%;
-      margin: 0;
-    }
+  /* Two-column layout: sidebar floats left, body creates BFC */
+  main > .section.legal-col {
+    float: left;
+    width: 30%;
+    box-sizing: border-box;
+    padding: 40px 15px 40px 4.333%;
+    margin: 0;
+  }
 
-    main > .section.legal > p >strong {
-   color: #007981;
-    }
+  main > .section.legal > p > strong {
+    color: #007981;
+  }
 
+  main > .section.legal-col + .section.legal,
+  main > .section.legal-col + .section.legal-side {
+    overflow: hidden;
+    margin-top: 0;
+    min-height: 600px;
+    padding-top: 40px;
+    border-top: 1px solid #dadada;
+  }
 
-    main > .section.legal-col + .section.legal,  main > .section.legal-col + .section.legal-side {
-      overflow: hidden;
-      margin-top: 0;
-      min-height: 600px;
-      padding-top: 40px;
-      border-top: 1px solid #dadada;
-    }
+  main > .section.legal-col + .section.legal > div {
+    padding-left: 20px;
+    padding-right: 8.333%;
+  }
 
-    main > .section.legal-col + .section.legal > div {
-      padding-left: 20px;
-      padding-right: 8.333%;
-    }
+  main .section.legal-col a:any-link {
+    font-size: 16px;
+  }
 
-    main .section.legal-col a:any-link {
-      font-size: 16px;
-    }
-}
-
-
-@media (width >= 900px) {
   body[data-breadcrumbs] {
     --header-height: calc(var(--nav-height) + var(--breadcrumbs-height));
   }
-
-  main > .section > div {
-    padding: 0 32px;
-  }
 }
 
+/* --- 1024px+ breakpoint (desktop) --- */
 @media (width >= 1024px) {
-  main .section.legal h1, main .section.legal-side h1 {
-    font-size: 48px;
-    line-height: 50px;
-
-  }
-
-}
-
-@media (width >= 1200px) {
   :root {
     --nav-height: 136px;
     --heading-font-size-xxl: 60px;
     --heading-font-size-xl: 48px;
-    --heading-font-size-l: 24px;
-    --heading-font-size-m: 20px;
-    --heading-font-size-s: 18px;
-    --heading-font-size-xs: 16px;
   }
 
   main > .section > div {
     padding: 0 100px;
   }
 
+  main .section.legal h1,
+  main .section.legal-side h1 {
+    font-size: 48px;
+    line-height: 50px;
+  }
+
+  main .section.legal-hero:has(.hero-bg) {
+    min-height: 350px;
+  }
+
   main .section.orange {
     background: none;
   }
-
 
   main .section.blue {
     background: none;
   }
 
-
   main .section.yellow {
     background: none;
   }
-
-  main .section.legal-hero {
-    height: 350px;
-    align-items: center;
-    display: flex
-  }
-  
-  main .section.legal-hero > div {
-    margin: 0 37.5% 0 8.333%;
-    padding: 0;
-  }
-
 }
 
 /* Accordion-item section style: collapsible sections using details/summary */
