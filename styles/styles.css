@@ -351,6 +351,76 @@ main .section.legal a:hover {
   color: #0f3133;
 }
 
+/* --- Legal two-column layout: legal-col sidebar navigation (stacks on top at mobile) --- */
+main > .section.legal-col {
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+main > .section.legal-col > div {
+  padding-left: 8.333%;
+  padding-right: 8.333%;
+}
+
+main .section.legal-col p,
+main .section.legal-col ul {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #333;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
+  margin: 0 0 8px;
+}
+
+main .section.legal-col ul {
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+main .section.legal-col li {
+  margin: 0;
+  padding: 0;
+}
+
+main .section.legal-col a:any-link {
+  text-decoration: underline;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #007981;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+main .section.legal-col a:hover {
+  color: #0f3133;
+}
+
+/* Override button decoration in sidebar — keep links as inline text */
+main .section.legal-col .button-container {
+  text-align: left;
+}
+
+main .section.legal-col a.button:any-link {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  color: #007981;
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: underline;
+  white-space: normal;
+}
+
+main .section.legal-col a.button:hover {
+  background-color: transparent;
+  color: #0f3133;
+}
 
 /* Back to top button — dark teal pill */
 a.button[aria-label="Back to top"] {
@@ -505,6 +575,33 @@ main .section.yellow p {
 
     main .section.legal a:any-link {
       font-size: 18px;
+    }
+
+    /* Two-column layout: sidebar floats left, body creates BFC */
+    main > .section.legal-col {
+      float: left;
+      width: 30%;
+      box-sizing: border-box;
+      padding: 0 20px 40px 8.333%;
+      margin: 0;
+    }
+
+    main > .section.legal-col > div {
+      padding: 0;
+    }
+
+    main > .section.legal-col + .section.legal {
+      overflow: hidden;
+      margin-top: 0;
+    }
+
+    main > .section.legal-col + .section.legal > div {
+      padding-left: 20px;
+      padding-right: 8.333%;
+    }
+
+    main .section.legal-col a:any-link {
+      font-size: 16px;
     }
 }
 
