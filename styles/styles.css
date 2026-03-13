@@ -435,7 +435,7 @@ main .section.legal-col .button-container {
   text-align: left;
 }
 
-main .section.legal-col a.button:any-link {
+main .section.legal-col a.button:any-link , main .section.legal-side a.button:any-link {
   display: inline;
   padding: 0;
   margin: 0;
@@ -576,10 +576,14 @@ main .section.legal {
   margin-top: 0;
 }
 
+main .section.legal-side h1 {
+  font-size: 24px;
+  line-height: 30px;
+}
 
 
 @media (width > 425px) {
-  main .section.legal-hero h1, main .section.legal h1, main .section.legal h2 {
+  main .section.legal-hero h1, main .section.legal h1, main .section.legal h2, main .section.legal-side h1 {
     font-size: 38px;
     line-height: 40px;
   }
@@ -597,8 +601,12 @@ main .section.legal {
   }
 
   main > .section.legal > div {
-    padding-left:32.333%;
     border-bottom: none;
+  }
+
+  main > .section.legal-side > div{
+    padding-left:32.333%;
+
   }
 
     main .section.legal-hero h1 {
@@ -607,7 +615,7 @@ main .section.legal {
     }
 
     main .section.legal h1,
-    main .section.legal h2 {
+    main .section.legal h2, main .section.legal-side h1{
       font-size: 38px;
       line-height: 40px;
     }
@@ -636,7 +644,7 @@ main .section.legal {
     }
 
 
-    main > .section.legal-col + .section.legal {
+    main > .section.legal-col + .section.legal,  main > .section.legal-col + .section.legal-side {
       overflow: hidden;
       margin-top: 0;
       min-height: 600px;
@@ -666,7 +674,7 @@ main .section.legal {
 }
 
 @media (width >= 1024px) {
-  main .section.legal h1 {
+  main .section.legal h1, main .section.legal-side h1 {
     font-size: 48px;
     line-height: 50px;
 
