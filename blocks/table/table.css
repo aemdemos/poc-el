@@ -1,6 +1,8 @@
 .table.block {
   width: 100%;
   overflow-x: auto;
+  padding-top:20px;
+  padding-bottom:40px;
 }
 
 .table.block table {
@@ -21,7 +23,7 @@
 
 .table.block table th,
 .table.block table td {
-  padding: 8px 16px;
+  padding: 40px 10px;
   text-align: left;
   line-height: 28px;
 }
@@ -51,6 +53,12 @@ main .section.legal .table table td p {
 .table.block.bordered table th,
 .table.block.bordered table td {
   border: 1px solid;
+}
+
+/* col-striped variant — alternating column background */
+.table.block.col-striped table td:nth-child(even),
+.table.block.col-striped table th:nth-child(even) {
+  background-color: #f2f0f1;
 }
 
 
