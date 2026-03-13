@@ -284,7 +284,7 @@ main .section.legal-hero {
   color: var(--background-color);
   margin: 0;
   padding-top: 0;
-  background: linear-gradient(90deg, #15fdf4, #15faf1 22%, #13f0e8 39%, #11e0d8 54%, #0dc9c2 69%, #08aca6 82%, #038883 95%, #007672) 0 0 no-repeat;
+  background-color: #0f3133;
 }
 
 main .section.legal-hero > div {
