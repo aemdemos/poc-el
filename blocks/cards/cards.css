@@ -5,6 +5,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
   gap: 24px;
+  
 }
 
 .cards > ul > li {
@@ -12,10 +13,19 @@
   background-color: var(--background-color);
   border-radius: 8px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .cards .cards-card-body {
   margin: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cards .cards-card-body p:last-child {
+  margin-top: auto;
 }
 
 .cards .cards-card-image {
