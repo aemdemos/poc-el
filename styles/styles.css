@@ -618,6 +618,13 @@ main .section.legal h2 {
   padding-top:0;
 }
 
+main .section.legal h4 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  font-family: Gotham, Arial, Helvetica;
+}
+
 /* --- 425px+ breakpoint --- */
 @media (width >= 425px) {
   main .section.legal-hero h1,
@@ -631,6 +638,13 @@ main .section.legal h2 {
   main .section.legal h2 {
     font-size: 30px;
     line-height: 32px;
+  }
+
+  main .section.legal h4 { 
+    font-size: 18px;
+    line-height: 26px;
+    padding-top: 40px;
+    padding-bottom: 20px;
   }
 }
 
@@ -711,6 +725,11 @@ main .section.legal h2 {
   body[data-breadcrumbs] {
     --header-height: calc(var(--nav-height) + var(--breadcrumbs-height));
   }
+
+  main .section.legal h4 {
+    font-size: 24px;
+    line-height: 32px;
+  }
 }
 
 /* --- 1024px+ breakpoint (desktop) --- */
@@ -757,6 +776,7 @@ main .section.legal h3 {
   main .section.yellow {
     background: none;
   }
+
 }
 
 /* Accordion-item section style: collapsible sections using details/summary */
