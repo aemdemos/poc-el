@@ -95,6 +95,16 @@ function a11yLinks(main) {
   });
 }
 
+function decoratePrintButtons(main) {
+  main.querySelectorAll('a[href="#print"]').forEach((link) => {
+    const btn = document.createElement('button');
+    btn.className = 'print-button';
+    btn.textContent = link.textContent;
+    btn.addEventListener('click', () => window.print());
+    link.replaceWith(btn);
+  });
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -109,6 +119,7 @@ export function decorateMain(main) {
   decorateBlocks(main);
   // add aria-label to links
   a11yLinks(main);
+  decoratePrintButtons(main);
 }
 
 /**
