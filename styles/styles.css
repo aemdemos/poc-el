@@ -270,7 +270,7 @@ main > .section > div {
 main > .section.legal > div {
   padding-left: 8.333%;
   padding-right: 8.333%;
-  border-bottom: 1px solid #dadada;
+
 }
 
 main > .section.legal-col > div {
@@ -423,6 +423,7 @@ main > .section.legal-col {
   margin: 0;
   padding-top: 40px;
   padding-bottom: 0;
+  border-top: 1px solid #dadada;
 }
 
 main > .section.legal-col h1 {
@@ -720,6 +721,7 @@ main .section.legal h4 {
     box-sizing: border-box;
     padding: 40px 15px 40px 4.333%;
     margin: 0;
+    border-top: none;
   }
 
   main > .section.legal > p > strong {
