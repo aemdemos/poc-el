@@ -10,6 +10,14 @@
   justify-content: center;
 }
 
+.embed.embed-bugcrowd {
+  max-width: 100%;
+}
+
+.embed.embed-bugcrowd > div {
+  display: block;
+}
+
 .embed.embed-twitter .twitter-tweet-rendered {
   margin-left: auto;
   margin-right: auto;
