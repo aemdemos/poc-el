@@ -664,6 +664,7 @@ main .section.legal h2 {
   main .section.legal-side h1 {
     font-size: 38px;
     line-height: 40px;
+    text-align: center;
   }
 
   main .section.legal p,
