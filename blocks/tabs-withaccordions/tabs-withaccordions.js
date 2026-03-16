@@ -2,6 +2,12 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 let tabBlockCnt = 0;
 
+// Tab intro text: maps tab names to intro paragraphs shown above accordions
+const TAB_INTRO_TEXT = {
+  Savvis: 'Savvis Service Guides (End of Sale)',
+  'Time Warner': 'Time Warner',
+};
+
 // Accordion icon lookup: maps title keywords to icon SVGs
 const ACCORDION_ICONS = {
   'doing-business': ['Agreements', 'Colocation', 'Network'],
@@ -138,6 +144,13 @@ export default function decorate(block) {
         accordionContainer.append(details);
       }
 
+      // Inject intro text from mapping if no intro content from HTML
+      const tabName = label.textContent.trim();
+      if (intro.childNodes.length === 0 && TAB_INTRO_TEXT[tabName]) {
+        const p = document.createElement('p');
+        p.textContent = TAB_INTRO_TEXT[tabName];
+        intro.append(p);
+      }
       if (intro.childNodes.length > 0) panel.append(intro);
       panel.append(accordionContainer);
     } else {
