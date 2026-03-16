@@ -2,6 +2,24 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 let tabBlockCnt = 0;
 
+// Accordion icon lookup: maps title keywords to icon SVGs
+const ACCORDION_ICONS = {
+  'doing-business': ['Agreements', 'Colocation', 'Network'],
+  'governance-documentation': ['Service Level Agreements', 'Digital Content'],
+};
+
+function getAccordionIcon(title) {
+  const match = Object.entries(ACCORDION_ICONS)
+    .find(([, keywords]) => keywords.some((kw) => title.startsWith(kw)));
+  if (match) {
+    const img = document.createElement('img');
+    img.src = `/icons/${match[0]}.svg`;
+    img.setAttribute('aria-hidden', 'true');
+    return img;
+  }
+  return null;
+}
+
 export default function decorate(block) {
   const tablist = document.createElement('div');
   tablist.className = 'tabs-wa-list';
@@ -57,6 +75,7 @@ export default function decorate(block) {
       const intro = document.createElement('div');
       intro.className = 'tabs-wa-intro';
       let currentAccTitle = null;
+      let currentAccIcon = null;
       let currentAccBody = null;
       const accordionContainer = document.createElement('div');
       accordionContainer.className = 'tabs-wa-accordions';
@@ -69,7 +88,14 @@ export default function decorate(block) {
             details.className = 'tabs-wa-accordion-item';
             const summary = document.createElement('summary');
             summary.className = 'tabs-wa-accordion-label';
-            summary.textContent = currentAccTitle;
+            if (currentAccIcon) {
+              currentAccIcon.className = 'tabs-wa-accordion-icon';
+              summary.append(currentAccIcon);
+            }
+            const titleSpan = document.createElement('span');
+            titleSpan.className = 'tabs-wa-accordion-title';
+            titleSpan.textContent = currentAccTitle;
+            summary.append(titleSpan);
 
             // Add chevron
             const chevron = document.createElement('span');
@@ -81,6 +107,7 @@ export default function decorate(block) {
             accordionContainer.append(details);
           }
           currentAccTitle = child.textContent.trim();
+          currentAccIcon = getAccordionIcon(currentAccTitle);
           currentAccBody = document.createElement('div');
         } else if (currentAccTitle) {
           currentAccBody.append(child);
@@ -95,7 +122,14 @@ export default function decorate(block) {
         details.className = 'tabs-wa-accordion-item';
         const summary = document.createElement('summary');
         summary.className = 'tabs-wa-accordion-label';
-        summary.textContent = currentAccTitle;
+        if (currentAccIcon) {
+          currentAccIcon.className = 'tabs-wa-accordion-icon';
+          summary.append(currentAccIcon);
+        }
+        const titleSpan = document.createElement('span');
+        titleSpan.className = 'tabs-wa-accordion-title';
+        titleSpan.textContent = currentAccTitle;
+        summary.append(titleSpan);
         const chevron = document.createElement('span');
         chevron.className = 'tabs-wa-chevron';
         summary.append(chevron);

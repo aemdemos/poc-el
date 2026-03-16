@@ -91,6 +91,23 @@
   display: none;
 }
 
+/* Accordion icon */
+.tabs-withaccordions .tabs-wa-accordion-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-right: 12px;
+  object-fit: contain;
+}
+
+.tabs-withaccordions .tabs-wa-accordion-title {
+  flex: 1;
+}
+
+.tabs-withaccordions details[open] .tabs-wa-accordion-icon {
+  filter: brightness(0) invert(1);
+}
+
 /* Chevron */
 .tabs-withaccordions .tabs-wa-chevron {
   position: relative;
@@ -116,6 +133,7 @@
 .tabs-withaccordions details[open] .tabs-wa-chevron::after {
   top: 5px;
   transform: rotate(-135deg);
+  border-color: white;
 }
 
 /* Open state */
