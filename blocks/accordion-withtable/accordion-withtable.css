@@ -1,7 +1,8 @@
 .accordion-withtable details {
-  border: 2px solid #d0d4d9;
-  border-radius: 6px;
+  border: 2px solid #007981;
+  border-radius: 8px;
   background-color: white;
+  border-width: 2px;
 }
 
 .accordion-withtable details + details {
@@ -13,20 +14,37 @@
   align-items: center;
   gap: 12px;
   position: relative;
-  padding: 16px 46px 16px 16px;
+  padding: 8px 50px 8px 16px;
   cursor: pointer;
   list-style: none;
   background-color: white;
-  font-size: 20px;
+  color:#007981;
+}
+
+main .section.legal:has(.accordion-withtable) {
+padding-bottom: 40px;
+}
+
+main .section .accordion-withtable details summary p {
   font-weight: 700;
-  line-height: 26px;
-  color: #083176;
+  font-size: 20px;
+  line-height: 28px;
+  margin: 0;
+  color: #007981;
 }
 
 /* Same styling open and closed */
 .accordion-withtable details[open] summary {
-  background-color: white;
-  color: #083176;
+  background-color: black;
+  color: white;
+}
+
+.accordion-withtable details[open] summary .accordion-item-icon {
+  filter: brightness(0) saturate(100%) invert(87%) sepia(89%) saturate(3%) hue-rotate(271deg) brightness(109%) contrast(97%) 
+}
+
+main .section .accordion-withtable details[open] summary p {
+  color: white;
 }
 
 .accordion-withtable details summary::-webkit-details-marker {
@@ -58,7 +76,7 @@
   left: 0;
   width: 14px;
   height: 14px;
-  border: solid #007981;
+  border: solid ;
   border-width: 0 3px 3px 0;
   transform: rotate(45deg);
   transition: transform 0.2s;
@@ -133,11 +151,17 @@
 @media (width >= 425px) {
   .accordion-withtable details summary {
     font-size: 24px;
-    padding: 20px 46px 20px 20px;
   }
 
   .accordion-withtable .accordion-item-body {
     padding: 20px;
+  }
+
+  main .section .accordion-withtable details summary p {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    margin: 0;
   }
 }
 
