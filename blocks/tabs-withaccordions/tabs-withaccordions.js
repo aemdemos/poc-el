@@ -185,19 +185,19 @@ export default function decorate(block) {
   fade.className = 'tabs-wa-fade';
   fade.setAttribute('aria-hidden', 'true');
 
+  function updateOverflow() {
+    const hasOverflow = scrollWrap.scrollWidth > scrollWrap.clientWidth;
+    wrapper.classList.toggle('has-overflow', hasOverflow);
+  }
+
   const scrollBtn = document.createElement('button');
   scrollBtn.className = 'tabs-wa-scroll-btn';
   scrollBtn.type = 'button';
   scrollBtn.setAttribute('aria-label', 'Scroll tabs');
   scrollBtn.addEventListener('click', () => {
     scrollWrap.scrollBy({ left: 200, behavior: 'smooth' });
-    setTimeout(updateOverflow, 400); /* Recheck after smooth scroll */
+    setTimeout(updateOverflow, 400);
   });
-
-  function updateOverflow() {
-    const hasOverflow = scrollWrap.scrollWidth > scrollWrap.clientWidth;
-    wrapper.classList.toggle('has-overflow', hasOverflow);
-  }
 
   updateOverflow();
   scrollWrap.addEventListener('scroll', updateOverflow);
