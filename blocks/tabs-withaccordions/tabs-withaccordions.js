@@ -174,5 +174,35 @@ export default function decorate(block) {
     row.replaceWith(panel);
   });
 
-  block.prepend(tablist);
+  /* Wrap tablist for scroll + fade + arrow */
+  const wrapper = document.createElement('div');
+  wrapper.className = 'tabs-wa-tabs-wrapper';
+  const scrollWrap = document.createElement('div');
+  scrollWrap.className = 'tabs-wa-scroll-wrap';
+  scrollWrap.append(tablist);
+
+  const fade = document.createElement('div');
+  fade.className = 'tabs-wa-fade';
+  fade.setAttribute('aria-hidden', 'true');
+
+  const scrollBtn = document.createElement('button');
+  scrollBtn.className = 'tabs-wa-scroll-btn';
+  scrollBtn.type = 'button';
+  scrollBtn.setAttribute('aria-label', 'Scroll tabs');
+  scrollBtn.addEventListener('click', () => {
+    scrollWrap.scrollBy({ left: 200, behavior: 'smooth' });
+    setTimeout(updateOverflow, 400); /* Recheck after smooth scroll */
+  });
+
+  function updateOverflow() {
+    const hasOverflow = scrollWrap.scrollWidth > scrollWrap.clientWidth;
+    wrapper.classList.toggle('has-overflow', hasOverflow);
+  }
+
+  updateOverflow();
+  scrollWrap.addEventListener('scroll', updateOverflow);
+  window.addEventListener('resize', updateOverflow);
+
+  wrapper.append(scrollWrap, fade, scrollBtn);
+  block.prepend(wrapper);
 }

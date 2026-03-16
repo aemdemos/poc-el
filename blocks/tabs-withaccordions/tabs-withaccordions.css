@@ -1,13 +1,88 @@
 /* Tabs with Accordions block */
 
+/* Tabs wrapper: scroll area + fade + arrow */
+.tabs-withaccordions .tabs-wa-tabs-wrapper {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  border-bottom: 2px solid #dadada;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.tabs-withaccordions .tabs-wa-scroll-wrap {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.tabs-withaccordions .tabs-wa-scroll-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+/* Right-edge fade overlay — visible only when tabs overflow */
+.tabs-withaccordions .tabs-wa-fade {
+  position: absolute;
+  top: 0;
+  right: 52px;
+  bottom: 0;
+  width: 72px;
+  background: linear-gradient(to right, rgba(255 255 255 / 0), #fff);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.tabs-withaccordions .tabs-wa-tabs-wrapper.has-overflow .tabs-wa-fade {
+  opacity: 1;
+}
+
+/* Scroll arrow button — visible only when tabs overflow, no borders */
+.tabs-withaccordions .tabs-wa-scroll-btn {
+  flex: 0 0 auto;
+  width: 44px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: #fff;
+  color: #007981;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: background-color 0.2s;
+}
+
+.tabs-withaccordions .tabs-wa-tabs-wrapper.has-overflow .tabs-wa-scroll-btn {
+  display: flex;
+}
+
+.tabs-withaccordions .tabs-wa-scroll-btn:hover {
+  background-color: #f5f5f5;
+}
+
+/* Chevron icon (right-pointing) */
+.tabs-withaccordions .tabs-wa-scroll-btn::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border: solid #007981;
+  border-width: 0 2px 2px 0;
+  transform: rotate(-45deg);
+}
+
 /* Tab list */
 .tabs-withaccordions .tabs-wa-list {
   display: flex;
   gap: 0;
-  max-width: 100%;
-  overflow-x: auto;
-  border-bottom: 2px solid #dadada;
-  margin-bottom: 24px;
+  flex-wrap: nowrap;
 }
 
 .tabs-withaccordions .tabs-wa-list button {
@@ -16,17 +91,21 @@
   border: none;
   border-bottom: 3px solid transparent;
   border-radius: 0;
-  padding: 12px 20px;
+  padding: 12px 0;
   background-color: transparent;
   color: #333;
   font-size: 16px;
-  font-weight: 500;
-  line-height: 1.4;
-  text-align: center;
+  font-weight: 400;
+  line-height: 19px;
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s;
   white-space: nowrap;
   font-family: Gotham, Arial, Helvetica, sans-serif;
+  margin-left: 40px;
+}
+
+.tabs-withaccordions .tabs-wa-list button:first-child {
+  margin-left: 16px;
 }
 
 .tabs-withaccordions .tabs-wa-list button:hover {
@@ -215,7 +294,7 @@
 
 @media (width >= 768px) {
   .tabs-withaccordions .tabs-wa-list button {
-    font-size: 18px;
-    padding: 14px 28px;
+    font-size: 16px;
+    padding: 8px 0;
   }
 }
