@@ -1,0 +1,203 @@
+/* Tabs with Accordions block */
+
+/* Tab list */
+.tabs-withaccordions .tabs-wa-list {
+  display: flex;
+  gap: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  border-bottom: 2px solid #dadada;
+  margin-bottom: 24px;
+}
+
+.tabs-withaccordions .tabs-wa-list button {
+  flex: 0 0 max-content;
+  margin: 0;
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  padding: 12px 20px;
+  background-color: transparent;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
+}
+
+.tabs-withaccordions .tabs-wa-list button:hover {
+  color: #007981;
+}
+
+.tabs-withaccordions .tabs-wa-list button[aria-selected='true'] {
+  border-bottom-color: #007981;
+  color: #007981;
+  font-weight: 700;
+}
+
+/* Tab panels */
+.tabs-withaccordions .tabs-wa-panel {
+  padding: 0 0 24px;
+}
+
+.tabs-withaccordions .tabs-wa-panel[aria-hidden='true'] {
+  display: none;
+}
+
+/* Intro text */
+.tabs-withaccordions .tabs-wa-intro p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.tabs-withaccordions .tabs-wa-intro a {
+  color: #007981;
+  text-decoration: underline;
+}
+
+/* Accordion items within tabs */
+.tabs-withaccordions .tabs-wa-accordion-item {
+  border: 2px solid #007981;
+  border-radius: 6px;
+  background-color: white;
+}
+
+.tabs-withaccordions .tabs-wa-accordion-item + .tabs-wa-accordion-item {
+  margin-top: 12px;
+}
+
+.tabs-withaccordions .tabs-wa-accordion-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  cursor: pointer;
+  list-style: none;
+  background-color: white;
+  color: #007981;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  position: relative;
+}
+
+.tabs-withaccordions .tabs-wa-accordion-label::-webkit-details-marker {
+  display: none;
+}
+
+/* Chevron */
+.tabs-withaccordions .tabs-wa-chevron {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.tabs-withaccordions .tabs-wa-chevron::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border: solid #007981;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  transition: transform 0.2s;
+}
+
+.tabs-withaccordions details[open] .tabs-wa-chevron::after {
+  top: 5px;
+  transform: rotate(-135deg);
+}
+
+/* Open state */
+.tabs-withaccordions details[open] .tabs-wa-accordion-label {
+  background-color: black;
+  color: white;
+}
+
+/* Accordion body */
+.tabs-withaccordions .tabs-wa-accordion-body {
+  padding: 16px;
+  border-top: 1px solid #dadada;
+  background-color: var(--background-color);
+  color: black;
+}
+
+.tabs-withaccordions details:not([open]) .tabs-wa-accordion-body {
+  display: none;
+}
+
+.tabs-withaccordions .tabs-wa-accordion-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tabs-withaccordions .tabs-wa-accordion-body li {
+  padding: 6px 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.tabs-withaccordions .tabs-wa-accordion-body a {
+  color: #007981;
+  text-decoration: underline;
+}
+
+/* Plain content (non-accordion tabs) */
+.tabs-withaccordions .tabs-wa-content {
+  padding: 0;
+}
+
+.tabs-withaccordions .tabs-wa-content p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.tabs-withaccordions .tabs-wa-content a {
+  color: #007981;
+  text-decoration: underline;
+}
+
+.tabs-withaccordions .tabs-wa-content h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 20px 0 8px;
+  color: #333;
+}
+
+.tabs-withaccordions .tabs-wa-content ul {
+  padding-left: 0;
+  list-style: none;
+  margin: 0 0 16px;
+}
+
+.tabs-withaccordions .tabs-wa-content li {
+  padding: 4px 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+@media (width >= 425px) {
+  .tabs-withaccordions .tabs-wa-accordion-label {
+    font-size: 20px;
+  }
+}
+
+@media (width >= 768px) {
+  .tabs-withaccordions .tabs-wa-list button {
+    font-size: 18px;
+    padding: 14px 28px;
+  }
+}
