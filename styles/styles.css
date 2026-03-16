@@ -728,6 +728,7 @@ main .section.legal h2 {
   main .section.legal-side h1 {
     font-size: 48px;
     line-height: 50px;
+    text-align: center;
   }
 
 main .section.legal h2 {
