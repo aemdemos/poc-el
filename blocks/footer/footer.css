@@ -163,7 +163,7 @@ footer .footer .footer-main-links ul li a {
   color: #fff;
   font-size: 16px;
   text-decoration-line: underline;
-  font-family: Gotham, Arial, Helvetica;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
 }
 
 /* Col right: WHY LUMEN + RESOURCES */
@@ -199,7 +199,7 @@ footer .footer .footer-col-right ul li a {
   color: #fff;
   font-size: 16px;
   text-decoration-line: underline;
-  font-family: Gotham, Arial, Helvetica;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
 }
 
 /* Section 3: Disclaimer */
@@ -234,13 +234,13 @@ footer .footer > div > div:nth-child(4) ul li a {
   color: #fff;
   font-size: 13px;
   font-weight: 500;
-  font-family: Figtree, Gotham,Arial;
+  font-family: Figtree, Gotham,Arial, sans-serif;
 }
 
 footer .footer > div > div:nth-child(4) p {
   color: #fff;
   font-size: 13px;
-  font-family: Figtree, Gotham,Arial;
+  font-family: Figtree, Gotham,Arial, sans-serif;
   line-height: normal;
 }
 
@@ -546,7 +546,6 @@ footer .footer .footer-country-list li a img {
 
   footer .footer .footer-social-mobile {
     display: flex;
-    margin-top: 0;
     padding: 80px 0 0;
     grid-column: 1;
     grid-row: 1;

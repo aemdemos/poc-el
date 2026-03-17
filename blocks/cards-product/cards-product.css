@@ -15,6 +15,8 @@ main .section.cards-product-container h2 {
   line-height: 28px;
   margin-bottom: 25px;
   font-weight: 700;
+  text-align: center;
+  padding-bottom: 20px;
 }
 
 /* Mobile: horizontal scroll carousel */
@@ -111,10 +113,7 @@ main .cards-product .cards-product-card-body a:any-link:hover {
   border-radius: 8px 8px 0 0;
 }
 
-main .section.cards-product-container h2 {
-  text-align: center;
-  padding-bottom: 20px;
-}
+
 
 @media (width > 425px) {
   main .section.cards-product-container h2 {
@@ -125,9 +124,10 @@ main .section.cards-product-container h2 {
 @media (width >= 768px) {
   .cards-product > ul {
     gap: 40px;
-    padding-inline-start: 8.33333%;
-    padding-right:8.33333%;
+    padding-inline-start: 8.3333%;
+    padding-right:8.3333%;
   }
+  
   .cards-product > ul > li {
     max-width: 43%;
   }

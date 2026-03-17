@@ -69,7 +69,7 @@
   }
 }
 
-@media (width > 1024) {
+@media (width > 1024px) {
   .hero-customer-story h1 {
     font-size: 48px;
     line-height: 50px;
@@ -78,12 +78,12 @@
 
 /* Below 1200px: use logo image instead of hero background */
 @media (width < 1200px) {
-
   .hero-customer-story {
     display: flex;
     flex-direction: column;
     padding: 0;
     background: linear-gradient(90deg, #f95e4a, #fb6742 35%, #fb812c 94%, #fb8429);
+    min-height: unset;
   }
 
   main .section.blue .hero-customer-story {
@@ -124,10 +124,6 @@
     height: auto;
     max-height: 80px;
     object-fit: contain;
-  }
-
-  .hero-customer-story {
-    min-height: unset;
   }
 }
 

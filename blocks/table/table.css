@@ -1,6 +1,8 @@
 .table.block {
   width: 100%;
   overflow-x: auto;
+  padding-top:20px;
+  padding-bottom:40px;
 }
 
 .table.block table {
@@ -10,26 +12,10 @@
   font-size: var(--body-font-size-xs);
 }
 
-@media (width >= 600px) {
-  .table.block table {
-    font-size: var(--body-font-size-s);
-  }
+.table.block table thead tr, .table.block table tbody tr, table th, table td {
+  border: 1px solid #d0d4d9;
 }
 
-@media (width >= 900px) {
-  .table.block table {
-    font-size: var(--body-font-size-m);
-  }
-}
-
-.table.block table thead tr {
-  border-top: 2px solid;
-  border-bottom: 2px solid;
-}
-
-.table.block table tbody tr {
-  border-bottom: 1px solid;
-}
 
 .table.block table th {
   font-weight: 700;
@@ -37,17 +23,18 @@
 
 .table.block table th,
 .table.block table td {
-  padding: 0.5em;
+  padding: 40px 10px;
   text-align: left;
-}
-
-.table table th p,
-.table table td p {
-  margin: 0;
+  line-height: 28px;
 }
 
 .table table td p + p {
   margin-top: 0.25em;
+}
+
+main .section.legal .table table th p,
+main .section.legal .table table td p {
+  margin: 0;
 }
 
 /* no header variant */
@@ -64,4 +51,23 @@
 .table.block.bordered table th,
 .table.block.bordered table td {
   border: 1px solid;
+}
+
+/* col-striped variant — alternating column background */
+.table.block.col-striped table td:nth-child(even),
+.table.block.col-striped table th:nth-child(even) {
+  background-color: #f2f0f1;
+}
+
+
+@media (width >= 600px) {
+  .table.block table {
+    font-size: var(--body-font-size-s);
+  }
+}
+
+@media (width >= 900px) {
+  .table.block table {
+    font-size: var(--body-font-size-m);
+  }
 }

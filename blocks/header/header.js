@@ -290,10 +290,10 @@ export default async function decorate(block) {
       // Conventions:
       //   **Bold Text** = category separator
       //   Link ending in "Portfolio →" right after bold = portfolio link
-      //   <del>Section Heading</del> (~~text~~ in md) = section label (Featured Services, Categories)
       //   link | description text = item with description
       //   _Italic Text_ without link = expandable parent (e.g., Public Sector)
-      //   **[Bold Link](url)** = trailing direct link (e.g., View All Products)
+      //   **[Bold Link](url)** = trailing direct link
+      //     (e.g., View All Products)
       //   Links before first bold = standalone direct links
       const catGroups = [];
       const standaloneItems = [];

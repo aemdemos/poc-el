@@ -1,0 +1,105 @@
+.section.tabs-legal-container {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Full-bleed background */
+.tabs-legal-wrapper {
+  max-width: none !important;
+  padding: 0 !important;
+}
+
+.tabs-legal {
+  background-color: #d0d4d9;
+  padding: 0;
+  margin: 0;
+}
+
+.tabs-legal .tabs-legal-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.tabs-legal .tabs-legal-nav li {
+  margin: 0;
+  padding: 0;
+}
+
+.tabs-legal .tabs-legal-nav li:first-child {
+color: black;
+}
+
+.tabs-legal .tabs-legal-nav a,
+.tabs-legal .tabs-legal-nav a.button:any-link {
+  display: flex;
+  place-content: center center;
+  flex-wrap: wrap;
+  padding: 20px;
+  color: #333;
+  background: none;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  white-space: normal;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18px;
+  cursor: pointer;
+  transition: color 0.2s;
+  border-top: 1px solid white;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
+  height:20px;
+}
+
+.tabs-legal .tabs-legal-nav > ul >li >a {
+  border-top: 1px solid white;
+}
+
+
+.tabs-legal .tabs-legal-nav a:hover,
+.tabs-legal .tabs-legal-nav a.button:hover {
+  background: none;
+}
+
+.tabs-legal .tabs-legal-nav li.active a {
+  background-color: #d0d4d9;
+  border-top: 1px solid white;
+}
+
+/* Tablet: horizontal flex row, no dividers */
+@media (width >= 426px) {
+  .tabs-legal .tabs-legal-nav ul {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .tabs-legal .tabs-legal-nav li {
+    border-top: none;
+    margin-left: 2px;
+    white-space: normal;
+  }
+
+  .tabs-legal .tabs-legal-nav li:first-child {
+    margin-left: 0;
+  }
+
+  .tabs-legal .tabs-legal-nav a,
+  .tabs-legal .tabs-legal-nav a.button:any-link {
+    min-height: auto;
+    padding: 15px 17px;
+  }
+}
+
+/* Desktop: wider link padding */
+@media (width >= 769px) {
+  .tabs-legal .tabs-legal-nav a {
+    padding: 16px 50px;
+  }
+}

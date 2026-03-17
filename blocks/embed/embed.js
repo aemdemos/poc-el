@@ -58,6 +58,13 @@ const embedTwitter = (url) => {
   return embedHTML;
 };
 
+const embedBugcrowd = (url) => `<div style="width: 100%;">
+    <iframe src="${url.href}" style="border: none; width: 100%; height: 4200px; overflow: hidden;"
+      scrolling="no" referrerpolicy="origin" allow="clipboard-read; clipboard-write"
+      title="Security vulnerability submission form" loading="lazy">
+    </iframe>
+  </div>`;
+
 const loadEmbed = (block, link, autoplay) => {
   if (block.classList.contains('embed-is-loaded')) {
     return;
@@ -75,6 +82,10 @@ const loadEmbed = (block, link, autoplay) => {
     {
       match: ['twitter', 'x.com'],
       embed: embedTwitter,
+    },
+    {
+      match: ['bugcrowd'],
+      embed: embedBugcrowd,
     },
   ];
   const config = EMBEDS_CONFIG.find((e) => e.match.some((match) => link.includes(match)));

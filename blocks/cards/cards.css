@@ -5,15 +5,27 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
   gap: 24px;
+  
 }
 
 .cards > ul > li {
   border: 1px solid #dadada;
   background-color: var(--background-color);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .cards .cards-card-body {
   margin: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cards .cards-card-body p:last-child {
+  margin-top: auto;
 }
 
 .cards .cards-card-image {
@@ -25,3 +37,27 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+/* Override section-level list styles that may conflict */
+main .section .cards > ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.cards .cards-card-body h3 {
+  font-size: 18px;
+  line-height: 24px;
+  margin: 0 0 8px;
+}
+
+.cards .cards-card-body p:last-child a {
+  color: #007981;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cards .cards-card-body p:last-child a:hover {
+  text-decoration: underline;
+}
+

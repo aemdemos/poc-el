@@ -55,6 +55,13 @@ header nav p {
   line-height: 1;
 }
 
+.mobile-direct-link a {
+  color: #0f3133;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+
 header nav a:any-link {
   color: currentcolor;
   text-decoration: none;
@@ -200,6 +207,10 @@ header nav[aria-expanded='true'] .nav-tools ul > li.nav-tools-signin {
   display: block;
 }
 
+.mobile-panel-links a:hover {
+  color: #00827f;
+}
+
 header nav[aria-expanded='true'] .nav-tools ul > li a {
   display: block;
   padding: 16px 0;
@@ -233,6 +244,19 @@ header nav .nav-sections ul > li {
 header nav .nav-sections ul > li > ul {
   display: none;
   margin-top: 0;
+}
+
+header nav .nav-mega[aria-expanded='true'] > ul {
+  display: none !important;
+}
+
+header nav[aria-expanded='true'] .nav-tools-bottom ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 2px;
+  width: 100%;
 }
 
 header nav .nav-sections ul > li[aria-expanded='true'] > ul {
@@ -288,7 +312,6 @@ header nav .nav-sections .nav-drop::after {
   transition: transform 0.2s;
 }
 
-
 /* Sub-menu items padding on mobile */
 /* stylelint-disable-next-line no-descending-specificity */
 header nav .nav-sections ul > li > ul > li > a {
@@ -301,15 +324,6 @@ header nav .nav-sections ul > li > ul > li > a {
 /* Hide mega-menu panel on mobile (desktop-only feature) */
 header nav .mega-menu {
   display: none;
-}
-
-/* Mobile: hide original sub-list for mega items, show mobile-drilldown instead */
-header nav .nav-mega[aria-expanded='true'] > ul {
-  display: none !important;
-}
-
-header nav .nav-mega[aria-expanded='true'] > .mobile-drilldown {
-  display: block;
 }
 
 /* Mobile drill-down panel styles */
@@ -335,11 +349,10 @@ header nav .nav-mega[aria-expanded='true'] > .mobile-drilldown {
   cursor: default;
 }
 
-.mobile-direct-link a {
-  color: #0f3133;
-  text-decoration: none;
+
+
+header nav .nav-mega[aria-expanded='true'] > .mobile-drilldown {
   display: block;
-  width: 100%;
 }
 
 .mobile-cat-chevron::after {
@@ -414,9 +427,7 @@ header nav .nav-mega[aria-expanded='true'] > .mobile-drilldown {
   text-decoration: none;
 }
 
-.mobile-panel-links a:hover {
-  color: #00827f;
-}
+
 
 /* Mobile portfolio link (e.g., "Infrastructure Portfolio →") */
 .mobile-panel-links a.mobile-portfolio-link {
@@ -483,14 +494,7 @@ header nav[aria-expanded='true'] .nav-tools-bottom {
   bottom: 0;
 }
 
-header nav[aria-expanded='true'] .nav-tools-bottom ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 2px;
-  width: 100%;
-}
+
 
 /* stylelint-disable-next-line no-descending-specificity */
 header nav[aria-expanded='true'] .nav-tools-bottom ul li {
@@ -559,7 +563,6 @@ header nav .nav-drop-icon {
     grid-template-columns: auto 1fr auto;
     grid-template-rows: auto auto;
     align-items: center;
-
     max-width: none;
     padding: 0 32px;
     min-height: auto;
@@ -614,6 +617,11 @@ header nav .nav-drop-icon {
     justify-content: flex-end;
     gap: 16px;
     white-space: nowrap;
+  }
+
+
+  header nav .nav-sections ul > li {
+    border-bottom: none;
   }
 
   /* Hide non-signin items from nav-tools at desktop (shown in nav-tools-bottom) */
@@ -678,6 +686,14 @@ header nav .nav-drop-icon {
     padding-right:30px;
 }
 
+header nav .nav-sections ul {
+  display: flex;
+  margin: 0;
+  margin-left: 80px;
+  padding-right: 80px;
+  align-items: center;
+}
+
   header nav[aria-expanded='true'] .nav-tools ul {
     display: flex;
     gap: 16px;
@@ -691,6 +707,18 @@ header nav .nav-drop-icon {
   header nav[aria-expanded='true'] .nav-tools ul > li.nav-tools-signin {
     display: block;
   }
+
+    /* Reset orange button styles on desktop */
+    header nav[aria-expanded='true'] .nav-tools-bottom a {
+      background-color: transparent;
+      color: #000;
+      border-radius: 0;
+      padding: 0;
+      font-size: 16px;
+      font-weight: 500;
+      text-align: left;
+      width: auto;
+    }
 
   /* stylelint-disable-next-line no-descending-specificity */
   header nav[aria-expanded='true'] .nav-tools ul > li a {
@@ -724,9 +752,6 @@ header nav .nav-drop-icon {
     align-self: unset;
   }
 
-  header nav .nav-sections ul > li {
-    border-bottom: none;
-  }
 
   header nav .nav-sections .nav-drop {
     position: relative;
@@ -754,13 +779,7 @@ header nav .nav-drop-icon {
     transform: rotate(315deg);
   }
 
-  header nav .nav-sections ul {
-    display: flex;
-    margin: 0;
-    margin-left: 80px;
-    padding-right: 80px;
-    align-items: center;
-  }
+
 
   header nav .nav-sections .default-content-wrapper > ul > li {
     flex: 0 1 auto;
@@ -783,6 +802,23 @@ header nav .nav-drop-icon {
   header nav .nav-sections .default-content-wrapper > ul > li > a,
   header nav .nav-sections .default-content-wrapper > ul > li > .nav-drop {
     padding: 0;
+  }
+
+
+  /* Desktop: show mega item original sub-list */
+  header nav .nav-mega[aria-expanded='true'] > ul {
+    display: none !important;
+  }
+
+  header nav[aria-expanded='true'] .nav-tools-bottom ul {
+    flex-direction: row;
+    gap: 40px;
+    width: auto;
+    background-color: #f2f0f1;
+    height: 38px;
+    padding-left:30px;
+    padding-right:30px;
+    margin-left:-40px;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
@@ -816,25 +852,17 @@ header nav .nav-drop-icon {
     border-bottom: 8px solid #fff;
   }
 
+  header nav[aria-expanded='true'] .nav-tools-bottom ul li {
+    width: auto;
+  }
+
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding: 8px 0;
   }
 
-  /* Desktop: show mega item original sub-list */
-  header nav .nav-mega[aria-expanded='true'] > ul {
-    display: none !important;
-  }
-
-  /* Reset orange button styles on desktop */
-  header nav[aria-expanded='true'] .nav-tools-bottom a {
-    background-color: transparent;
-    color: #000;
-    border-radius: 0;
-    padding: 0;
-    font-size: 16px;
-    font-weight: 500;
-    text-align: left;
-    width: auto;
+  header nav .nav-sections .default-content-wrapper > ul > li > a, header nav .nav-sections .default-content-wrapper > ul > li > p {
+    padding-top:6px;
+    padding-left:20px;
   }
 
   header nav[aria-expanded='true'] .nav-tools-bottom a:hover {
@@ -842,20 +870,7 @@ header nav .nav-drop-icon {
     color: #00827f;
   }
 
-  header nav[aria-expanded='true'] .nav-tools-bottom ul {
-    flex-direction: row;
-    gap: 40px;
-    width: auto;
-    background-color: #f2f0f1;
-    height: 38px;
-    padding-left:30px;
-    padding-right:30px;
-    margin-left:-40px;
-  }
 
-  header nav[aria-expanded='true'] .nav-tools-bottom ul li {
-    width: auto;
-  }
 
   header nav[aria-expanded='true'] .nav-tools-bottom {
     padding: 0;
@@ -864,10 +879,8 @@ header nav .nav-drop-icon {
     grid-area:tools-bottom;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > a, header nav .nav-sections .default-content-wrapper > ul > li > p {
-    padding-top:6px;
-    padding-left:20px;
-  }
+
+
   /* Hide original nested list for mega items; mega-menu panel takes over */
   header nav .nav-sections .default-content-wrapper > ul > li.nav-mega > ul {
     display: none !important;
@@ -925,7 +938,7 @@ header nav .nav-drop-icon {
     max-width: 315px;
     box-sizing: border-box;
     border-right: 1px solid #d0d4d9;
-    padding: 20px 20px 20px 20px;
+    padding: 20px;
   }
 
   header nav .mega-menu-cat {
@@ -1061,6 +1074,11 @@ header nav .nav-drop-icon {
     flex-direction: column;
   }
 
+  header nav .mega-menu-cat-column .mega-menu-item-title {
+    font-weight: 500;
+    font-size: 15px;
+  }
+
   /* Each item: title + description */
   /* stylelint-disable-next-line no-descending-specificity */
   header nav .mega-menu-item {
@@ -1097,10 +1115,7 @@ header nav .nav-drop-icon {
     padding: 8px 0;
   }
 
-  header nav .mega-menu-cat-column .mega-menu-item-title {
-    font-weight: 500;
-    font-size: 15px;
-  }
+
 
   /* Expandable columns layout (e.g. By Industry) */
   header nav .mega-menu-columns .mega-menu-items:first-child {

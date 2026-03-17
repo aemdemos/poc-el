@@ -15,9 +15,14 @@ export default function decorate(block) {
     ul.append(li);
   });
   ul.querySelectorAll('picture > img').forEach((img) => {
-    const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
-    moveInstrumentation(img, optimizedPic.querySelector('img'));
-    img.closest('picture').replaceWith(optimizedPic);
+    try {
+      const imgUrl = new URL(img.src, window.location.href);
+      if (imgUrl.origin === window.location.origin) {
+        const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+        moveInstrumentation(img, optimizedPic.querySelector('img'));
+        img.closest('picture').replaceWith(optimizedPic);
+      }
+    } catch { /* keep original picture for external URLs */ }
   });
   block.textContent = '';
   block.append(ul);

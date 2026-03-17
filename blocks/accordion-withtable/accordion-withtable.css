@@ -1,0 +1,181 @@
+.accordion-withtable details {
+  border: 2px solid #007981;
+  border-radius: 8px;
+  background-color: white;
+  border-width: 2px;
+}
+
+.accordion-withtable details + details {
+  margin-top: 8px;
+}
+
+.accordion-withtable details summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  padding: 8px 50px 8px 16px;
+  cursor: pointer;
+  list-style: none;
+  background-color: white;
+  color:#007981;
+}
+
+main .section.legal:has(.accordion-withtable) {
+padding-bottom: 40px;
+}
+
+.accordion-withtable .accordion-item-body > p {
+  margin-bottom: 0.8em;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.accordion-withtable .accordion-item-body table td p {
+  margin: 0 0 0.5em;
+}
+
+
+main .section .accordion-withtable details summary p {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  margin: 0;
+  color: #007981;
+}
+
+.accordion-withtable .accordion-item-body table td p:last-child {
+  margin-bottom: 0;
+}
+
+/* Same styling open and closed */
+.accordion-withtable details[open] summary {
+  background-color: black;
+  color: white;
+}
+
+/* Globe icon */
+.accordion-withtable details summary .accordion-item-icon {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.accordion-withtable details[open] summary .accordion-item-icon {
+  filter: brightness(0) saturate(100%) invert(87%) sepia(89%) saturate(3%) hue-rotate(271deg) brightness(109%) contrast(97%) 
+}
+
+main .section .accordion-withtable details[open] summary p {
+  color: white;
+}
+
+.accordion-withtable details summary::-webkit-details-marker {
+  display: none;
+}
+
+
+
+/* Chevron icon */
+.accordion-withtable details summary .accordion-item-chevron {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  transform: translateY(-50%);
+  flex-shrink: 0;
+}
+
+.accordion-withtable details summary .accordion-item-chevron::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border: solid ;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  transition: transform 0.2s;
+}
+
+.accordion-withtable details[open] summary .accordion-item-chevron::after {
+  top: 5px;
+  transform: rotate(-135deg);
+}
+
+.accordion-withtable details .accordion-item-body {
+  padding: 16px;
+  border-top: 1px solid #dadada;
+  background-color: var(--background-color);
+  color: black;
+  font-weight: 400;
+}
+
+.accordion-withtable details:not([open]) .accordion-item-body {
+  display: none;
+}
+
+/* Rights headings */
+.accordion-withtable .accordion-item-body > p b i {
+  font-size: 18px;
+  color: #333;
+}
+
+
+
+/* Table styling within accordion panels */
+.accordion-withtable .accordion-item-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  font-size: 15px;
+}
+
+.accordion-withtable .accordion-item-body table td {
+  padding: 12px 14px;
+  border: 1px solid #d0d4d9;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.accordion-withtable .accordion-item-body table td:first-child {
+  width: 25%;
+  font-weight: 700;
+}
+
+.accordion-withtable .accordion-item-body table td:last-child {
+  width: 75%;
+}
+
+
+
+
+
+.accordion-withtable .accordion-item-body a {
+  color: #007981;
+  text-decoration: underline;
+}
+
+@media (width >= 425px) {
+  .accordion-withtable details summary {
+    font-size: 24px;
+  }
+
+  .accordion-withtable .accordion-item-body {
+    padding: 20px;
+  }
+
+  main .section .accordion-withtable details summary p {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    margin: 0;
+  }
+}
+
+@media (width >= 768px) {
+  .accordion-withtable .accordion-item-body table {
+    font-size: 16px;
+  }
+}

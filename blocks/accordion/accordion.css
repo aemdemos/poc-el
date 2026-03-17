@@ -1,5 +1,32 @@
 .accordion details {
-  border: 1px solid #dadada;
+  border: 2px solid #007981;
+}
+
+.section.legal .accordion-wrapper {
+  padding-top: 20px;
+}
+
+.section.legal .accordion details {
+  border-radius: 6px;
+}
+
+
+.accordion details p {
+  margin-bottom: 0.8em;
+}
+
+.section.legal .accordion details summary p {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 26px;
+  color: #007981;
+  margin-top: 10px;
+}
+
+.section.legal .accordion details .accordion-item-body p {
+  color: black;
+  font-weight: 400;
+  font-size: 18px;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -7,14 +34,11 @@
   margin-top: 24px;
 }
 
-.accordion details p {
-  margin-bottom: 0.8em;
-}
+
 
 .accordion details summary {
   position: relative;
-  padding: 0 16px;
-  padding-right: 46px;
+  padding: 0 46px;
   cursor: pointer;
   list-style: none;
   overflow: auto;
@@ -22,13 +46,10 @@
 }
 
 .accordion details[open] summary {
-  background-color: var(--light-color);
+  background-color: black;
+  color: white;
 }
 
-.accordion details summary:focus,
-.accordion details summary:hover {
-  background-color: var(--light-color);
-}
 
 .accordion details summary::-webkit-details-marker {
   display: none;
@@ -62,4 +83,24 @@
 .accordion details[open] .accordion-item-body {
   border-top: 1px solid #dadada;
   background-color: var(--background-color);
+  color: black;
+  font-weight: 400;
 }
+
+.main .section.legal > div .accordion details {
+  border-radius: 6px;
+}
+
+@media (width > 425px) {
+  .section.legal .accordion details p {
+  font-size: 24px;
+  }
+
+  .section.legal .accordion details summary p {
+    font-size: 24px;
+  }
+
+  .section.legal .accordion a:any-link {
+    font-size: 18px;
+  }
+  }
