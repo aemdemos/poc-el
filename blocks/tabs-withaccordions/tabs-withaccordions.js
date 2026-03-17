@@ -2,30 +2,6 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 let tabBlockCnt = 0;
 
-// Tab intro text: maps tab names to intro paragraphs shown above accordions
-const TAB_INTRO_TEXT = {
-  Savvis: 'Savvis Service Guides (End of Sale)',
-  'Time Warner': 'Time Warner',
-};
-
-// Accordion icon lookup: maps title keywords to icon SVGs
-const ACCORDION_ICONS = {
-  'doing-business': ['Agreements', 'Colocation', 'Network'],
-  'governance-documentation': ['Service Level Agreements', 'Digital Content'],
-};
-
-function getAccordionIcon(title) {
-  const match = Object.entries(ACCORDION_ICONS)
-    .find(([, keywords]) => keywords.some((kw) => title.startsWith(kw)));
-  if (match) {
-    const img = document.createElement('img');
-    img.src = `/icons/${match[0]}.svg`;
-    img.setAttribute('aria-hidden', 'true');
-    return img;
-  }
-  return null;
-}
-
 export default function decorate(block) {
   const tablist = document.createElement('div');
   tablist.className = 'tabs-wa-list';
@@ -112,8 +88,16 @@ export default function decorate(block) {
             details.append(summary, currentAccBody);
             accordionContainer.append(details);
           }
+          // Read icon from data-icon attribute (authored in content)
+          const iconName = child.dataset.icon;
+          if (iconName) {
+            currentAccIcon = document.createElement('img');
+            currentAccIcon.src = `/icons/${iconName}.svg`;
+            currentAccIcon.setAttribute('aria-hidden', 'true');
+          } else {
+            currentAccIcon = null;
+          }
           currentAccTitle = child.textContent.trim();
-          currentAccIcon = getAccordionIcon(currentAccTitle);
           currentAccBody = document.createElement('div');
         } else if (currentAccTitle) {
           currentAccBody.append(child);
@@ -144,13 +128,6 @@ export default function decorate(block) {
         accordionContainer.append(details);
       }
 
-      // Inject intro text from mapping if no intro content from HTML
-      const tabName = label.textContent.trim();
-      if (intro.childNodes.length === 0 && TAB_INTRO_TEXT[tabName]) {
-        const p = document.createElement('p');
-        p.textContent = TAB_INTRO_TEXT[tabName];
-        intro.append(p);
-      }
       if (intro.childNodes.length > 0) panel.append(intro);
       panel.append(accordionContainer);
     } else {
