@@ -51,7 +51,7 @@ color: black;
   cursor: pointer;
   transition: color 0.2s;
   border-top: 1px solid white;
-  font-family: Gotham, Arial, Helvetica;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
   height:20px;
 }
 

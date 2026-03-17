@@ -357,9 +357,9 @@ main .section.legal h1{
 
 /* --- Legal content section (mobile-first) --- */
 main .section.legal h2 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
-  line-height: 30px;
+  line-height: 28px;
   font-family: Gotham, Arial, Helvetica, sans-serif;
   color: #000;
   margin: 0 0 16px;
@@ -630,17 +630,13 @@ main .section.legal-side h1 {
   line-height: 30px;
 }
 
-main .section.legal h2 {
-  font-size: 20px;
-  line-height: 28px;
-  padding-top:0;
-}
+
 
 main .section.legal h4 {
   font-size: 20px;
   line-height: 28px;
   font-weight: 400;
-  font-family: Gotham, Arial, Helvetica;
+  font-family: Gotham, Arial, Helvetica, sans-serif;
   padding-top: 40px;
   padding-bottom: 20px;
 }

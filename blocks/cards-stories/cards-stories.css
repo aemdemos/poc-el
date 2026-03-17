@@ -124,9 +124,10 @@ main .cards-stories .cards-stories-card-body a:any-link:hover {
 @media (width >= 768px) {
   .cards-stories > ul {
     gap: 40px;
-    padding-inline-start: 8.33333%;
-    padding-right:8.33333%;
+    padding-inline-start: 8.3333%;
+    padding-right:8.3333%;
   }
+  
   .cards-stories > ul > li {
     max-width: 60%;
   }

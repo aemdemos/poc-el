@@ -28,15 +28,13 @@
   line-height: 28px;
 }
 
-
+.table table td p + p {
+  margin-top: 0.25em;
+}
 
 main .section.legal .table table th p,
 main .section.legal .table table td p {
   margin: 0;
-}
-
-.table table td p + p {
-  margin-top: 0.25em;
 }
 
 /* no header variant */

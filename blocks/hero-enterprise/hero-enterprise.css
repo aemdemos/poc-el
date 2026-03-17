@@ -173,6 +173,10 @@ main > .section.hero-enterprise-container {
 
 /* 1600px — max-width, center content */
 @media (width >= 1600px) {
+  .hero-enterprise > div:not(.hero-enterprise-img-desktop, .hero-enterprise-img-mobile, :first-child) {
+    bottom: 4.8cm;
+}
+
   main > .section.hero-enterprise-container > div,
   .hero-enterprise-container .hero-enterprise-wrapper {
     max-width: 1600px;
@@ -180,7 +184,5 @@ main > .section.hero-enterprise-container {
     margin-right: auto;
   }
 
-  .hero-enterprise > div:not(.hero-enterprise-img-desktop, .hero-enterprise-img-mobile, :first-child) {
-    bottom: 4.8cm;
-}
+
 }
