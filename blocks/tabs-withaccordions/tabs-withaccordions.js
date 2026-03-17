@@ -88,7 +88,7 @@ export default function decorate(block) {
             details.append(summary, currentAccBody);
             accordionContainer.append(details);
           }
-          // Extract icon from h3 (decorateIcons already converted span.icon to img)
+          // Extract icon from h3: try span.icon (decorateIcons) then :icon-name: text
           const iconSpan = child.querySelector('.icon');
           if (iconSpan) {
             currentAccIcon = iconSpan.querySelector('img');
@@ -98,6 +98,14 @@ export default function decorate(block) {
             currentAccIcon = null;
           }
           currentAccTitle = child.textContent.trim();
+          // Fallback: parse :icon-name: text pattern from heading
+          const iconMatch = currentAccTitle.match(/^:([a-z0-9-]+):\s*/);
+          if (!currentAccIcon && iconMatch) {
+            currentAccIcon = document.createElement('img');
+            currentAccIcon.src = `/icons/${iconMatch[1]}.svg`;
+            currentAccIcon.setAttribute('aria-hidden', 'true');
+            currentAccTitle = currentAccTitle.replace(iconMatch[0], '');
+          }
           currentAccBody = document.createElement('div');
         } else if (currentAccTitle) {
           currentAccBody.append(child);
