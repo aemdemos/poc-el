@@ -88,12 +88,12 @@ export default function decorate(block) {
             details.append(summary, currentAccBody);
             accordionContainer.append(details);
           }
-          // Read icon from data-icon attribute (authored in content)
-          const iconName = child.dataset.icon;
-          if (iconName) {
-            currentAccIcon = document.createElement('img');
-            currentAccIcon.src = `/icons/${iconName}.svg`;
-            currentAccIcon.setAttribute('aria-hidden', 'true');
+          // Extract icon from h3 (decorateIcons already converted span.icon to img)
+          const iconSpan = child.querySelector('.icon');
+          if (iconSpan) {
+            currentAccIcon = iconSpan.querySelector('img');
+            if (currentAccIcon) currentAccIcon.setAttribute('aria-hidden', 'true');
+            iconSpan.remove();
           } else {
             currentAccIcon = null;
           }
